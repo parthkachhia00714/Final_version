@@ -745,7 +745,7 @@ input,textarea,select{font-family:inherit;outline:none;}
 
 /* ── 18. ACCELERATION — THREE-TIER LAYOUT ── */
 .accel-tier{border-top:1px solid var(--border);}
-.accel-tier:first-of-type{border-top:none;}
+.accel-card-hd + .accel-tier{border-top:none;}
 .accel-tier-sep{display:flex;align-items:center;gap:8px;padding:10px 16px 0;}
 .accel-tier-lbl{font-size:10px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;flex-shrink:0;}
 .accel-tier-line{flex:1;height:1px;background:var(--border);}

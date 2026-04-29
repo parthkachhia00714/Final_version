@@ -379,9 +379,21 @@ function selAccelDom(el, domain, status) {
   }
 }
 
-function selAudPreset(el) {
+function selAudPreset(el, key) {
   document.querySelectorAll('#aud-presets .apre').forEach(a => a.classList.remove('on'));
   el.classList.add('on');
+  // if custom is active, turning on a preset deactivates custom
+  if (accAudCustom) {
+    accAudCustom = false;
+    const panel = document.getElementById('aud-custom-panel');
+    const btn = document.getElementById('aud-custom-toggle');
+    if (panel) panel.style.display = 'none';
+    if (btn) btn.textContent = '+ Build Custom Audience — $15/mo';
+    _updateAccelOrder();
+  }
+  const tag = document.getElementById('acc-aud-tag');
+  const name = el.querySelector('.apre-name');
+  if (tag) { tag.textContent = (name ? name.textContent.replace(/^[^\w]+/, '') : 'Preset') + ' — Free'; tag.className = 'accel-card-tag'; }
 }
 
 function toggleAudCustom() {
@@ -395,9 +407,20 @@ function toggleAudCustom() {
   _updateAccelOrder();
 }
 
-function selVoicePreset(el) {
+function selVoicePreset(el, key) {
   document.querySelectorAll('#voice-presets .vpre').forEach(v => v.classList.remove('on'));
   el.classList.add('on');
+  if (accVoiceCustom) {
+    accVoiceCustom = false;
+    const panel = document.getElementById('voice-custom-panel');
+    const btn = document.getElementById('voice-custom-toggle');
+    if (panel) panel.style.display = 'none';
+    if (btn) btn.textContent = '+ Build Custom Voice — $10/mo';
+    _updateAccelOrder();
+  }
+  const tag = document.getElementById('acc-voice-tag');
+  const name = el.querySelector('.vpre-name');
+  if (tag) { tag.textContent = (name ? name.textContent.replace(/^[^\w]+/, '') : 'Preset') + ' — Free'; tag.className = 'accel-card-tag'; }
 }
 
 function toggleVoiceCustom() {
