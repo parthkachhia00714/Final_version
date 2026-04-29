@@ -186,7 +186,12 @@ function showUpgradeNudge(el) {
 let mCur = 1;
 let mMethod = 'ai';
 
-function openModal() { document.getElementById('moverlay').classList.add('on'); mCur = 1; mMethod = 'ai'; renderM(1); }
+function openModal() {
+  document.getElementById('moverlay').classList.add('on');
+  mCur = 1; mMethod = 'ai';
+  macAudCustom = false; macVoiceCustom = false;
+  renderM(1);
+}
 function closeModal() { document.getElementById('moverlay').classList.remove('on'); }
 function checkModalClose(e) { if (e.target === document.getElementById('moverlay')) closeModal(); }
 
@@ -249,9 +254,9 @@ function renderM(n) {
 
   const back = document.getElementById('m-back'), next = document.getElementById('m-next'), note = document.getElementById('m-note');
   back.style.display = n > 1 ? 'inline-flex' : 'none';
-  if (n === 6) { next.textContent = '🚀 Activate Domain'; next.className = 'btn btn-g btn-sm'; }
+  if (n === 6) { _updateMacOrder(); }
   else { next.textContent = 'Continue →'; next.className = 'btn btn-p btn-sm'; }
-  note.textContent = n === 6 ? 'Jobs run in background — returns instantly' : 'No credit card required';
+  note.textContent = n === 6 ? 'Charged per domain · Cancel anytime' : 'No credit card required';
 
   const dom = document.getElementById('dom-in')?.value || 'your domain';
   ['ms2-dom', 'ms3-dom', 'ms5-dom'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = dom; });
@@ -264,6 +269,8 @@ function mNext() {
 
 function mBack() { if (mCur > 1) { mCur--; renderM(mCur); } }
 
+let macAudCustom = false, macVoiceCustom = false;
+
 function macSelAud(el) {
   document.querySelectorAll('#mac-aud-presets .mac-pre').forEach(p => p.classList.remove('on'));
   el.classList.add('on');
@@ -271,6 +278,38 @@ function macSelAud(el) {
 function macSelVoice(el) {
   document.querySelectorAll('#mac-voice-presets .mac-pre').forEach(p => p.classList.remove('on'));
   el.classList.add('on');
+}
+
+function macToggleAud() {
+  macAudCustom = !macAudCustom;
+  const form = document.getElementById('mac-aud-form');
+  const btn = document.getElementById('mac-aud-btn');
+  if (form) form.style.display = macAudCustom ? 'flex' : 'none';
+  if (btn) { btn.textContent = macAudCustom ? '− Remove' : '+ Add $15/mo'; btn.className = 'mac-add-btn' + (macAudCustom ? ' active' : ''); }
+  _updateMacOrder();
+}
+
+function macToggleVoice() {
+  macVoiceCustom = !macVoiceCustom;
+  const form = document.getElementById('mac-voice-form');
+  const btn = document.getElementById('mac-voice-btn');
+  if (form) form.style.display = macVoiceCustom ? 'flex' : 'none';
+  if (btn) { btn.textContent = macVoiceCustom ? '− Remove' : '+ Add $10/mo'; btn.className = 'mac-add-btn' + (macVoiceCustom ? ' active' : ''); }
+  _updateMacOrder();
+}
+
+function _updateMacOrder() {
+  const show = (id, v) => { const e = document.getElementById(id); if (e) e.style.display = v ? 'flex' : 'none'; };
+  show('mac-ol-aud', macAudCustom);
+  show('mac-ol-voice', macVoiceCustom);
+  const total = (macAudCustom ? 15 : 0) + (macVoiceCustom ? 10 : 0);
+  const tv = document.getElementById('mac-total');
+  if (tv) { tv.textContent = total > 0 ? '$' + total + '/mo' : '$0'; tv.className = 'mac-total-val' + (total > 0 ? ' paid' : ''); }
+  const next = document.getElementById('m-next');
+  if (next) {
+    next.textContent = total > 0 ? `💳 Activate + $${total}/mo →` : '🚀 Activate for Free';
+    next.className = total > 0 ? 'btn btn-p btn-sm' : 'btn btn-g btn-sm';
+  }
 }
 
 function runProc() {

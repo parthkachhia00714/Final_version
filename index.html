@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>SiteWarming — Platform v5</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/styles.css?v=6"/>
+<link rel="stylesheet" href="css/styles.css?v=7"/>
 </head>
 <body>
 <div class="app">
@@ -333,22 +333,28 @@ Output: Markdown with front matter (title, description, tags)</textarea>
 
       <!-- Step 6: Acceleration -->
       <div class="ms" id="ms-accel">
-        <div class="ms-ey">Step 6 of 6</div>
+        <div class="ms-ey">Step 6 of 6 — Optional</div>
         <div class="ms-h">⚡ Site Acceleration</div>
-        <div class="ms-sub">Choose your default audience &amp; voice. Presets are free and applied from your first post. Custom builds are unlocked after activation.</div>
-        <div class="mac-row">
+        <div class="ms-sub">Pick a free preset for each service, or add a custom build for deeper personalisation. Charged monthly per domain, cancel anytime.</div>
 
-          <!-- Audience DNA -->
-          <div class="mac-card">
-            <div class="mac-hd">
-              <span class="mac-ic">🎯</span>
-              <div class="mac-hd-text">
-                <div class="mac-title">Audience DNA</div>
-                <div class="mac-sub">Who your content speaks to</div>
+        <!-- SERVICE 1: Audience DNA -->
+        <div class="mac-svc-card">
+          <div class="mac-svc-hd">
+            <div class="mac-svc-info">
+              <span class="mac-svc-ic">🎯</span>
+              <div>
+                <div class="mac-svc-title">Audience DNA</div>
+                <div class="mac-svc-sub">Who your content speaks to — shapes angle, depth, and CTAs of every post.</div>
               </div>
-              <span class="accel-badge-free">Free</span>
             </div>
-            <div class="mac-presets" id="mac-aud-presets">
+            <div class="mac-badges">
+              <span class="mac-free-badge">Preset Free</span>
+              <span class="mac-paid-tag">Custom $15/mo</span>
+            </div>
+          </div>
+          <div class="mac-preset-section">
+            <div class="mac-ps-lbl">Free presets — click one to apply from your first post</div>
+            <div class="mac-presets-grid" id="mac-aud-presets">
               <div class="mac-pre on" onclick="macSelAud(this)">💼 Domain Investors</div>
               <div class="mac-pre" onclick="macSelAud(this)">🏢 Business Owners</div>
               <div class="mac-pre" onclick="macSelAud(this)">💻 Tech Professionals</div>
@@ -356,31 +362,75 @@ Output: Markdown with front matter (title, description, tags)</textarea>
               <div class="mac-pre" onclick="macSelAud(this)">🛒 Online Shoppers</div>
               <div class="mac-pre" onclick="macSelAud(this)">🌐 General Audience</div>
             </div>
-            <div class="mac-upgrade">💳 Custom Audience DNA — $15/mo · Available from Acceleration tab after activation</div>
           </div>
-
-          <!-- Brand Voice -->
-          <div class="mac-card">
-            <div class="mac-hd">
-              <span class="mac-ic">🗣️</span>
-              <div class="mac-hd-text">
-                <div class="mac-title">Brand Voice</div>
-                <div class="mac-sub">How your content sounds</div>
-              </div>
-              <span class="accel-badge-free">Free</span>
+          <div class="mac-custom-row">
+            <div class="mac-custom-info">
+              <div class="mac-custom-title">Custom Audience DNA — $15/mo</div>
+              <div class="mac-custom-desc">Define exactly who reads your content. We use your answers to tailor every post — angle, depth, examples, and CTAs.</div>
             </div>
-            <div class="mac-presets" id="mac-voice-presets">
+            <button class="mac-add-btn" id="mac-aud-btn" onclick="macToggleAud()">+ Add $15/mo</button>
+          </div>
+          <div class="mac-custom-form" id="mac-aud-form" style="display:none;">
+            <div class="fl"><label>Who is your exact target audience?</label><input class="fi" id="mac-aud-who" placeholder="e.g. Domain investors aged 30–55, portfolio of 10+ domains…"/></div>
+            <div class="fl"><label>Their biggest challenges</label><textarea class="fi fta" id="mac-aud-pain" rows="2" placeholder="e.g. Finding undervalued domains, estimating SEO worth, managing renewals…"></textarea></div>
+            <div class="fl"><label>What drives them to act?</label><input class="fi" id="mac-aud-motive" placeholder="e.g. ROI potential, scarcity signals, expert validation…"/></div>
+          </div>
+        </div>
+
+        <!-- SERVICE 2: Brand Voice -->
+        <div class="mac-svc-card">
+          <div class="mac-svc-hd">
+            <div class="mac-svc-info">
+              <span class="mac-svc-ic">🗣️</span>
+              <div>
+                <div class="mac-svc-title">Brand Voice</div>
+                <div class="mac-svc-sub">How your content sounds — tone, sentence style, vocabulary, and pacing.</div>
+              </div>
+            </div>
+            <div class="mac-badges">
+              <span class="mac-free-badge">Preset Free</span>
+              <span class="mac-paid-tag">Custom $10/mo</span>
+            </div>
+          </div>
+          <div class="mac-preset-section">
+            <div class="mac-ps-lbl">Free presets — click one to apply from your first post</div>
+            <div class="mac-presets-grid" id="mac-voice-presets">
               <div class="mac-pre on" onclick="macSelVoice(this)">📚 Authoritative</div>
               <div class="mac-pre" onclick="macSelVoice(this)">😊 Friendly</div>
               <div class="mac-pre" onclick="macSelVoice(this)">💥 Bold &amp; Direct</div>
               <div class="mac-pre" onclick="macSelVoice(this)">⚙️ Technical</div>
               <div class="mac-pre" onclick="macSelVoice(this)">🎓 Educational</div>
             </div>
-            <div class="mac-upgrade">💳 Custom Brand Voice — $10/mo · Available from Acceleration tab after activation</div>
           </div>
-
+          <div class="mac-custom-row">
+            <div class="mac-custom-info">
+              <div class="mac-custom-title">Custom Brand Voice — $10/mo</div>
+              <div class="mac-custom-desc">Write your brand's voice in your own words. Applied consistently across every post — sentence structure, vocabulary, and pacing.</div>
+            </div>
+            <button class="mac-add-btn" id="mac-voice-btn" onclick="macToggleVoice()">+ Add $10/mo</button>
+          </div>
+          <div class="mac-custom-form" id="mac-voice-form" style="display:none;">
+            <div class="fl"><label>Describe your brand voice in 2–3 sentences</label><textarea class="fi fta" id="mac-voice-desc" rows="2" placeholder="e.g. We're the calm expert in the room. We explain complex topics simply and always leave readers with one clear next step."></textarea></div>
+            <div class="fl"><label>Words that define your voice</label><input class="fi" id="mac-voice-words" placeholder="e.g. Clear, Honest, Precise, Empowering, Grounded…"/></div>
+            <div class="fl"><label>Patterns to always avoid</label><input class="fi" id="mac-voice-avoid" placeholder="e.g. Jargon, hype words, passive voice, clickbait titles…"/></div>
+          </div>
         </div>
-        <div class="mac-skip" onclick="mNext()">Skip — apply smart defaults automatically →</div>
+
+        <!-- Order strip -->
+        <div class="mac-order-strip">
+          <div class="mac-order-items">
+            <div class="mac-oi mac-oi-base">✓ 1 blog/month <span class="mac-free">Free</span></div>
+            <div class="mac-oi mac-oi-base">✓ Site + DNS <span class="mac-free">Free</span></div>
+            <div class="mac-oi" id="mac-ol-aud" style="display:none;">+ Custom Audience DNA <span class="mac-paid">+$15/mo</span></div>
+            <div class="mac-oi" id="mac-ol-voice" style="display:none;">+ Custom Brand Voice <span class="mac-paid">+$10/mo</span></div>
+          </div>
+          <div class="mac-order-total">
+            <div class="mac-total-lbl">Add-ons total</div>
+            <div class="mac-total-val" id="mac-total">$0</div>
+          </div>
+        </div>
+
+        <div class="mac-skip" onclick="mNext()">Skip — activate with free defaults →</div>
       </div>
 
       <!-- Step 7: Processing -->
@@ -432,7 +482,7 @@ Output: Markdown with front matter (title, description, tags)</textarea>
   </div>
 </div><!-- /moverlay -->
 
-<script src="js/app.js?v=6"></script>
+<script src="js/app.js?v=7"></script>
 <script>
 /* Load all views from separate files on startup */
 const viewMap = {

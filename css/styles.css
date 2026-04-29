@@ -816,3 +816,49 @@ input,textarea,select{font-family:inherit;outline:none;}
 .accel-free-item{font-size:12px;padding:3px 0;}
 .accel-price-row{font-size:11.5px;padding:4px 0;}
 .accel-price-ref{padding:12px 13px;}
+
+/* ── 22. MODAL STEP 6 — PREMIUM ACCELERATION (full purchase UI) ── */
+.mac-svc-card{border:1.5px solid var(--border);border-radius:var(--rxl);margin-bottom:13px;overflow:hidden;background:var(--surface);}
+.mac-svc-hd{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);gap:12px;}
+.mac-svc-info{display:flex;align-items:flex-start;gap:10px;flex:1;}
+.mac-svc-ic{font-size:18px;flex-shrink:0;margin-top:1px;}
+.mac-svc-title{font-size:14px;font-weight:800;margin-bottom:3px;}
+.mac-svc-sub{font-size:11px;color:var(--ink3);line-height:1.5;}
+.mac-badges{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.mac-free-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--gbg);color:var(--green);border:1px solid var(--gbd);white-space:nowrap;}
+.mac-paid-tag{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);white-space:nowrap;}
+.mac-preset-section{padding:13px 16px;border-bottom:1px solid var(--border);background:var(--s2);}
+.mac-ps-lbl{font-size:10px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:9px;}
+.mac-presets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.mac-pre{font-size:11.5px;font-weight:600;padding:8px 10px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:var(--T);color:var(--ink2);text-align:center;background:var(--surface);}
+.mac-pre:hover{border-color:var(--brand-bd);background:var(--brand-lt);color:var(--brand);}
+.mac-pre.on{border-color:var(--brand);background:var(--brand-lt);color:var(--brand);font-weight:700;}
+.mac-custom-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:14px;border-bottom:1px solid var(--border);}
+.mac-custom-info{flex:1;}
+.mac-custom-title{font-size:12.5px;font-weight:800;margin-bottom:2px;}
+.mac-custom-desc{font-size:11px;color:var(--ink3);line-height:1.5;}
+.mac-add-btn{font-size:11px;font-weight:700;padding:7px 16px;border-radius:20px;border:1.5px solid var(--brand);background:var(--brand-lt);color:var(--brand);cursor:pointer;transition:var(--T);white-space:nowrap;flex-shrink:0;}
+.mac-add-btn:hover,.mac-add-btn.active{background:var(--brand);color:#fff;}
+.mac-custom-form{display:flex;flex-direction:column;gap:10px;padding:13px 16px;background:var(--s2);}
+.mac-custom-form .fl{margin-bottom:0;}
+.mac-order-strip{display:flex;align-items:center;justify-content:space-between;background:var(--s2);border:1.5px solid var(--border);border-radius:var(--r);padding:11px 14px;margin-top:4px;gap:14px;flex-wrap:wrap;}
+.mac-order-items{display:flex;gap:8px;flex-wrap:wrap;flex:1;}
+.mac-oi{font-size:11.5px;color:var(--ink2);display:flex;align-items:center;gap:4px;}
+.mac-free{font-weight:700;color:var(--green);}
+.mac-paid{font-weight:700;color:var(--brand);}
+.mac-oi-base{opacity:.65;}
+.mac-order-total{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;}
+.mac-total-lbl{font-size:10px;color:var(--ink4);margin-bottom:2px;}
+.mac-total-val{font-size:17px;font-weight:900;color:var(--green);}
+.mac-total-val.paid{color:var(--brand);}
+.mac-skip{text-align:center;margin-top:11px;font-size:11px;color:var(--ink4);cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.mac-skip:hover{color:var(--brand);}
+
+/* ── 23. ACCELERATION PAGE — FORCE VISIBLE SCROLLBAR ON MAIN ── */
+.accel-main::-webkit-scrollbar{width:6px;}
+.accel-main::-webkit-scrollbar-track{background:transparent;}
+.accel-main::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+.accel-main::-webkit-scrollbar-thumb:hover{background:var(--ink4);}
+.accel-aside::-webkit-scrollbar{width:4px;}
+.accel-aside::-webkit-scrollbar-track{background:transparent;}
+.accel-aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
