@@ -646,7 +646,7 @@ input,textarea,select{font-family:inherit;outline:none;}
 .mkt-sig.on .mkt-ck{opacity:1;}
 
 /* ── 16. ACCELERATION PAGE ── */
-.accel-wrap{display:flex;flex-direction:column;height:100%;}
+.accel-wrap{display:flex;flex-direction:column;flex:1;}
 .accel-hd{padding:18px 24px 14px;border-bottom:1px solid var(--border);flex-shrink:0;}
 .accel-hd-t{font-size:18px;font-weight:800;margin-bottom:3px;}
 .accel-hd-s{font-size:12px;color:var(--ink3);}
@@ -762,3 +762,6 @@ input,textarea,select{font-family:inherit;outline:none;}
 .accel-price-row{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--ink2);padding:3px 0;}
 .apr-free{font-weight:700;color:var(--green);}
 .apr-paid{font-weight:700;color:var(--brand);}
+
+/* ── 19. ACCELERATION VIEW — force internal scroll (override .view overflow-y:auto) ── */
+#view-acceleration.view.on{overflow:hidden;}
