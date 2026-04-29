@@ -5,1277 +5,120 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>SiteWarming — Platform v5</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-:root{
-  --brand:#C85D37;--brand-dk:#A84528;--brand-lt:#FDF0EB;--brand-bd:#F2D5C8;--brand-mid:#E8724A;
-  --ink:#111827;--ink2:#374151;--ink3:#6B7280;--ink4:#9CA3AF;--ink5:#D1D5DB;
-  --bg:#F9FAFB;--surface:#FFF;--s2:#F3F4F6;--s3:#FAFAFA;
-  --border:#E5E7EB;--border2:#D1D5DB;
-  --green:#059669;--gbg:#ECFDF5;--gbd:#A7F3D0;
-  --amber:#B45309;--abg:#FFFBEB;--abd:#FDE68A;
-  --blue:#2563EB;--bbg:#EFF6FF;--bbd:#BFDBFE;
-  --purple:#7C3AED;--pbg:#F5F3FF;--pbd:#DDD6FE;
-  --red:#DC2626;--rbg:#FEF2F2;
-  --r:6px;--rlg:10px;--rxl:14px;
-  --sh:0 1px 2px rgba(0,0,0,.05),0 1px 3px rgba(0,0,0,.06);
-  --shmd:0 4px 16px rgba(0,0,0,.09),0 2px 6px rgba(0,0,0,.05);
-  --shlg:0 24px 64px rgba(0,0,0,.18),0 8px 20px rgba(0,0,0,.08);
-  --sb:218px;--T:.16s cubic-bezier(.4,0,.2,1);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;overflow:hidden;}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:13px;line-height:1.55;}
-button{font-family:inherit;cursor:pointer;border:none;outline:none;}
-input,textarea,select{font-family:inherit;outline:none;}
-::-webkit-scrollbar{width:4px;height:4px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-
-/* ── APP ── */
-.app{display:flex;height:100vh;overflow:hidden;}
-
-/* ── SIDEBAR ── */
-.sb{width:var(--sb);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow-y:auto;z-index:10;}
-.sb-logo{display:flex;align-items:center;gap:8px;padding:14px 14px 13px;border-bottom:1px solid var(--border);}
-.sb-logo-i{width:27px;height:27px;background:var(--brand);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.sb-logo-t{font-size:13px;font-weight:700;}
-.sb-org{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:var(--r);background:var(--s2);cursor:pointer;margin:6px 7px 2px;}
-.sb-org-n{font-size:11px;font-weight:600;color:var(--ink2);}
-.sb-org-s{font-size:10px;color:var(--ink4);margin-top:1px;}
-.sb-learn{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;margin:0 7px 2px;border-radius:var(--r);cursor:pointer;transition:var(--T);}
-.sb-learn:hover{background:var(--s2);}
-.sb-d{height:1px;background:var(--border);margin:3px 0;}
-.sb-nav{padding:5px 6px;flex:1;}
-.sb-item{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:var(--r);cursor:pointer;transition:var(--T);font-size:12px;font-weight:500;color:var(--ink3);margin-bottom:1px;}
-.sb-item:hover{background:var(--s2);color:var(--ink);}
-.sb-item.on{background:var(--brand-lt);color:var(--brand);font-weight:700;}
-.sb-item-i{font-size:13px;width:15px;text-align:center;flex-shrink:0;}
-.sb-sp{flex:1;}
-.sb-plan{margin:6px;padding:10px 11px;background:var(--s2);border-radius:var(--rlg);border:1px solid var(--border);}
-.sb-plan-t{font-size:10px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
-.sb-plan-r{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
-.sb-plan-l{font-size:11px;color:var(--ink3);}
-.sb-plan-v{font-size:11px;font-weight:700;color:var(--ink2);}
-.sb-user{display:flex;align-items:center;gap:7px;padding:10px 11px;border-top:1px solid var(--border);cursor:pointer;}
-.sb-av{width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
-.sb-un{font-size:11.5px;font-weight:600;}
-.sb-ue{font-size:10px;color:var(--ink4);}
-
-/* ── MAIN ── */
-.main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
-.abar{background:var(--abg);border-bottom:1px solid var(--abd);padding:7px 22px;display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:var(--amber);flex-shrink:0;}
-.view{flex:1;overflow-y:auto;display:none;}
-.view.on{display:flex;flex-direction:column;}
-
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:var(--r);font-size:12.5px;font-weight:700;transition:var(--T);white-space:nowrap;}
-.btn-p{background:var(--brand);color:#fff;}
-.btn-p:hover{background:var(--brand-dk);}
-.btn-s{background:var(--surface);color:var(--ink2);border:1.5px solid var(--border);}
-.btn-s:hover{background:var(--s2);}
-.btn-g{background:var(--green);color:#fff;}
-.btn-g:hover{background:#047857;}
-.btn-sm{padding:5px 12px;font-size:11.5px;}
-.btn-xs{padding:3px 9px;font-size:11px;}
-
-/* ── STATUS PILLS ── */
-.sp{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:700;}
-.sp-a{background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
-.sp-d{background:var(--s2);color:var(--ink3);border:1px solid var(--border);}
-.sp-ac{background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);}
-
-/* ── DASHBOARD ── */
-.dash{padding:24px 28px 40px;}
-.dash-h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;}
-.dash-sub{font-size:12.5px;color:var(--ink3);}
-.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin:16px 0 14px;}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:14px 17px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--sh);}
-.stat-nums{display:flex;gap:22px;}
-.stat-v{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1;}
-.stat-l{font-size:10.5px;color:var(--ink4);margin-top:3px;}
-.action-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:14px;}
-.ac{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:15px 15px 13px;display:flex;flex-direction:column;box-shadow:var(--sh);}
-.ac-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;}
-.ac-hd{display:flex;align-items:center;gap:7px;}
-.ac-ic{font-size:15px;}
-.ac-title{font-size:13px;font-weight:700;}
-.ac-play{width:26px;height:26px;border-radius:5px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink3);cursor:pointer;transition:var(--T);}
-.ac-play:hover{background:var(--brand);color:#fff;border-color:var(--brand);}
-.ac-desc{font-size:11.5px;color:var(--ink3);line-height:1.55;flex:1;margin-bottom:10px;}
-.ac-btn{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;border-radius:var(--r);font-size:12px;font-weight:700;transition:var(--T);cursor:pointer;}
-.ac-p{background:var(--brand);color:#fff;}
-.ac-p:hover{background:var(--brand-dk);}
-.ac-o{background:var(--surface);color:var(--ink2);border:1px solid var(--border);}
-.ac-o:hover{background:var(--s2);}
-
-/* post-activation subtle hint */
-.act-hint{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:12px 16px;margin-bottom:13px;display:none;align-items:center;justify-content:space-between;box-shadow:var(--sh);animation:fup .3s ease;}
-.act-hint.on{display:flex;}
-@keyframes fup{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
-.ah-l{display:flex;align-items:center;gap:9px;}
-.ah-ic{width:30px;height:30px;border-radius:7px;background:var(--brand-lt);border:1px solid var(--brand-bd);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.ah-title{font-size:12.5px;font-weight:700;margin-bottom:2px;}
-.ah-sub{font-size:11px;color:var(--ink3);}
-.ah-dismiss{background:none;font-size:11px;color:var(--ink4);padding:4px 8px;}
-.ah-dismiss:hover{color:var(--ink);}
-
-/* ── MY DOMAINS ── */
-.mdwrap{display:flex;flex:1;overflow:hidden;}
-.mdmain{flex:1;overflow-y:auto;padding:20px 24px;}
-.mdh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.mdh-t{font-size:19px;font-weight:800;letter-spacing:-.015em;}
-.mdh-s{font-size:11.5px;color:var(--ink3);margin-top:2px;}
-.md-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;}
-.mds{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:12px 15px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--sh);}
-.mds-nums{display:flex;gap:18px;}
-.mds-v{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1;}
-.mds-l{font-size:10px;color:var(--ink4);margin-top:3px;}
-.dtabs{display:flex;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rlg);padding:3px;margin-bottom:11px;box-shadow:var(--sh);}
-.dtab{padding:5px 13px;border-radius:var(--r);font-size:11.5px;font-weight:600;color:var(--ink3);cursor:pointer;transition:var(--T);}
-.dtab:hover{background:var(--s2);color:var(--ink);}
-.dtab.on{background:var(--surface);color:var(--ink);box-shadow:var(--sh);border:1px solid var(--border);}
-.mdtool{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.mdsrch{display:flex;align-items:center;gap:5px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);flex:0 0 190px;}
-.mdsrch input{border:none;font-size:11.5px;color:var(--ink);background:none;width:100%;}
-.mdsrch input::placeholder{color:var(--ink4);}
-.fsel{padding:6px 9px;border:1px solid var(--border);border-radius:var(--r);font-size:11.5px;color:var(--ink3);background:var(--surface);}
-.dtbl{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--sh);}
-.dtbl th{background:var(--s2);padding:8px 12px;text-align:left;font-size:10.5px;font-weight:700;color:var(--ink3);border-bottom:1px solid var(--border);white-space:nowrap;}
-.dtbl td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.dtbl tr:last-child td{border-bottom:none;}
-.dtbl tbody tr{cursor:pointer;transition:background .1s;}
-.dtbl tbody tr:hover{background:var(--s3);}
-.dtbl tbody tr.sel{background:var(--brand-lt)!important;border-left:3px solid var(--brand);}
-.dtbl tbody tr.sel td:first-child{padding-left:9px;}
-.dc{display:flex;align-items:center;gap:7px;}
-.dfl{width:23px;height:23px;border-radius:4px;background:var(--brand-lt);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
-.dn{font-size:12.5px;font-weight:700;}
-.lp{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);}
-.sob{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:var(--r);font-size:10.5px;font-weight:600;cursor:pointer;transition:var(--T);}
-.so-a{background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
-.so-act{background:var(--s2);color:var(--ink3);border:1px solid var(--border);}
-.so-act:hover{background:var(--brand);color:#fff;border-color:var(--brand);}
-.soci{display:flex;gap:3px;}
-.si{width:16px;height:16px;border-radius:3px;background:var(--s2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:8px;}
-
-/* ── RIGHT PANEL ── */
-.mdr{width:330px;flex-shrink:0;border-left:1px solid var(--border);background:var(--surface);overflow-y:auto;display:none;flex-direction:column;}
-.mdr.on{display:flex;}
-.dr-hd{padding:12px 15px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2;}
-.dr-nr{display:flex;align-items:center;gap:6px;margin-bottom:9px;}
-.dr-nm{font-size:13.5px;font-weight:800;}
-.dr-acts{display:flex;gap:5px;flex-wrap:wrap;}
-.dr-visit{background:var(--s2);color:var(--ink2);border:1px solid var(--border);}
-.dr-draft{background:var(--s2);color:var(--ink3);border:1px solid var(--border);}
-.dr-cfg{width:calc(100% - 30px);margin:9px 15px 0;padding:7px;border-radius:var(--r);font-size:11.5px;font-weight:600;background:var(--surface);color:var(--ink2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:5px;transition:var(--T);}
-.dr-cfg:hover{background:var(--s2);}
-
-/* Brett's expand/collapse acceleration row */
-.dr-acc-row{margin:9px 15px;border:1.5px solid var(--border);border-radius:var(--rlg);overflow:hidden;transition:border-color .15s;}
-.dr-acc-row:hover{border-color:var(--brand-bd);}
-.dr-acc-row.open{border-color:var(--brand);}
-.dr-acc-trig{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;cursor:pointer;background:var(--surface);transition:background .13s;user-select:none;}
-.dr-acc-trig:hover{background:var(--s2);}
-.dr-acc-row.open .dr-acc-trig{background:var(--brand-lt);}
-.dr-acc-tl{display:flex;align-items:center;gap:7px;}
-.dr-acc-tic{width:21px;height:21px;border-radius:5px;background:var(--brand-lt);border:1px solid var(--brand-bd);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:var(--T);}
-.dr-acc-row.open .dr-acc-tic{background:var(--brand);border-color:var(--brand);color:#fff;}
-.dr-acc-tn{font-size:12px;font-weight:700;color:var(--ink2);}
-.dr-acc-row.open .dr-acc-tn{color:var(--brand-dk);}
-.dr-acc-ts{font-size:10px;color:var(--ink4);margin-top:1px;}
-.dr-acc-chv{font-size:10px;color:var(--ink4);transition:transform .17s;flex-shrink:0;}
-.dr-acc-row.open .dr-acc-chv{transform:rotate(180deg);color:var(--brand);}
-.dr-acc-body{display:none;border-top:1px solid var(--border);}
-.dr-acc-row.open .dr-acc-body{display:block;animation:acslide .17s ease;}
-@keyframes acslide{from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:none;}}
-.dr-acc-in{padding:11px 12px;}
-.dr-acc-lede{font-size:11.5px;color:var(--ink3);line-height:1.55;margin-bottom:10px;}
-
-/* Bundle cards inside expand */
-.bundle-cards{display:flex;flex-direction:column;gap:7px;margin-bottom:11px;}
-.bcard{border:1.5px solid var(--border);border-radius:var(--r);padding:10px 11px;cursor:pointer;transition:var(--T);position:relative;}
-.bcard:hover{border-color:var(--brand-bd);}
-.bcard.on{border-color:var(--brand);background:var(--brand-lt);}
-.bcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;}
-.bcard-name{font-size:12px;font-weight:700;}
-.bcard-price{font-size:13px;font-weight:900;color:var(--brand);}
-.bcard-sub{font-size:10.5px;color:var(--ink3);}
-.bcard-feats{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
-.bfeat{font-size:10px;font-weight:600;padding:1px 6px;border-radius:20px;background:var(--s2);border:1px solid var(--border);color:var(--ink3);}
-.bcard.on .bfeat{background:var(--brand-lt);border-color:var(--brand-bd);color:var(--brand-dk);}
-.bcard-rec{position:absolute;top:-7px;right:10px;font-size:8px;font-weight:900;background:var(--brand);color:#fff;padding:1px 8px;border-radius:20px;letter-spacing:.05em;}
-.dr-acc-footer{display:flex;gap:6px;}
-.dr-acc-go{flex:1;padding:8px;border-radius:var(--r);font-size:12px;font-weight:700;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:var(--T);border:none;}
-.dr-acc-go:hover{background:var(--brand-dk);}
-.dr-acc-skip{padding:8px 10px;border-radius:var(--r);font-size:11px;font-weight:600;background:var(--surface);color:var(--ink3);border:1px solid var(--border);cursor:pointer;transition:var(--T);}
-.dr-acc-skip:hover{background:var(--s2);}
-.dr-acc-note{font-size:10px;color:var(--ink5);text-align:center;margin-top:5px;}
-.dr-acc-active{margin:9px 15px;display:none;align-items:center;justify-content:space-between;padding:8px 11px;background:var(--gbg);border:1px solid var(--gbd);border-radius:var(--rlg);}
-.dr-acc-active.on{display:flex;}
-.dr-info{padding:11px 15px;}
-.dr-st{font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4);margin-bottom:7px;}
-.dr-ig{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.dr-ib{background:var(--s2);border-radius:var(--r);padding:8px 10px;}
-.dr-ibl{font-size:10px;color:var(--ink4);margin-bottom:2px;}
-.dr-ibv{font-size:12px;font-weight:700;color:var(--ink2);}
-
-/* ── DOMAIN MANAGE ── */
-.dmwrap{flex:1;overflow:hidden;display:flex;flex-direction:column;}
-.dmtop{display:flex;align-items:center;gap:8px;padding:10px 20px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0;}
-.dmback{width:26px;height:26px;border-radius:5px;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink3);cursor:pointer;transition:var(--T);}
-.dmback:hover{background:var(--border);}
-.dmbic{width:24px;height:24px;border-radius:4px;background:var(--brand-lt);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
-.dmtitle{font-size:13.5px;font-weight:800;}
-.badge-a{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;}
-.bga{background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
-.bgac{background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);}
-.dmsp{flex:1;}
-.dmtabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface);padding:0 20px;flex-shrink:0;overflow-x:auto;}
-.dmtab{display:flex;align-items:center;gap:4px;padding:10px 12px;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;border-bottom:2px solid transparent;transition:var(--T);white-space:nowrap;margin-bottom:-1px;}
-.dmtab:hover{color:var(--ink);}
-.dmtab.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:700;}
-.dmbody{flex:1;overflow:hidden;display:flex;}
-.dmcontent{flex:1;overflow-y:auto;padding:18px 20px;}
-.dmaside{width:265px;border-left:1px solid var(--border);overflow-y:auto;background:var(--surface);}
-
-/* ── GENERAL TAB ── */
-.dmsec{margin-bottom:18px;}
-.dmsec-t{font-size:12.5px;font-weight:700;margin-bottom:3px;}
-.dmsec-s{font-size:11px;color:var(--ink3);margin-bottom:11px;}
-.dmfr{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px;}
-.dmfr.full{grid-template-columns:1fr;}
-.dmlbl{font-size:10.5px;font-weight:700;color:var(--ink2);margin-bottom:3px;display:block;}
-.dminpw{position:relative;display:flex;align-items:center;}
-.dminp{width:100%;padding:8px 30px 8px 10px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;color:var(--ink);background:var(--surface);}
-.dminp:focus{border-color:var(--brand);}
-.dmic{position:absolute;right:8px;font-size:12px;color:var(--ink4);}
-.dmta{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;color:var(--ink);min-height:68px;resize:vertical;}
-.logo-g{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
-.logo-box{border:1px solid var(--border);border-radius:var(--rlg);padding:11px;}
-.logo-tit{font-size:12px;font-weight:700;margin-bottom:2px;}
-.logo-sub{font-size:10.5px;color:var(--ink3);margin-bottom:7px;}
-.logo-upl{display:flex;align-items:center;gap:8px;}
-.logo-ph{width:38px;height:38px;border:1.5px dashed var(--border2);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink4);flex-shrink:0;}
-.upl-btn{flex:1;padding:7px;border-radius:var(--r);font-size:11px;font-weight:600;background:var(--surface);color:var(--ink2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;transition:var(--T);}
-.upl-btn:hover{background:var(--s2);}
-
-/* ── SITE ACCELERATION TAB ── */
-/* Current status banner */
-.sa-banner{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:14px 17px;margin-bottom:15px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--sh);}
-.sa-banner h3{font-size:13.5px;font-weight:800;margin-bottom:2px;}
-.sa-banner p{font-size:11.5px;color:var(--ink3);}
-.sa-tog{display:flex;align-items:center;gap:7px;}
-.sa-tog-lbl{font-size:12px;font-weight:700;}
-.tog{width:38px;height:21px;background:var(--border2);border-radius:11px;cursor:pointer;position:relative;transition:var(--T);}
-.tog.on{background:var(--green);}
-.tok{width:15px;height:15px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:var(--T);box-shadow:0 1px 3px rgba(0,0,0,.2);}
-.tog.on .tok{left:20px;}
-
-/* Included free card */
-.sa-free-card{background:var(--gbg);border:1px solid var(--gbd);border-radius:var(--rxl);padding:14px 17px;margin-bottom:15px;}
-.sa-free-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.sa-free-title{font-size:12.5px;font-weight:800;color:#065F46;display:flex;align-items:center;gap:6px;}
-.sa-free-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.sa-free-item{background:#fff;border:1px solid var(--gbd);border-radius:var(--r);padding:10px 11px;}
-.sa-fi-lbl{font-size:10.5px;color:var(--green);font-weight:700;margin-bottom:2px;}
-.sa-fi-val{font-size:13px;font-weight:800;color:var(--ink);}
-.sa-fi-sub{font-size:10px;color:var(--ink4);margin-top:2px;}
-
-/* Premium bundle section */
-.sa-prem-divider{display:flex;align-items:center;gap:10px;margin:6px 0 15px;}
-.sa-prem-line{flex:1;height:1px;background:var(--border);}
-.sa-prem-label{font-size:10.5px;font-weight:800;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em;}
-
-/* Bundle plan cards - redesigned for value perception */
-.bundle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:15px;}
-.bplan{border:1.5px solid var(--border);border-radius:var(--rxl);padding:16px;cursor:pointer;transition:var(--T);position:relative;overflow:hidden;}
-.bplan:hover{border-color:var(--brand-bd);transform:translateY(-2px);box-shadow:var(--shmd);}
-.bplan.on{border-color:var(--brand);background:var(--brand-lt);box-shadow:0 0 0 3px rgba(200,93,55,.08);}
-.bplan-rec{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:900;background:var(--brand);color:#fff;padding:2px 10px;border-radius:20px;letter-spacing:.05em;white-space:nowrap;}
-.bplan-name{font-size:13.5px;font-weight:800;margin-bottom:3px;}
-.bplan-tagline{font-size:11px;color:var(--ink3);margin-bottom:11px;}
-.bplan-price{font-size:26px;font-weight:900;color:var(--brand);letter-spacing:-.02em;line-height:1;}
-.bplan-per{font-size:11px;color:var(--ink4);}
-.bplan-compare{font-size:10.5px;color:var(--green);font-weight:600;margin-top:3px;margin-bottom:10px;}
-.bplan-divider{height:1px;background:var(--border);margin:10px 0;}
-.bplan-feat{display:flex;align-items:flex-start;gap:5px;font-size:11.5px;padding:3px 0;}
-.bplan-feat .ic{font-size:12px;flex-shrink:0;margin-top:1px;}
-.bplan-cta{width:100%;margin-top:12px;padding:8px;border-radius:var(--r);font-size:12px;font-weight:700;text-align:center;cursor:pointer;transition:var(--T);border:none;}
-.bplan-cta-p{background:var(--brand);color:#fff;}
-.bplan-cta-p:hover{background:var(--brand-dk);}
-.bplan-cta-s{background:var(--surface);color:var(--ink2);border:1.5px solid var(--border);}
-.bplan-cta-s:hover{background:var(--s2);}
-
-/* Boost packs */
-.sa-sec{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);margin-bottom:12px;overflow:hidden;box-shadow:var(--sh);}
-.sa-sec-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid var(--border);}
-.sa-sec-title{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;}
-.sa-sec-b{padding:13px 15px;}
-.boost-grid-sa{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-.bst{border:1.5px solid var(--border);border-radius:var(--rlg);padding:11px;cursor:pointer;transition:var(--T);}
-.bst:hover{border-color:var(--brand-bd);}
-.bst.on{border-color:var(--brand);background:var(--brand-lt);}
-.bst-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
-.bst-nm{font-size:12.5px;font-weight:800;}
-.bst-pr{font-size:14px;font-weight:900;color:var(--brand);}
-.bst-meta{font-size:11px;color:var(--ink3);}
-.bst-hint{font-size:10.5px;color:var(--ink4);margin-top:3px;}
-
-/* Market signals */
-.sig-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
-.sig-c{display:flex;align-items:center;gap:5px;padding:6px 9px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:var(--T);font-size:11px;}
-.sig-c:hover{border-color:var(--brand-bd);}
-.sig-c.on{border-color:var(--brand);background:var(--brand-lt);}
-.sig-ck{width:12px;height:12px;border-radius:3px;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;transition:var(--T);}
-.sig-c.on .sig-ck{background:var(--brand);border-color:var(--brand);}
-
-/* SA aside */
-.sa-aside{padding:13px 14px;}
-.sa-at{font-size:11.5px;font-weight:800;margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid var(--border);}
-.sa-order{background:var(--s2);border:1px solid var(--border);border-radius:var(--rlg);padding:11px;margin-bottom:12px;}
-.sa-ol{display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0;}
-.sa-ok{color:var(--ink3);}
-.sa-ov{font-weight:700;}
-.sa-ov-free{color:var(--green);}
-.sa-ov-paid{color:var(--brand);}
-.sa-ototal{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:800;border-top:1px solid var(--border);padding-top:8px;margin-top:5px;}
-.sa-otv{font-size:17px;color:var(--brand);}
-.sa-save{width:100%;padding:9px;border-radius:var(--r);font-size:12.5px;font-weight:700;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;gap:5px;transition:var(--T);margin-top:10px;border:none;cursor:pointer;}
-.sa-save:hover{background:var(--brand-dk);}
-.sa-rnote{font-size:10px;color:var(--ink4);text-align:center;margin-top:6px;}
-.ctx-box{background:var(--s2);border:1px solid var(--border);border-radius:var(--rlg);padding:11px;margin-bottom:11px;}
-.ctx-title{font-size:11.5px;font-weight:700;margin-bottom:5px;color:var(--ink2);}
-.ctx-txt{font-size:11.5px;color:var(--ink3);line-height:1.6;}
-.imp-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--rlg);padding:11px;}
-.imp-title{font-size:11.5px;font-weight:700;margin-bottom:7px;color:var(--ink2);}
-.imp-row{display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0;border-bottom:1px solid var(--border);}
-.imp-row:last-child{border-bottom:none;}
-.imp-k{color:var(--ink3);}
-.imp-v{font-weight:700;color:var(--ink);}
-/* layout/theme aside */
-.lt-row{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);margin-bottom:5px;cursor:pointer;transition:var(--T);}
-.lt-row:hover{border-color:var(--brand-bd);}
-.lt-row.on{border:1.5px solid var(--brand);background:var(--brand-lt);}
-.lt-dots{display:flex;gap:3px;margin-left:auto;}
-.lt-dot{width:9px;height:9px;border-radius:50%;}
-
-/* ── CONTENT OPS TAB ── */
-.co-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:15px;}
-.com{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:12px 14px;box-shadow:var(--sh);}
-.com-title{font-size:11px;font-weight:600;color:var(--ink3);margin-bottom:5px;display:flex;align-items:center;justify-content:space-between;}
-.com-val{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
-.com-sub{font-size:11px;color:var(--ink4);margin-top:3px;}
-.coming-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:20px;background:var(--abg);color:var(--amber);border:1px solid var(--abd);}
-/* Publishing schedule */
-.co-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);margin-bottom:13px;overflow:hidden;box-shadow:var(--sh);}
-.co-chd{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid var(--border);}
-.co-ct{font-size:13px;font-weight:700;}
-.co-cs{font-size:11.5px;color:var(--ink3);margin-top:2px;}
-.co-cb{padding:13px 15px;}
-.co-sl{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-/* Free post notice */
-.co-free-notice{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--gbg);border:1px solid var(--gbd);border-radius:var(--r);margin-bottom:13px;}
-.co-fn-l{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#065F46;}
-.co-upgrade-hint{font-size:11px;font-weight:600;color:var(--brand);cursor:pointer;display:flex;align-items:center;gap:3px;}
-.co-upgrade-hint:hover{text-decoration:underline;}
-/* Cadence options */
-.co-cad-tog{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px;}
-.copt{padding:9px 11px;border-radius:var(--r);cursor:pointer;transition:var(--T);border:2px solid var(--border);}
-.copt:hover{border-color:var(--brand-bd);}
-.copt.on{border-color:var(--brand);background:var(--brand-lt);}
-.copt.locked{opacity:.55;cursor:not-allowed;}
-.copt.locked:hover{border-color:var(--border);}
-.copt-name{font-size:12.5px;font-weight:700;margin-bottom:2px;}
-.copt-price{font-size:11px;color:var(--ink3);}
-.copt-lock{font-size:10px;font-weight:700;color:var(--brand);}
-.form-f{margin-bottom:10px;}
-.form-f label{font-size:10.5px;font-weight:700;color:var(--ink2);display:block;margin-bottom:3px;}
-.form-sel{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;color:var(--ink);background:var(--surface);}
-/* Power-ups */
-.pu-sec{margin-top:14px;}
-.pu-hd{font-size:12px;font-weight:800;display:flex;align-items:center;gap:5px;margin-bottom:3px;}
-.pu-sub{font-size:11px;color:var(--ink3);margin-bottom:9px;}
-.pu-item{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--rlg);margin-bottom:7px;transition:var(--T);}
-.pu-item:hover{border-color:var(--brand-bd);}
-.pu-ico{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
-.pu-brand{background:var(--brand-lt);}
-.pu-gray{background:var(--s2);}
-.pu-info{flex:1;}
-.pu-nm{font-size:12px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:5px;}
-.pu-desc{font-size:11px;color:var(--ink3);line-height:1.5;}
-.cs-badge{font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:20px;background:var(--s2);color:var(--ink3);border:1px solid var(--border);}
-/* Calendar */
-.pub-notice{display:flex;align-items:flex-start;gap:5px;padding:8px 10px;background:var(--abg);border:1px solid var(--abd);border-radius:var(--r);font-size:11px;color:var(--amber);margin-bottom:9px;}
-.mini-cal-month{font-size:11.5px;font-weight:700;text-align:center;margin-bottom:7px;}
-.mini-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
-.mch{font-size:9.5px;font-weight:700;color:var(--ink4);text-align:center;padding:2px 0;}
-.mcd{font-size:11px;text-align:center;padding:4px 2px;border-radius:4px;cursor:pointer;transition:background .1s;}
-.mcd:hover{background:var(--s2);}
-.mcd-today{background:var(--border);font-weight:700;}
-.mcd-sched{background:var(--brand-lt);color:var(--brand);font-weight:700;}
-.mcd-pub{background:var(--gbg);color:var(--green);font-weight:700;}
-.mcd-e{color:var(--ink5);}
-/* Upcoming content - rich cards matching screenshot */
-.uc-section{margin-bottom:16px;}
-.uc-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.uc-title{font-size:13.5px;font-weight:700;}
-.uc-count{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
-.uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
-.uc-card{border:1px solid var(--border);border-radius:var(--rxl);overflow:hidden;background:var(--surface);box-shadow:var(--sh);position:relative;}
-.uc-card-corner{position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 28px 28px 0;border-color:transparent var(--brand) transparent transparent;}
-.uc-meta{padding:9px 12px;background:var(--s2);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;}
-.uc-date{font-size:11px;font-weight:700;color:var(--ink2);}
-.uc-time{font-size:10px;color:var(--ink3);}
-.uc-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;}
-.uc-tag{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:20px;}
-.utg-howto{background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);}
-.utg-opinion{background:var(--pbg);color:var(--purple);border:1px solid var(--pbd);}
-.utg-inter{background:var(--pbg);color:var(--purple);border:1px solid var(--pbd);}
-.utg-beginner{background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
-.utg-advanced{background:var(--rbg);color:var(--red);border:1px solid var(--red-bd,#FECACA);}
-.utg-words{background:var(--s2);color:var(--ink3);}
-.uc-body{padding:11px 12px;}
-.uc-body-title{font-size:12.5px;font-weight:800;margin-bottom:5px;line-height:1.35;}
-.uc-excerpt{font-size:11px;color:var(--ink3);line-height:1.55;margin-bottom:8px;}
-.uc-angle{display:flex;align-items:flex-start;gap:5px;font-size:11px;margin-bottom:7px;}
-.uc-angle-ico{font-size:12px;color:var(--brand);flex-shrink:0;}
-.uc-angle-t{font-weight:700;color:var(--ink2);}
-.uc-angle-v{font-size:10.5px;color:var(--ink3);margin-top:2px;}
-.uc-kws{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
-.uc-kw{font-size:9.5px;padding:1px 6px;border-radius:20px;background:var(--s2);border:1px solid var(--border);color:var(--ink3);}
-.uc-footer{display:flex;align-items:center;justify-content:space-between;font-size:11px;}
-.uc-pri{color:var(--brand);font-weight:700;display:flex;align-items:center;gap:3px;}
-.uc-cal{color:var(--green);font-weight:600;display:flex;align-items:center;gap:3px;}
-/* Published content cards (matching live screenshot) */
-.pub-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
-.pub-title{font-size:13.5px;font-weight:700;}
-.pub-tabs{display:flex;gap:4px;background:var(--s2);border-radius:var(--r);padding:3px;}
-.pub-tab{padding:5px 11px;border-radius:4px;font-size:11.5px;font-weight:600;color:var(--ink3);cursor:pointer;transition:var(--T);}
-.pub-tab.on{background:var(--surface);color:var(--ink);box-shadow:var(--sh);}
-.pub-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;}
-.pub-card{border:1px solid var(--border);border-radius:var(--rxl);overflow:hidden;background:var(--surface);box-shadow:var(--sh);}
-.pub-card-img{height:100px;background:linear-gradient(135deg,var(--brand-lt),var(--brand-lt));display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink3);position:relative;overflow:hidden;}
-.pub-card-img-inner{width:100%;height:100%;background:linear-gradient(135deg,#F3EDE8 0%,#E8DDD5 100%);display:flex;align-items:center;justify-content:center;}
-.pub-card-img-txt{font-size:11.5px;font-weight:700;color:var(--ink3);text-align:center;padding:12px;line-height:1.4;}
-.pub-card-tags{display:flex;gap:4px;position:absolute;top:8px;left:8px;flex-wrap:wrap;}
-.pub-card-body{padding:11px 12px;}
-.pub-card-title{font-size:12.5px;font-weight:800;margin-bottom:5px;line-height:1.35;}
-.pub-card-excerpt{font-size:11px;color:var(--ink3);line-height:1.55;margin-bottom:8px;}
-.pub-card-footer{display:flex;align-items:center;justify-content:space-between;font-size:11px;}
-.pub-card-date{color:var(--ink4);}
-.pub-card-status{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;}
-.pcs-published{background:var(--gbg);color:var(--green);}
-.pcs-scheduled{background:var(--bbg);color:var(--blue);}
-
-/* ── PRICING PAGE ── */
-.pricing-wrap{padding:24px 28px 50px;}
-.pricing-h1{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;}
-.pricing-sub{font-size:12.5px;color:var(--ink3);margin-bottom:22px;}
-.eco-row{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:22px;}
-.eco{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:13px 15px;box-shadow:var(--sh);}
-.eco-v{font-size:23px;font-weight:900;letter-spacing:-.02em;margin-bottom:3px;}
-.eco-l{font-size:11.5px;color:var(--ink3);}
-.eco.hi{background:var(--brand);color:#fff;}
-.eco.hi .eco-l{color:rgba(255,255,255,.7);}
-.psec-title{font-size:14px;font-weight:800;margin-bottom:3px;}
-.psec-sub{font-size:11.5px;color:var(--ink3);margin-bottom:13px;}
-.ptbl{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--sh);margin-bottom:13px;}
-.ptbl th{background:var(--brand);color:#fff;font-size:11.5px;font-weight:700;padding:10px 14px;text-align:left;}
-.ptbl td{padding:10px 14px;font-size:12.5px;border-bottom:1px solid var(--border);}
-.ptbl tr:last-child td{border-bottom:none;}
-.ptbl tr:hover td{background:var(--brand-lt);}
-.mb{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:4px;}
-.mbf{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--brand),var(--green));}
-.tlbl{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;}
-.tl-free{background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
-.tl-entry{background:var(--abg);color:var(--amber);border:1px solid var(--abd);}
-.tl-growth{background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);}
-.tl-scale{background:var(--pbg);color:var(--purple);border:1px solid var(--pbd);}
-/* Domain plan cards */
-.plan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:26px;}
-.pcard{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rxl);padding:18px;position:relative;box-shadow:var(--sh);}
-.pcard.feat{border-color:var(--brand);box-shadow:0 0 0 3px rgba(200,93,55,.09);}
-.pcard-badge{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:8.5px;font-weight:900;background:var(--brand);color:#fff;padding:2px 10px;border-radius:20px;letter-spacing:.05em;white-space:nowrap;}
-.pcard-name{font-size:15px;font-weight:800;margin-bottom:2px;}
-.pcard-tag{font-size:11px;color:var(--ink3);margin-bottom:11px;}
-.pcard-price{font-size:28px;font-weight:900;color:var(--brand);letter-spacing:-.02em;line-height:1;}
-.pcard-per{font-size:11.5px;color:var(--ink4);}
-.pcard-dn{font-size:11px;color:var(--ink3);margin:7px 0 11px;padding-top:7px;border-top:1px solid var(--border);}
-.pcard-feat{display:flex;align-items:flex-start;gap:5px;font-size:11.5px;padding:3px 0;}
-.pcard-feat .pi{font-size:12px;flex-shrink:0;margin-top:1px;}
-.pcard-cta{width:100%;margin-top:13px;padding:9px;border-radius:var(--r);font-size:12.5px;font-weight:700;text-align:center;cursor:pointer;border:none;}
-/* Rec box */
-.rec-box{background:linear-gradient(135deg,#180C06,#2D1208);border-radius:var(--rxl);padding:22px;color:#fff;}
-.rec-box-t{font-size:16px;font-weight:800;color:#F2A57C;margin-bottom:14px;}
-.rec-item{display:flex;gap:9px;margin-bottom:13px;}
-.rec-num{width:23px;height:23px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.rec-txt h5{font-size:12.5px;font-weight:700;margin-bottom:2px;color:#fff;}
-.rec-txt p{font-size:11.5px;color:rgba(255,255,255,.6);line-height:1.6;}
-
-/* ── CENTER MODAL (replaces side panel for activation) ── */
-.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;animation:mfade .22s ease;}
-.moverlay.on{display:flex;}
-@keyframes mfade{from{opacity:0;}to{opacity:1;}}
-.modal{background:var(--surface);border-radius:var(--rxl);width:100%;max-width:620px;max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shlg);animation:mrise .25s ease;}
-@keyframes mrise{from{opacity:0;transform:scale(.96) translateY(12px);}to{opacity:1;transform:none;}}
-.modal-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--border);flex-shrink:0;}
-.modal-title{font-size:15px;font-weight:800;}
-.modal-pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--s2);color:var(--ink3);}
-.modal-close{width:28px;height:28px;border-radius:6px;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink3);cursor:pointer;transition:var(--T);}
-.modal-close:hover{background:var(--border);}
-/* Progress in modal */
-.modal-prog{padding:14px 22px 0;flex-shrink:0;}
-.mprog-row{display:flex;align-items:center;}
-.mpc{display:flex;flex-direction:column;align-items:center;flex:1;}
-.mpc:last-child{flex:0;}
-.mpd{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;transition:var(--T);}
-.mpd.done{background:var(--green);color:#fff;}
-.mpd.active{background:var(--brand);color:#fff;box-shadow:0 0 0 4px var(--brand-lt);}
-.mpd.idle{background:var(--s2);color:var(--ink4);border:1.5px solid var(--border);}
-.mpl-w{flex:1;padding-top:13px;}
-.mpl{height:2px;background:var(--border);transition:var(--T);}
-.mpl.done{background:var(--green);}
-.mp-labels{display:flex;padding:5px 22px 12px;border-bottom:1px solid var(--border);}
-.mp-lbl{font-size:9.5px;font-weight:700;text-align:center;color:var(--ink4);flex:1;}
-.mp-lbl.active{color:var(--brand);}
-.mp-lbl.done{color:var(--green);}
-.mp-lbl-last{flex:0;min-width:38px;}
-/* Modal body */
-.modal-body{flex:1;overflow-y:auto;padding:20px 22px;}
-.ms{display:none;}
-.ms.on{display:block;animation:msrise .2s ease;}
-@keyframes msrise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-.ms-ey{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin-bottom:4px;}
-.ms-h{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px;}
-.ms-sub{font-size:12.5px;color:var(--ink3);margin-bottom:17px;line-height:1.6;}
-.fl{display:flex;flex-direction:column;margin-bottom:12px;}
-.fl label{font-size:11px;font-weight:700;color:var(--ink2);margin-bottom:4px;}
-.fi{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:var(--r);font-size:12.5px;color:var(--ink);background:var(--surface);transition:border-color .15s;}
-.fi:focus{border-color:var(--brand);}
-.fta{resize:vertical;min-height:68px;}
-.fh{font-size:10.5px;color:var(--ink4);margin-top:3px;line-height:1.5;}
-/* Theme grid in modal */
-.theme-g{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
-.tc{border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:var(--T);}
-.tc:hover{border-color:var(--brand-bd);}
-.tc.on{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand-lt);}
-.tc-p{height:46px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.tc-n{font-size:10px;font-weight:600;text-align:center;padding:4px 5px;background:var(--s2);}
-/* Type grid in modal */
-.type-g{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
-.typec{border:1.5px solid var(--border);border-radius:var(--r);padding:11px 9px;cursor:pointer;transition:var(--T);}
-.typec:hover{border-color:var(--brand-bd);background:var(--brand-lt);}
-.typec.on{border-color:var(--brand);background:var(--brand-lt);}
-.tyic{font-size:17px;margin-bottom:4px;}
-.tynm{font-size:12px;font-weight:700;}
-.tyds{font-size:10px;color:var(--ink4);margin-top:1px;}
-/* DNS in modal */
-.dns-bx{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:10px;}
-.dns-rw{display:flex;gap:6px;align-items:center;margin-bottom:7px;}
-.dns-rw:last-child{margin-bottom:0;}
-.dns-fi{flex:1;}
-.dns-lbl{font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:2px;}
-.dns-v{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-size:10.5px;font-family:monospace;color:var(--ink2);}
-.dns-st{display:flex;align-items:center;gap:5px;padding:7px 10px;border-radius:var(--r);font-size:11px;font-weight:600;}
-.dns-p{background:var(--abg);color:var(--amber);}
-.dns-ok{background:var(--gbg);color:var(--green);}
-/* Day/pub pickers in modal */
-.day-row{display:flex;gap:5px;flex-wrap:wrap;}
-.daybtn{padding:6px 9px;border-radius:5px;font-size:11.5px;font-weight:700;border:1.5px solid var(--border);background:var(--surface);color:var(--ink3);cursor:pointer;transition:var(--T);}
-.daybtn:hover{border-color:var(--brand);color:var(--brand);}
-.daybtn.on{border-color:var(--brand);background:var(--brand);color:#fff;}
-.pub-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px;}
-.pub-opt{border:1.5px solid var(--border);border-radius:var(--r);padding:9px 7px;cursor:pointer;transition:var(--T);text-align:center;}
-.pub-opt:hover{border-color:var(--brand-bd);}
-.pub-opt.on{border-color:var(--brand);background:var(--brand-lt);}
-.pub-ic{font-size:16px;margin-bottom:3px;}
-.pub-t{font-size:11.5px;font-weight:700;}
-.pub-s{font-size:9.5px;color:var(--ink4);margin-top:1px;}
-.cfg-sum{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;margin-bottom:10px;}
-.cfg-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);}
-.cfg-row:last-child{border-bottom:none;}
-.cfgk{font-size:11px;font-weight:600;display:flex;align-items:center;gap:4px;}
-.cfgv{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:4px;}
-.cbf{font-size:9px;font-weight:700;padding:1px 6px;border-radius:20px;background:var(--gbg);color:var(--green);}
-.cbd{font-size:9px;font-weight:700;padding:1px 6px;border-radius:20px;background:var(--s2);color:var(--ink4);}
-.ins{border-radius:var(--r);padding:9px 12px;margin-bottom:10px;font-size:11.5px;}
-.ins-brand{background:var(--brand-lt);border:1px solid var(--brand-bd);border-left:2px solid var(--brand);}
-.ins-brand h5{font-size:11.5px;font-weight:700;color:var(--brand-dk);margin-bottom:2px;}
-.ins-brand p{color:var(--ink2);line-height:1.5;}
-.ins-green{background:var(--gbg);border:1px solid var(--gbd);border-left:2px solid var(--green);}
-.ins-green h5{font-size:11.5px;font-weight:700;color:#065F46;margin-bottom:2px;}
-.ins-green p{color:#047857;line-height:1.5;}
-/* Processing in modal */
-.proc-sc{text-align:center;padding:28px 18px;}
-.proc-spin{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;margin:0 auto 12px;animation:spin 1s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.proc-title{font-size:17px;font-weight:800;margin-bottom:4px;}
-.proc-sub{font-size:12px;color:var(--ink3);margin-bottom:15px;line-height:1.6;}
-.proc-steps{background:var(--s2);border-radius:var(--r);padding:10px 12px;text-align:left;margin-bottom:14px;}
-.proc-step{display:flex;align-items:center;gap:7px;padding:3px 0;font-size:11.5px;}
-.proc-ico{font-size:12px;width:16px;text-align:center;}
-.ps-done{color:var(--green);}
-.ps-run{color:var(--brand);}
-.ps-pend{color:var(--ink4);}
-/* Confirm in modal */
-.conf-sc{text-align:center;padding:24px 18px;}
-.conf-ico{font-size:44px;margin-bottom:11px;}
-.conf-title{font-size:17px;font-weight:800;margin-bottom:4px;}
-.conf-sub{font-size:12px;color:var(--ink3);margin-bottom:17px;line-height:1.6;}
-.conf-dt{background:var(--s2);border-radius:var(--r);padding:10px 12px;text-align:left;margin-bottom:15px;}
-.cdr{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:11.5px;}
-.cdr:last-child{border-bottom:none;}
-.cdk{font-weight:700;}
-.cdv{color:var(--ink3);}
-.conf-hint{background:linear-gradient(135deg,#1C0E08,#3A1A0D);border-radius:var(--rlg);padding:11px 13px;margin-bottom:13px;text-align:left;}
-.cht{font-size:11.5px;font-weight:800;color:#F2A57C;margin-bottom:2px;}
-.chd{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;}
-/* Modal footer */
-.modal-ft{padding:12px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--surface);}
-.mft-note{font-size:11px;color:var(--ink4);}
-</style>
+<link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
 <div class="app">
 
-<!-- SIDEBAR -->
-<aside class="sb">
-  <div class="sb-logo"><div class="sb-logo-i">🔥</div><span class="sb-logo-t">SiteWarming</span></div>
-  <div class="sb-org"><div><div class="sb-org-n">Parth Kachhia's Organizat…</div><div class="sb-org-s">Owner</div></div><span style="color:var(--ink4);font-size:11px;">∨</span></div>
-  <div class="sb-learn" style="margin:0 7px 2px;"><span style="font-size:12px;font-weight:500;color:var(--ink2);">Learn</span><div style="width:6px;height:6px;border-radius:50%;background:var(--brand);"></div></div>
-  <div class="sb-d"></div>
-  <nav class="sb-nav">
-    <div class="sb-item" id="sb-dash" onclick="V('dashboard')"><span class="sb-item-i">⊞</span>Dashboard</div>
-    <div class="sb-item on" id="sb-domains" onclick="V('mydomains')"><span class="sb-item-i">🌐</span>My Domains</div>
-    <div class="sb-item"><span class="sb-item-i">🎨</span>Logo Maker</div>
-    <div class="sb-item"><span class="sb-item-i">🔗</span>Connection</div>
-    <div class="sb-item" id="sb-pricing" onclick="V('pricing')"><span class="sb-item-i">💰</span>Pricing &amp; Billing</div>
-  </nav>
-  <div class="sb-sp"></div>
-  <div class="sb-plan">
-    <div class="sb-plan-t">Pro</div>
-    <div class="sb-plan-r"><span class="sb-plan-l">🚀 Active</span><span class="sb-plan-v" id="sb-active">2 / 35</span></div>
-    <div class="sb-plan-r"><span class="sb-plan-l">🎨 Logo Credits</span><span class="sb-plan-v">11</span></div>
+  <!-- ── SIDEBAR ── -->
+  <aside class="sb">
+    <div class="sb-logo">
+      <div class="sb-logo-i">🔥</div>
+      <span class="sb-logo-t">SiteWarming</span>
+    </div>
+    <div class="sb-org">
+      <div>
+        <div class="sb-org-n">Parth Kachhia's Organizat…</div>
+        <div class="sb-org-s">Owner</div>
+      </div>
+      <span style="color:var(--ink4);font-size:11px;">∨</span>
+    </div>
+    <div class="sb-learn" style="margin:0 7px 2px;">
+      <span style="font-size:12px;font-weight:500;color:var(--ink2);">Learn</span>
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--brand);"></div>
+    </div>
+    <div class="sb-d"></div>
+    <nav class="sb-nav">
+      <div class="sb-item" id="sb-dash"    onclick="V('dashboard')"><span class="sb-item-i">⊞</span>Dashboard</div>
+      <div class="sb-item on" id="sb-domains" onclick="V('mydomains')"><span class="sb-item-i">🌐</span>My Domains</div>
+      <div class="sb-item"><span class="sb-item-i">🎨</span>Logo Maker</div>
+      <div class="sb-item"><span class="sb-item-i">🔗</span>Connection</div>
+      <div class="sb-item" id="sb-pricing" onclick="V('pricing')"><span class="sb-item-i">💰</span>Pricing &amp; Billing</div>
+    </nav>
+    <div class="sb-sp"></div>
+    <div class="sb-plan">
+      <div class="sb-plan-t">Pro</div>
+      <div class="sb-plan-r"><span class="sb-plan-l">🚀 Active</span><span class="sb-plan-v" id="sb-active">2 / 35</span></div>
+      <div class="sb-plan-r"><span class="sb-plan-l">🎨 Logo Credits</span><span class="sb-plan-v">11</span></div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av">P</div>
+      <div>
+        <div class="sb-un">Parth Kachhia</div>
+        <div class="sb-ue">parth.kachhia+6@adopi…</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+    <div class="abar">
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span>⚠️</span>
+        <span><strong>Test 21: Warning Alert Circle (Copy)</strong> — Warning: High traffic expected. Site may be slow.</span>
+      </div>
+      <button style="background:none;color:var(--amber);font-size:14px;opacity:.6;cursor:pointer;" onclick="this.parentElement.remove()">×</button>
+    </div>
+
+    <!-- Views — content is loaded dynamically from views/ folder -->
+    <div class="view"    id="view-dashboard"></div>
+    <div class="view on" id="view-mydomains"></div>
+    <div class="view"    id="view-domainmanage"></div>
+    <div class="view"    id="view-pricing"></div>
   </div>
-  <div class="sb-user"><div class="sb-av">P</div><div><div class="sb-un">Parth Kachhia</div><div class="sb-ue">parth.kachhia+6@adopi…</div></div></div>
-</aside>
 
-<!-- MAIN -->
-<div class="main">
-<div class="abar"><div style="display:flex;align-items:center;gap:6px;"><span>⚠️</span><span><strong>Test 21: Warning Alert Circle (Copy)</strong> — Warning: High traffic expected. Site may be slow.</span></div><button style="background:none;color:var(--amber);font-size:14px;opacity:.6;cursor:pointer;" onclick="this.parentElement.remove()">×</button></div>
-
-<!-- DASHBOARD -->
-<div class="view" id="view-dashboard">
-  <div class="dash">
-    <div class="dash-h1">Activate instantly. Accelerate for growth.</div>
-    <div class="dash-sub">Welcome back, Parth!</div>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-nums"><div><div class="stat-v" id="d-ready">4</div><div class="stat-l">Ready to Activate</div></div><div><div class="stat-v">0</div><div class="stat-l">Tracked</div></div></div><div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span style="font-size:18px;color:var(--ink5);">📄</span><span style="font-size:18px;color:var(--ink5);">🛡️</span></div></div>
-      <div class="stat"><div class="stat-nums"><div><div class="stat-v" id="d-active">2</div><div class="stat-l">Active</div></div></div><span style="font-size:22px;color:var(--ink5);">🌐</span></div>
-      <div class="stat"><div><div class="stat-v">$0</div><div class="stat-l">Portfolio Value</div></div><span style="font-size:24px;color:var(--ink5);">$</span></div>
-    </div>
-    <!-- Subtle one-time hint (Brett's requirement: NOT a persistent commercial) -->
-    <div class="act-hint" id="dash-hint">
-      <div class="ah-l"><div class="ah-ic">⚡</div><div><div class="ah-title">Domain activated — premium acceleration available</div><div class="ah-sub">Configure audience, voice &amp; cadence from domain's Site Acceleration tab.</div></div></div>
-      <div style="display:flex;align-items:center;gap:6px;"><button class="btn btn-p btn-sm" onclick="V('mydomains');openDM('namecrates.com','sa')">Configure →</button><button class="ah-dismiss" onclick="document.getElementById('dash-hint').style.display='none'">Dismiss</button></div>
-    </div>
-    <div class="action-g">
-      <div class="ac">
-        <div class="ac-top"><div class="ac-hd"><span class="ac-ic">🚀</span><span class="ac-title">Activate Your Domain</span></div><div class="ac-play" onclick="openModal()">▶</div></div>
-        <p class="ac-desc">Turn your domain into a live site in minutes. Every activation includes 1 blog post/month — free, automatic, published within 3–6 hours.</p>
-        <button class="ac-btn ac-p" onclick="openModal()">+ Activate New Site</button>
-      </div>
-      <div class="ac">
-        <div class="ac-top"><div class="ac-hd"><span class="ac-ic">📥</span><span class="ac-title">Bulk Import Domains</span></div><div class="ac-play">▶</div></div>
-        <p class="ac-desc">Import your existing domains and start managing them all in one place.</p>
-        <button class="ac-btn ac-o">↑ Import Domains</button>
-      </div>
-      <div class="ac">
-        <div class="ac-top"><div class="ac-hd"><span class="ac-ic">👁️</span><span class="ac-title">Track a Domain</span></div></div>
-        <p class="ac-desc">Monitor a domain you host elsewhere. Track value and performance without activation.</p>
-        <button class="ac-btn ac-o">👁 Track a Domain</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MY DOMAINS -->
-<div class="view on" id="view-mydomains">
-  <div class="mdwrap">
-    <div class="mdmain">
-      <div class="mdh"><div><div class="mdh-t">My Domains</div><div class="mdh-s">Manage and monitor your active domains</div></div><div style="display:flex;gap:6px;"><button class="btn btn-s btn-sm">↑ Add Bulk</button><button class="btn btn-p btn-sm" onclick="openModal()">+ Add New</button></div></div>
-      <div class="md-stats">
-        <div class="mds"><div class="mds-nums"><div><div class="mds-v" id="mds-r">4</div><div class="mds-l">Ready to Activate</div></div><div><div class="mds-v">0</div><div class="mds-l">Tracked</div></div></div><div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;"><span style="font-size:16px;color:var(--ink5);">📄</span><span style="font-size:16px;color:var(--ink5);">🛡️</span></div></div>
-        <div class="mds"><div class="mds-nums"><div><div class="mds-v" id="mds-a">2</div><div class="mds-l">Active</div></div><div><div class="mds-v" id="mds-ac">1</div><div class="mds-l">Accelerating</div></div></div><div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;"><span style="font-size:16px;color:var(--ink5);">🌐</span><span style="font-size:16px;color:var(--ink5);">🔥</span></div></div>
-        <div class="mds"><div><div class="mds-v">$0</div><div class="mds-l">Portfolio Value</div></div><span style="font-size:20px;color:var(--ink5);">$</span></div>
-      </div>
-      <div class="dtabs">
-        <div class="dtab on">⊟ All</div><div class="dtab">🚀 Active</div><div class="dtab">🔥 Accelerating</div><div class="dtab">👁 Tracked</div><div class="dtab">🌿 Seasoned</div><div class="dtab">↔ Transferred</div>
-      </div>
-      <div class="mdtool">
-        <div class="mdsrch"><span style="font-size:11px;color:var(--ink4);">🔍</span><input placeholder="Search domains…"/></div>
-        <select class="fsel"><option>▼ All Statuses</option><option>Active</option><option>Draft</option><option>Accelerating</option></select>
-      </div>
-      <table class="dtbl">
-        <thead><tr><th><input type="checkbox" style="accent-color:var(--brand);"/></th><th>Domain ↕</th><th>Status ↕</th><th>Verified</th><th>Social</th><th>Layout</th><th>Activation Status</th><th>Expiration ↕</th><th>Last Updated</th></tr></thead>
-        <tbody id="dom-tbody">
-          <tr onclick="selDom(this,'namecrates.com','accelerating')">
-            <td><input type="checkbox" style="accent-color:var(--brand);"/></td>
-            <td><div class="dc"><div class="dfl">🔥</div><span class="dn">namecrates.com</span></div></td>
-            <td><span class="sp sp-ac">⚡ Accelerating</span></td>
-            <td><div class="soci"><div class="si">🌐</div><div class="si">📄</div><div class="si">🔒</div><div class="si">🔒</div><div class="si">🔒</div></div></td>
-            <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
-            <td><span class="lp">Actively Selling</span></td>
-            <td><span class="sob so-a">⚡ Accelerating</span></td>
-            <td><span style="font-size:11.5px;color:var(--ink3);">02/10/2027</span></td>
-            <td><span style="font-size:11.5px;color:var(--ink4);">15/04/2026</span></td>
-          </tr>
-          <tr class="sel" onclick="selDom(this,'stackcopilot.ai','active')">
-            <td><input type="checkbox" checked style="accent-color:var(--brand);"/></td>
-            <td><div class="dc"><div class="dfl">🔥</div><span class="dn">stackcopilot.ai</span></div></td>
-            <td><span class="sp sp-a">● Active</span></td>
-            <td><div class="soci"><div class="si">🌐</div><div class="si">📄</div><div class="si">🔒</div><div class="si">🔒</div><div class="si">🔒</div></div></td>
-            <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
-            <td><span class="lp">Actively Selling</span></td>
-            <td><span class="sob so-a">🚀 Active</span></td>
-            <td><span style="font-size:11.5px;color:var(--ink3);">02/10/2027</span></td>
-            <td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td>
-          </tr>
-          <tr onclick="selDom(this,'helperdroids.co','draft')"><td><input type="checkbox" style="accent-color:var(--brand);"/></td><td><div class="dc"><div class="dfl">🔥</div><span class="dn">helperdroids.co…</span></div></td><td><span class="sp sp-d">📄 Draft</span></td><td><div class="soci"><div class="si">📄</div><div class="si">📄</div><div class="si">🔒</div></div></td><td><span style="font-size:10.5px;color:var(--ink4);">None</span></td><td><span class="lp" style="background:var(--gbg);color:var(--green);border-color:var(--gbd);">Open to Offers</span></td><td><span class="sob so-act" onclick="event.stopPropagation();openModal()">🚀 Activate Site</span></td><td><span style="font-size:11.5px;color:var(--ink3);">23/12/2026</span></td><td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td></tr>
-          <tr onclick="selDom(this,'forget.org','draft')"><td><input type="checkbox" style="accent-color:var(--brand);"/></td><td><div class="dc"><div class="dfl">🔥</div><span class="dn">forget.org</span></div></td><td><span class="sp sp-d">📄 Draft</span></td><td><div class="soci"><div class="si">📄</div><div class="si">📄</div><div class="si">🔒</div></div></td><td><span style="font-size:10.5px;color:var(--ink4);">None</span></td><td><span class="lp" style="background:#F0FDF4;color:#047857;border-color:#A7F3D0;">Building My Vision</span></td><td><span class="sob so-act" onclick="event.stopPropagation();openModal()">🚀 Activate Site</span></td><td><span style="font-size:11.5px;color:var(--ink3);">12/02/2027</span></td><td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td></tr>
-          <tr onclick="selDom(this,'example7.com','draft')"><td><input type="checkbox" style="accent-color:var(--brand);"/></td><td><div class="dc"><div class="dfl">🔥</div><span class="dn">example7.com</span></div></td><td><span class="sp sp-d">📄 Draft</span></td><td><div class="soci"><div class="si">📄</div><div class="si">📄</div><div class="si">🔒</div></div></td><td><span style="font-size:10.5px;color:var(--ink4);">None</span></td><td><span class="lp" style="background:#F0FDF4;color:#047857;border-color:#A7F3D0;">Building My Vision</span></td><td><span class="sob so-act" onclick="event.stopPropagation();openModal()">🚀 Activate Site</span></td><td><span style="font-size:11.5px;color:var(--ink3);">04/01/2027</span></td><td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- RIGHT PANEL -->
-    <div class="mdr on" id="md-right">
-      <div class="dr-hd">
-        <div class="dr-nr"><span style="font-size:14px;">🔥</span><span class="dr-nm" id="dr-n">stackcopilot.ai</span><span class="sp sp-a" style="font-size:9.5px;" id="dr-st">Active</span></div>
-        <div class="dr-acts">
-          <button class="btn btn-sm dr-visit">↗ Visit Site</button>
-          <button class="btn btn-sm dr-draft">← Draft</button>
-        </div>
-      </div>
-      <button class="dr-cfg" onclick="openDM(document.getElementById('dr-n').textContent,'general')">⚙ Configure</button>
-
-      <!-- Brett's pattern: single row that expands on demand -->
-      <div class="dr-acc-row" id="dr-acc-row">
-        <div class="dr-acc-trig" onclick="toggleAcc()">
-          <div class="dr-acc-tl">
-            <div class="dr-acc-tic">⚡</div>
-            <div><div class="dr-acc-tn">Premium Acceleration</div><div class="dr-acc-ts">Warm · Heat · Blaze bundles</div></div>
-          </div>
-          <span class="dr-acc-chv">▾</span>
-        </div>
-        <div class="dr-acc-body">
-          <div class="dr-acc-in">
-            <div class="dr-acc-lede">Upgrade beyond 1 post/month. Bundles combine audience targeting, voice customisation, and increased cadence — all in one price.</div>
-            <div class="bundle-cards">
-              <div class="bcard" onclick="selBundle(this,'warm')">
-                <div class="bcard-top"><div class="bcard-name">🌿 Warm Bundle</div><div class="bcard-price">$12<span style="font-size:10px;font-weight:600;color:var(--ink3);">/mo</span></div></div>
-                <div class="bcard-sub">8 posts/month · Audience DNA · Multi-Voice</div>
-                <div class="bcard-feats"><span class="bfeat">8 posts/mo</span><span class="bfeat">Audience</span><span class="bfeat">Voice</span></div>
-              </div>
-              <div class="bcard on" onclick="selBundle(this,'heat')">
-                <div class="bcard-rec">RECOMMENDED</div>
-                <div class="bcard-top"><div class="bcard-name">🔥 Heat Bundle</div><div class="bcard-price">$22<span style="font-size:10px;font-weight:600;color:var(--ink3);">/mo</span></div></div>
-                <div class="bcard-sub">12 posts/month · Custom DNA · Multi-Voice</div>
-                <div class="bcard-feats"><span class="bfeat">12 posts/mo</span><span class="bfeat">Custom DNA</span><span class="bfeat">3 Voices</span></div>
-              </div>
-              <div class="bcard" onclick="selBundle(this,'blaze')">
-                <div class="bcard-top"><div class="bcard-name">⚡ Blaze Bundle</div><div class="bcard-price">$35<span style="font-size:10px;font-weight:600;color:var(--ink3);">/mo</span></div></div>
-                <div class="bcard-sub">20 posts/month + 1 Boost Pack/mo</div>
-                <div class="bcard-feats"><span class="bfeat">20 posts/mo</span><span class="bfeat">Full DNA</span><span class="bfeat">Boost</span></div>
-              </div>
-            </div>
-            <div class="dr-acc-footer">
-              <button class="dr-acc-go" onclick="openDM(document.getElementById('dr-n').textContent,'sa')">⚡ Open Site Acceleration →</button>
-              <button class="dr-acc-skip" onclick="collapseAcc()">Not now</button>
-            </div>
-            <div class="dr-acc-note">Configure full details from the Site Acceleration tab.</div>
-          </div>
-        </div>
-      </div>
-      <!-- When already accelerating -->
-      <div class="dr-acc-active" id="dr-acc-active">
-        <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--brand);">⚡ Accelerating — Heat Bundle</div>
-        <button class="btn btn-xs" style="background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);" onclick="openDM(document.getElementById('dr-n').textContent,'sa')">Manage</button>
-      </div>
-
-      <div class="dr-info">
-        <div class="dr-st-lbl" style="font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4);margin-bottom:7px;">Domain Information</div>
-        <div class="dr-ig">
-          <div class="dr-ib"><div class="dr-ibl">Registrar</div><div class="dr-ibv" id="dr-reg">NameCheap, Inc.</div></div>
-          <div class="dr-ib"><div class="dr-ibl">Purchase Date</div><div class="dr-ibv" id="dr-pdate">Oct 2, 2023</div></div>
-          <div class="dr-ib"><div class="dr-ibl">Expiration</div><div class="dr-ibv" id="dr-exp">02/10/2027</div></div>
-          <div class="dr-ib"><div class="dr-ibl">Layout</div><div class="dr-ibv" id="dr-layout">Actively Selling</div></div>
-          <div class="dr-ib"><div class="dr-ibl">Status</div><div class="dr-ibv" id="dr-stat-v" style="color:var(--green);">● Active</div></div>
-          <div class="dr-ib"><div class="dr-ibl">Last Updated</div><div class="dr-ibv">10/04/2026</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DOMAIN MANAGEMENT -->
-<div class="view" id="view-domainmanage">
-  <div class="dmwrap">
-    <div class="dmtop">
-      <div class="dmback" onclick="V('mydomains')">←</div>
-      <div class="dmbic">🔥</div>
-      <div class="dmtitle" id="dm-ttl">Manage namecrates.com</div>
-      <span class="badge-a bga">● Active</span>
-      <span class="badge-a bgac" id="dm-acbadge" style="display:none;">⚡ Accelerating</span>
-      <div class="dmsp"></div>
-      <div style="display:flex;gap:5px;">
-        <button class="btn btn-s btn-sm">↗ Visit</button>
-        <button class="btn btn-s btn-sm">← Back to Draft</button>
-        <button class="btn btn-s btn-sm">◎ Tracked</button>
-      </div>
-    </div>
-    <div class="dmtabs">
-      <div class="dmtab on" id="dmt-general" onclick="switchTab('general')">⊟ General</div>
-      <div class="dmtab" id="dmt-social" onclick="switchTab('social')">📱 Social Media</div>
-      <div class="dmtab" id="dmt-tech" onclick="switchTab('tech')">⚙ Technical</div>
-      <div class="dmtab" id="dmt-intel" onclick="switchTab('intel')">📊 Domain Intelligence</div>
-      <div class="dmtab" id="dmt-sa" onclick="switchTab('sa')">⚡ Site Acceleration</div>
-      <div class="dmtab" id="dmt-co" onclick="switchTab('co')">📝 Content Ops</div>
-      <div class="dmtab" id="dmt-sell" onclick="switchTab('sell')">💰 Selling Details</div>
-      <div class="dmtab" id="dmt-val" onclick="switchTab('val')">📈 Valuation</div>
-      <div class="dmtab" id="dmt-visit" onclick="switchTab('visit')">🌐 Visit Site</div>
-    </div>
-    <div class="dmbody">
-
-      <!-- GENERAL -->
-      <div id="dtb-general" class="dmcontent">
-        <div class="dmsec"><div class="dmsec-t">Domain Details</div><div class="dmsec-s">Basic domain information and registration details</div>
-          <div class="dmfr"><div><label class="dmlbl">Domain Name</label><div class="dminpw"><input class="dminp" value="stackcopilot.ai" readonly/><span class="dmic">🔒</span></div></div><div><label class="dmlbl">Registrar</label><div class="dminpw"><input class="dminp" value="NameCheap, Inc." readonly/><span class="dmic">🔒</span></div></div></div>
-          <div class="dmfr"><div><label class="dmlbl">Purchase Date</label><div class="dminpw"><input class="dminp" value="02-10-2023"/><span class="dmic">✏️</span></div></div><div><label class="dmlbl">Expiration Date</label><div class="dminpw"><input class="dminp" value="02-10-2027"/><span class="dmic">✏️</span></div></div></div>
-          <div class="dmfr"><div><label class="dmlbl">Renewal Amount</label><div class="dminpw"><input class="dminp" value="0.00"/><span class="dmic">✏️</span></div></div><div><label class="dmlbl">Renewal Period</label><select class="dminp" style="padding:8px 10px;"><option>Select renewal period</option><option>1 Year</option><option>2 Years</option></select></div></div>
-          <div class="dmfr full"><label class="dmlbl">Notes</label><textarea class="dmta" placeholder="Add any notes about this domain…"></textarea></div>
-        </div>
-        <div class="dmsec"><div class="dmsec-t">Domain Logos</div><div class="dmsec-s">Upload logos for different use cases</div>
-          <div class="logo-g">
-            <div class="logo-box"><div class="logo-tit">Square Logo</div><div class="logo-sub">For profile pictures, favicons, and thumbnails</div><div class="logo-upl"><div class="logo-ph">No logo</div><button class="upl-btn">↑ Upload Square Logo</button></div><div style="font-size:10px;color:var(--ink4);margin-top:5px;">Square ratio (1:1), 200×200px recommended</div></div>
-            <div class="logo-box"><div class="logo-tit">Ultrawide Logo</div><div class="logo-sub">For headers, banners, and wide displays</div><div class="logo-upl"><div class="logo-ph">No logo</div><button class="upl-btn">↑ Upload Ultrawide Logo</button></div><div style="font-size:10px;color:var(--ink4);margin-top:5px;">Ultrawide ratio (±2:1), 400×200px recommended</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SITE ACCELERATION -->
-      <div id="dtb-sa" style="display:none;overflow:hidden;" class="dmbody">
-        <div class="dmcontent" style="overflow-y:auto;" id="sa-col">
-          <!-- Status -->
-          <div class="sa-banner">
-            <div><h3>Acceleration Status</h3><p id="sa-status-p">1 blog/month active (free). Enable premium bundles below to increase cadence and personalise content.</p></div>
-            <div class="sa-tog"><span class="sa-tog-lbl" id="sa-tog-lbl" style="color:var(--ink3);">Premium Off</span><div class="tog" id="sa-tog" onclick="toggleSA()"><div class="tok"></div></div></div>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;"><div style="font-size:11.5px;color:var(--ink3);">Configure premium settings below. Changes save when you click Save.</div><button class="btn btn-s btn-sm">FAQ Complete (5) →</button></div>
-
-          <!-- What's already included FREE -->
-          <div class="sa-free-card">
-            <div class="sa-free-hd">
-              <div class="sa-free-title">✅ Already Active — Included Free with Your Plan</div>
-              <span style="font-size:10.5px;font-weight:700;color:var(--green);">No extra charge</span>
-            </div>
-            <div class="sa-free-grid">
-              <div class="sa-free-item"><div class="sa-fi-lbl">📝 Blog Cadence</div><div class="sa-fi-val">1× / month</div><div class="sa-fi-sub">First Tuesday recurring</div></div>
-              <div class="sa-free-item"><div class="sa-fi-lbl">🎯 Audience</div><div class="sa-fi-val">Default</div><div class="sa-fi-sub">Auto-matched to domain</div></div>
-              <div class="sa-free-item"><div class="sa-fi-lbl">🗣️ Voice</div><div class="sa-fi-val">Default</div><div class="sa-fi-sub">Authoritative tone</div></div>
-            </div>
-          </div>
-
-          <!-- Premium divider -->
-          <div class="sa-prem-divider"><div class="sa-prem-line"></div><div class="sa-prem-label">⚡ Premium Bundles — Upgrade Below</div><div class="sa-prem-line"></div></div>
-
-          <!-- BUNDLE PLANS — value-based, not itemised -->
-          <div style="font-size:12px;color:var(--ink3);margin-bottom:13px;">Choose a bundle that fits your growth goals. Bundles combine posts, targeting, and voice into one clear price — no need to add individual add-ons.</div>
-          <div class="bundle-grid" id="sa-bundle-grid">
-            <div class="bplan" onclick="selSABundle(this,'warm',12)" id="bpl-warm">
-              <div class="bplan-name">🌿 Warm</div>
-              <div class="bplan-tagline">Steady content momentum</div>
-              <div class="bplan-price">$12<span class="bplan-per">/mo</span></div>
-              <div class="bplan-compare">vs. $9 cadence + $1 audience + $1 voice separately</div>
-              <div class="bplan-divider"></div>
-              <div class="bplan-feat"><span class="ic">✅</span>8 posts/month (2×/week)</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Preset audience profile</div>
-              <div class="bplan-feat"><span class="ic">✅</span>2 voice profiles (rotating)</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Market signal selection</div>
-              <div class="bplan-feat"><span class="ic">📊</span>Research: 3.6× faster growth</div>
-              <button class="bplan-cta bplan-cta-s" id="bpl-warm-cta">Select Warm</button>
-            </div>
-            <div class="bplan on" onclick="selSABundle(this,'heat',22)" id="bpl-heat">
-              <div class="bplan-rec">⭐ RECOMMENDED</div>
-              <div class="bplan-name">🔥 Heat</div>
-              <div class="bplan-tagline">Authority building phase</div>
-              <div class="bplan-price">$22<span class="bplan-per">/mo</span></div>
-              <div class="bplan-compare">Includes $29 Boost Pack value</div>
-              <div class="bplan-divider"></div>
-              <div class="bplan-feat"><span class="ic">✅</span>12 posts/month (3×/week)</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Custom Audience DNA builder</div>
-              <div class="bplan-feat"><span class="ic">✅</span>3 voice profiles (rotating)</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Market signals + extra context</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Priority post generation queue</div>
-              <button class="bplan-cta bplan-cta-p" id="bpl-heat-cta">Select Heat — $22/mo</button>
-            </div>
-            <div class="bplan" onclick="selSABundle(this,'blaze',35)" id="bpl-blaze">
-              <div class="bplan-name">⚡ Blaze</div>
-              <div class="bplan-tagline">Aggressive authority growth</div>
-              <div class="bplan-price">$35<span class="bplan-per">/mo</span></div>
-              <div class="bplan-compare">Includes $49 Boost Pack free monthly</div>
-              <div class="bplan-divider"></div>
-              <div class="bplan-feat"><span class="ic">✅</span>20 posts/month (5×/week)</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Full custom DNA + analytics</div>
-              <div class="bplan-feat"><span class="ic">✅</span>Unlimited voice profiles</div>
-              <div class="bplan-feat"><span class="ic">✅</span>1 Authority Blitz (50 posts) free</div>
-              <div class="bplan-feat"><span class="ic">✅</span>3.5× HubSpot traffic threshold</div>
-              <button class="bplan-cta bplan-cta-s" id="bpl-blaze-cta">Select Blaze</button>
-            </div>
-          </div>
-
-          <!-- One-time Boost Packs -->
-          <div class="sa-sec" id="sa-sec-boost">
-            <div class="sa-sec-hd">
-              <div class="sa-sec-title">⚡ Boost Packs <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--s2);color:var(--ink3);border:1px solid var(--border);margin-left:5px;">One-time · No subscription</span></div>
-            </div>
-            <div class="sa-sec-b">
-              <div style="font-size:11.5px;color:var(--ink3);margin-bottom:11px;">A one-time burst of posts for domain launches, seasonal pushes, or topical clusters. Uses your current audience &amp; voice settings.</div>
-              <div class="boost-grid-sa">
-                <div class="bst" onclick="selBoost(this,15,'Quick Burst',10)"><div class="bst-top"><div class="bst-nm">⚡ Quick Burst</div><div class="bst-pr">$15</div></div><div class="bst-meta">10 posts · over 2 weeks</div><div class="bst-hint">Good for: domain refresh, topic testing</div></div>
-                <div class="bst on" onclick="selBoost(this,29,'Content Sprint',25)"><div class="bst-top"><div class="bst-nm">🚀 Content Sprint</div><div class="bst-pr">$29</div></div><div class="bst-meta">25 posts · over 3–4 weeks · $1.16/post</div><div class="bst-hint">Good for: new activation, topical authority</div></div>
-                <div class="bst" onclick="selBoost(this,49,'Authority Blitz',50)"><div class="bst-top"><div class="bst-nm">🔥 Authority Blitz</div><div class="bst-pr">$49</div></div><div class="bst-meta">50 posts · topical cluster · $0.98/post</div><div class="bst-hint">Good for: competitive niches, ranking</div></div>
-                <div class="bst" onclick="selBoost(this,79,'Launch Kit',100)"><div class="bst-top"><div class="bst-nm">🏆 Domain Launch Kit</div><div class="bst-pr">$79</div></div><div class="bst-meta">100 posts · full authority · $0.79/post</div><div class="bst-hint">Good for: new domains, sandbox exit</div></div>
-              </div>
-              <div style="font-size:10.5px;color:var(--ink4);margin-top:9px;display:flex;align-items:center;gap:4px;"><span>💡</span><span>Surfer SEO charges $29/article. Our Authority Blitz delivers 50 posts for the same price — 98% cheaper per post.</span></div>
-            </div>
-          </div>
-
-          <!-- Market Signals -->
-          <div class="sa-sec">
-            <div class="sa-sec-hd"><div class="sa-sec-title">📊 Domain &amp; Market Signals</div><div style="font-size:11px;color:var(--ink3);">Select at least 3 · informs AI content direction</div></div>
-            <div class="sa-sec-b">
-              <div class="sig-g">
-                <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Trend-rising</div>
-                <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Evergreen topic</div>
-                <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Highly brandable</div>
-                <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Geo/local opportunity</div>
-                <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Affiliate potential</div>
-                <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Lead gen potential</div>
-                <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Community angle</div>
-                <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>How-to/tutorial heavy</div>
-                <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Comparison/roundups</div>
-              </div>
-              <textarea style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;color:var(--ink);min-height:65px;resize:vertical;margin-top:10px;" placeholder="Additional context — any extra insights about this domain's opportunity, target market, or content focus…"></textarea>
-            </div>
-          </div>
-        </div>
-
-        <!-- SA aside -->
-        <div class="dmaside">
-          <div class="sa-aside">
-            <div class="sa-at">Your Selection</div>
-            <div class="sa-order">
-              <div class="sa-ol"><span class="sa-ok">Monthly blog (included)</span><span class="sa-ov sa-ov-free">$0</span></div>
-              <div class="sa-ol" id="sa-ol-bundle"><span class="sa-ok">Bundle: Heat</span><span class="sa-ov sa-ov-paid">$22/mo</span></div>
-              <div class="sa-ol" id="sa-ol-boost"><span class="sa-ok">Boost: Content Sprint</span><span class="sa-ov sa-ov-paid">$29 one-time</span></div>
-              <div class="sa-ototal"><span>Monthly total</span><span class="sa-otv" id="sa-total">$22/mo</span></div>
-              <div style="font-size:10.5px;color:var(--ink4);margin-top:4px;text-align:right;">+ $29 one-time today</div>
-            </div>
-            <button class="sa-save" id="sa-save-btn" onclick="saveSA()">💳 Activate Heat Bundle — $22/mo</button>
-            <div class="sa-rnote">Per-domain. Cancel anytime from this tab. Next billing cycle after save.</div>
-
-            <div class="sa-at" style="margin-top:14px;">Context Preview</div>
-            <div class="ctx-box">
-              <div class="ctx-title">How this shapes content</div>
-              <div class="ctx-txt" id="ctx-txt">Heat Bundle: 12 posts/month with custom audience DNA and 3 rotating voice profiles. Content will be highly targeted and varied in style — no uniform AI tone. Expected: 20% traffic growth in 60–90 days based on research data.</div>
-            </div>
-            <div class="imp-box">
-              <div class="imp-title">📊 Impact at a Glance</div>
-              <div class="imp-row"><span class="imp-k">Posts / Month</span><span class="imp-v" id="imp-posts">12 (Heat)</span></div>
-              <div class="imp-row"><span class="imp-k">Targeting</span><span class="imp-v" id="imp-aud">Custom DNA</span></div>
-              <div class="imp-row"><span class="imp-k">Voice Variety</span><span class="imp-v" id="imp-voice">3 rotating</span></div>
-              <div class="imp-row"><span class="imp-k">Expected Growth</span><span class="imp-v" style="color:var(--green);">~20% in 90 days</span></div>
-            </div>
-
-            <div class="sa-at" style="margin-top:14px;">Layout &amp; Theme</div>
-            <div style="font-size:11px;color:var(--ink3);margin-bottom:5px;">Sale Mode</div>
-            <div style="display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);margin-bottom:9px;font-size:12px;">💰 Actively Selling</div>
-            <div style="font-size:11px;color:var(--ink3);margin-bottom:6px;">Theme</div>
-            <div class="lt-row"><span style="font-size:14px;">🌙</span><div><div style="font-size:12px;font-weight:700;">Midnight</div><div style="font-size:10px;color:var(--ink4);">Dark &amp; mysterious</div></div><div class="lt-dots"><div class="lt-dot" style="background:#6366F1;"></div><div class="lt-dot" style="background:#A5B4FC;"></div></div></div>
-            <div class="lt-row on"><span style="font-size:14px;">☀️</span><div><div style="font-size:12px;font-weight:700;">Aurora</div><div style="font-size:10px;color:var(--ink4);">Vibrant &amp; energetic</div></div><div class="lt-dots"><div class="lt-dot" style="background:#F59E0B;"></div><div class="lt-dot" style="background:#FDE68A;"></div></div></div>
-            <div class="lt-row"><span style="font-size:14px;">🌊</span><div><div style="font-size:12px;font-weight:700;">Ocean</div><div style="font-size:10px;color:var(--ink4);">Calm &amp; professional</div></div><div class="lt-dots"><div class="lt-dot" style="background:#3B82F6;"></div><div class="lt-dot" style="background:#93C5FD;"></div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTENT OPS — matching real screenshot -->
-      <div id="dtb-co" style="display:none;" class="dmcontent">
-        <!-- Metrics row -->
-        <div class="co-metrics">
-          <div class="com"><div class="com-title">Total Performance <span class="coming-tag">Coming Soon</span></div><div class="com-val">0</div><div class="com-sub">Total views</div><div style="display:flex;gap:14px;margin-top:4px;font-size:10.5px;color:var(--ink4);"><span>0 Clicks</span><span>0.0% CTR</span></div></div>
-          <div class="com"><div class="com-title">Publishing Metrics</div><div class="com-val" id="co-pub-count">0</div><div class="com-sub">Total published</div><div style="font-size:10.5px;color:var(--ink4);margin-top:4px;"><span style="font-weight:700;color:var(--ink3);" id="co-this-mo">1</span> This month · <span style="font-weight:700;color:var(--ink3);">Apr 15</span> Next post</div><div style="font-size:10px;color:var(--ink4);margin-top:1px;" id="co-cadence-label">Monthly cadence</div></div>
-          <div class="com"><div class="com-title">Growth &amp; Impact <span class="coming-tag">Coming Soon</span></div><div class="com-val">0</div><div class="com-sub">Avg. views per post</div><div style="font-size:10.5px;color:var(--ink4);margin-top:4px;">0 Active (30d)</div></div>
-        </div>
-
-        <!-- Publishing Schedule -->
-        <div class="co-card">
-          <div class="co-chd"><div><div class="co-ct">Publishing Schedule</div><div class="co-cs" id="co-sched-desc">Monthly on the 15th between 12 PM – 3 PM (Asia/Calcutta)</div></div></div>
-          <div class="co-cb">
-            <!-- Free notice bar -->
-            <div class="co-free-notice">
-              <div class="co-fn-l"><span>🆓</span>1 blog/month included with your plan</div>
-              <div class="co-upgrade-hint" onclick="switchTab('sa')">Upgrade for more ⚡ →</div>
-            </div>
-            <div class="co-sl">
-              <div>
-                <div style="font-size:12px;font-weight:700;margin-bottom:9px;">Posts per month</div>
-                <div class="co-cad-tog">
-                  <div class="copt on" onclick="pickCadence(this,'monthly','Monthly',0)">
-                    <div class="copt-name">Monthly</div>
-                    <div class="copt-price" style="color:var(--green);">Included free</div>
-                  </div>
-                  <div class="copt locked" onclick="showUpgradeNudge(this)" title="Upgrade to Warm bundle for bi-weekly">
-                    <div class="copt-name">Bi-weekly</div>
-                    <div class="copt-lock">🔒 Warm+ bundle</div>
-                  </div>
-                  <div class="copt locked" onclick="showUpgradeNudge(this)" title="Upgrade to Heat/Blaze bundle for weekly">
-                    <div class="copt-name">Weekly</div>
-                    <div class="copt-lock">🔒 Heat+ bundle</div>
-                  </div>
-                </div>
-                <div class="form-f"><label>Preferred publish day</label><select class="form-sel" id="co-pub-day"><option>Wednesday</option><option>Monday</option><option>Tuesday</option><option>Thursday</option><option>Friday</option></select></div>
-                <div class="form-f"><label>Preferred time window</label><select class="form-sel"><option>12 PM – 3 PM</option><option>9 AM – 12 PM</option><option>3 PM – 6 PM</option></select></div>
-                <div class="form-f"><label>Time zone <span style="font-size:10px;color:var(--green);font-weight:600;">Auto-detected</span></label><select class="form-sel"><option>Asia/Calcutta (Your timezone)</option><option>UTC</option><option>America/New_York</option></select></div>
-                <div style="font-size:10px;color:var(--ink4);">All publish times shown in Asia/Calcutta</div>
-
-                <!-- Power-Ups -->
-                <div class="pu-sec">
-                  <div class="pu-hd">🔥 Power-Ups <span style="font-size:11px;font-weight:400;color:var(--ink3);">Give your domain extra fuel</span></div>
-                  <div class="pu-item"><div class="pu-ico pu-brand">⚡</div><div class="pu-info"><div class="pu-nm">Boost Your Start <span style="font-size:11.5px;font-weight:700;color:var(--brand);margin-left:4px;">One-time $10</span></div><div class="pu-desc">Add 10 boost posts distributed every 3 days between your regular posts to accelerate domain authority.</div></div><button class="btn btn-p btn-xs" style="flex-shrink:0;">Add</button></div>
-                  <div class="pu-item" style="opacity:.55;"><div class="pu-ico pu-gray">🔗</div><div class="pu-info"><div class="pu-nm">LinkedIn Auto-Share <span class="cs-badge">Coming Soon</span></div><div class="pu-desc">Automatically share new posts to your company LinkedIn page.</div></div></div>
-                  <div class="pu-item" style="opacity:.55;"><div class="pu-ico pu-gray">🐦</div><div class="pu-info"><div class="pu-nm">Twitter/X Auto-Share <span class="cs-badge">Coming Soon</span></div><div class="pu-desc">Auto-post content snippets and links to your Twitter/X account.</div></div></div>
-                  <div style="font-size:11px;color:var(--ink4);text-align:center;margin-top:5px;">Enhancements unlock new ways to accelerate and share your domain.</div>
-                </div>
-              </div>
-
-              <!-- Calendar -->
-              <div>
-                <div class="pub-notice"><span>⚠️</span><span><strong>48-Hour Notice:</strong> First publish must be at least 48 hours from today for research and positioning.</span></div>
-                <div class="mini-cal-month">April 2026</div>
-                <div class="mini-cal-grid">
-                  <div class="mch">Mon</div><div class="mch">Tue</div><div class="mch">Wed</div><div class="mch">Thu</div><div class="mch">Fri</div><div class="mch">Sat</div><div class="mch">Sun</div>
-                  <div class="mcd mcd-e"></div><div class="mcd mcd-e"></div><div class="mcd">1</div><div class="mcd">2</div><div class="mcd">3</div><div class="mcd">4</div><div class="mcd">5</div>
-                  <div class="mcd">6</div><div class="mcd">7</div><div class="mcd">8</div><div class="mcd">9</div><div class="mcd">10</div><div class="mcd">11</div><div class="mcd">12</div>
-                  <div class="mcd">13</div><div class="mcd mcd-today">14</div><div class="mcd mcd-sched">15</div><div class="mcd">16</div><div class="mcd">17</div><div class="mcd">18</div><div class="mcd">19</div>
-                  <div class="mcd">20</div><div class="mcd">21</div><div class="mcd mcd-sched">22</div><div class="mcd">23</div><div class="mcd">24</div><div class="mcd">25</div><div class="mcd">26</div>
-                  <div class="mcd">27</div><div class="mcd">28</div><div class="mcd">29</div><div class="mcd">30</div>
-                </div>
-                <div class="mini-cal-month" style="margin-top:10px;">May 2026</div>
-                <div class="mini-cal-grid">
-                  <div class="mch">Mon</div><div class="mch">Tue</div><div class="mch">Wed</div><div class="mch">Thu</div><div class="mch">Fri</div><div class="mch">Sat</div><div class="mch">Sun</div>
-                  <div class="mcd mcd-e"></div><div class="mcd mcd-e"></div><div class="mcd mcd-e"></div><div class="mcd">1</div><div class="mcd">2</div><div class="mcd">3</div><div class="mcd">4</div>
-                  <div class="mcd mcd-sched">5</div><div class="mcd">6</div><div class="mcd">7</div><div class="mcd">8</div><div class="mcd">9</div><div class="mcd">10</div><div class="mcd">11</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Upcoming Content — matching rich screenshot format -->
-        <div class="uc-section">
-          <div class="uc-hd">
-            <div><div class="uc-title">Upcoming Content</div><div style="font-size:11.5px;color:var(--ink3);">Topics for your publishing calendar</div></div>
-            <span class="uc-count" id="uc-count">4 Scheduled</span>
-          </div>
-          <div class="uc-grid" id="uc-grid">
-            <div class="uc-card">
-              <div class="uc-card-corner"></div>
-              <div class="uc-meta">
-                <div><div class="uc-date">Fri, May 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-howto">Comparison</span><span class="uc-tag utg-inter">Intermediate</span><span class="uc-tag utg-words">+1,600 words</span></div></div>
-              </div>
-              <div class="uc-body">
-                <div class="uc-body-title">Sustainable Light Aerocraft Comparison: 5 Electric Models Redefining Suburban Transit for the Modern Homeowner</div>
-                <div class="uc-excerpt">A comparative look at the emerging electric aerocraft market, highlighting models that fit the suburban lifestyle and meet the sustainability standards of the 28-45 demographic. The post uses a performance-to-utility framework to rank current market leaders.</div>
-                <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">A sustainability-focused comparison of new-to-market electric vertical take-off and landing (eVTOL) craft.</div></div></div>
-                <div class="uc-kws"><span class="uc-kw">light aerocraft comparison</span><span class="uc-kw">electric aviation market</span><span class="uc-kw">eVTOL for homeowners</span><span class="uc-kw">sustainable private flight</span></div>
-                <div class="uc-footer"><span class="uc-pri">● Priority 9/10</span><span class="uc-cal">✓ On Calendar</span></div>
-              </div>
-            </div>
-            <div class="uc-card">
-              <div class="uc-card-corner"></div>
-              <div class="uc-meta">
-                <div><div class="uc-date">Mon, Jun 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-howto">Tutorial</span><span class="uc-tag utg-advanced">Advanced</span><span class="uc-tag utg-words">+2,200 words</span></div></div>
-              </div>
-              <div class="uc-body">
-                <div class="uc-body-title">How to Evaluate Aerocraft Resale Value: A Data-Driven Framework for First-Time Suburban Buyers</div>
-                <div class="uc-excerpt">A technical tutorial on evaluating asset depreciation and value retention within the light aerocraft market. This helps homeowners treat an aerocraft purchase as a structured financial move rather than a generic luxury expense.</div>
-                <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">Financial framework for asset evaluation in the specialised aviation retail space.</div></div></div>
-                <div class="uc-kws"><span class="uc-kw">aerocraft resale value</span><span class="uc-kw">aircraft depreciation rates</span><span class="uc-kw">aviation asset management</span><span class="uc-kw">pre-owned light aircraft</span></div>
-                <div class="uc-footer"><span class="uc-pri">● Priority 9/10</span><span class="uc-cal">✓ On Calendar</span></div>
-              </div>
-            </div>
-            <div class="uc-card">
-              <div class="uc-card-corner"></div>
-              <div class="uc-meta">
-                <div><div class="uc-date">Wed, Jul 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-opinion">Opinion</span><span class="uc-tag utg-inter">Intermediate</span><span class="uc-tag utg-words">+1,200 words</span></div></div>
-              </div>
-              <div class="uc-body">
-                <div class="uc-body-title">The 2026 Aerocraft Industry Analysis: Why Personalised Storage is the New Standard for Luxury Flight Cabins</div>
-                <div class="uc-excerpt">An exploration of how the aerocraft market is shifting toward 'Identity-First' interiors, focusing on how manufacturers are integrating personalised organisational systems into small-cabin designs.</div>
-                <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">Industry analysis focusing on the intersection of aircraft interior design and personalised organisational utility.</div></div></div>
-                <div class="uc-kws"><span class="uc-kw">aerocraft industry analysis</span><span class="uc-kw">luxury aircraft interiors</span><span class="uc-kw">bespoke aviation storage</span><span class="uc-kw">custom flight cabin décor</span></div>
-                <div class="uc-footer"><span class="uc-pri">● Priority 8/10</span><span class="uc-cal">✓ On Calendar</span></div>
-              </div>
-            </div>
-            <div class="uc-card">
-              <div class="uc-card-corner"></div>
-              <div class="uc-meta">
-                <div><div class="uc-date">Sat, Aug 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-howto">Listicle</span><span class="uc-tag utg-beginner">Beginner</span><span class="uc-tag utg-words">+1,000 words</span></div></div>
-              </div>
-              <div class="uc-body">
-                <div class="uc-body-title">The Corporate Gift-Giver's Guide to Aerocraft Experience Packages: A Market Growth Strategy</div>
-                <div class="uc-excerpt">This post explores the secondary aerocraft market for corporate gifting, specifically how businesses are using private flight vouchers and personalised aviation accessories to build high-level client relationships.</div>
-                <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">Marketing and gifting strategy centred on the growth of the experiential aviation sector.</div></div></div>
-                <div class="uc-kws"><span class="uc-kw">aerocraft experience packages</span><span class="uc-kw">corporate aviation gifts</span><span class="uc-kw">private jet charter trends</span><span class="uc-kw">luxury gifting market</span></div>
-                <div class="uc-footer"><span class="uc-pri">● Priority 7/10</span><span class="uc-cal">✓ On Calendar</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Published Content -->
-        <div class="pub-hd">
-          <div><div class="pub-title">Published Content</div><div style="font-size:11.5px;color:var(--ink3);">Manage your acceleration blog posts and track performance</div></div>
-          <div class="pub-tabs"><div class="pub-tab on">All</div><div class="pub-tab">Published</div><div class="pub-tab">Scheduled</div></div>
-        </div>
-        <div class="pub-cards-grid" id="pub-grid">
-          <div class="pub-card">
-            <div class="pub-card-img">
-              <div class="pub-card-img-inner"><div class="pub-card-img-txt">Navigating the Private Aerocraft Market: A Framework for Suburban Homeowners Investing in Personal Aviation</div></div>
-              <div class="pub-card-tags"><span class="uc-tag utg-howto" style="font-size:9px;">Content</span><span class="uc-tag" style="font-size:9px;background:var(--abg);color:var(--amber);border-color:var(--abd);">Scheduled</span></div>
-            </div>
-            <div class="pub-card-body">
-              <div class="pub-card-title">Navigating the Private Aerocraft Market: A Framework for Suburban Homeowners…</div>
-              <div class="pub-card-excerpt">Personal aircraft ownership is the ultimate investment in domestic sophistication. Discover the strategic framework for navigating insurance, selection, and suburban logistics.</div>
-              <div class="pub-card-footer"><span class="pub-card-date">Apr 15, 2026</span><span class="pub-card-status pcs-scheduled">Scheduled · Publishing soon</span></div>
-            </div>
-          </div>
-          <div class="pub-card" id="pub-card-2" style="display:none;">
-            <div class="pub-card-img">
-              <div class="pub-card-img-inner"><div class="pub-card-img-txt">How AI Copilots Are Transforming Stack Development for Modern Engineering Teams</div></div>
-              <div class="pub-card-tags"><span class="uc-tag utg-howto" style="font-size:9px;">Content</span><span class="uc-tag" style="font-size:9px;background:var(--gbg);color:var(--green);border-color:var(--gbd);">Published</span></div>
-            </div>
-            <div class="pub-card-body">
-              <div class="pub-card-title">How AI Copilots Are Transforming Stack Development</div>
-              <div class="pub-card-excerpt">A deep dive into how AI-powered copilots are changing the way engineering teams approach stack architecture, debugging, and code review workflows.</div>
-              <div class="pub-card-footer"><span class="pub-card-date">Apr 13, 2026</span><span class="pub-card-status pcs-published">Published</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PLACEHOLDER TABS -->
-      <div id="dtb-social" style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Social Media configuration — coming soon</div></div>
-      <div id="dtb-tech" style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Technical settings — DNS, SSL, redirects</div></div>
-      <div id="dtb-intel" style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Domain Intelligence — analytics &amp; signals</div></div>
-      <div id="dtb-sell" style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Selling Details</div></div>
-      <div id="dtb-val" style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Valuation</div></div>
-      <div id="dtb-visit" style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Opening site in new tab…</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- PRICING PAGE -->
-<div class="view" id="view-pricing">
-  <div class="pricing-wrap">
-    <div class="pricing-h1">Pricing &amp; Billing</div>
-    <div class="pricing-sub">Transparent, volume-based pricing. Your first 2 blogs are always free. Bundles replace individual add-ons for a simpler, better-value upgrade path.</div>
-    <div class="eco-row">
-      <div class="eco"><div class="eco-v" style="color:var(--red);">$0.80</div><div class="eco-l">Previous cost per blog post</div></div>
-      <div class="eco hi"><div class="eco-v">$0.08</div><div class="eco-l">Current cost per blog post (90% reduction)</div></div>
-      <div class="eco"><div class="eco-v" style="color:var(--green);">95%</div><div class="eco-l">Gross margin on premium bundles</div></div>
-    </div>
-
-    <div class="psec-title">Blog Post Volume Pricing</div>
-    <div class="psec-sub" style="margin-bottom:13px;">First 2 posts per domain are always free. Beyond that, posts are priced in blocks with volume discounts.</div>
-    <table class="ptbl">
-      <thead><tr><th>Posts Published</th><th>Per-Post Price</th><th>Block Price</th><th>Our Cost</th><th>Tier</th><th>Gross Margin</th></tr></thead>
-      <tbody>
-        <tr><td><strong>First 2 posts</strong> per domain</td><td><strong style="color:var(--green);">Free</strong></td><td>$0</td><td>$0.16 total</td><td><span class="tlbl tl-free">Free Trial</span></td><td><div>—</div></td></tr>
-        <tr><td><strong>3–10 posts</strong> (block of 10)</td><td><strong>$1.50</strong></td><td><strong>$15</strong></td><td>$0.80</td><td><span class="tlbl tl-entry">Entry</span></td><td><div>94.7%</div><div class="mb"><div class="mbf" style="width:94%;"></div></div></td></tr>
-        <tr><td><strong>11–50 posts</strong></td><td><strong>$0.80</strong></td><td>~$32 for 40</td><td>$0.08</td><td><span class="tlbl tl-growth">Growth</span></td><td><div>90.0%</div><div class="mb"><div class="mbf" style="width:90%;"></div></div></td></tr>
-        <tr><td><strong>51–150 posts</strong></td><td><strong>$0.75</strong></td><td>~$75 for 100</td><td>$0.08</td><td><span class="tlbl tl-growth">Growth</span></td><td><div>89.3%</div><div class="mb"><div class="mbf" style="width:89%;"></div></div></td></tr>
-        <tr><td><strong>151–250 posts</strong></td><td><strong>$0.65</strong></td><td>~$65 for 100</td><td>$0.08</td><td><span class="tlbl tl-scale">Scale</span></td><td><div>87.7%</div><div class="mb"><div class="mbf" style="width:87%;"></div></div></td></tr>
-        <tr><td><strong>251+ posts</strong></td><td><strong>$0.60</strong></td><td>Volume deal</td><td>$0.08</td><td><span class="tlbl" style="background:var(--pbg);color:var(--purple);border:1px solid var(--pbd);">Portfolio</span></td><td><div>86.7%</div><div class="mb"><div class="mbf" style="width:86%;"></div></div></td></tr>
-      </tbody>
-    </table>
-
-    <div class="psec-title" style="margin-top:24px;">Domain Management Plans</div>
-    <div class="psec-sub">Determines how many domains you can manage. Blog posts priced separately above. Every domain includes the first 2 blogs free + 1/month ongoing.</div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;">
-      <span style="font-size:12.5px;font-weight:700;color:var(--brand);">Monthly</span>
-      <div style="width:42px;height:23px;background:var(--brand);border-radius:12px;cursor:pointer;position:relative;"><div style="width:17px;height:17px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px;box-shadow:0 1px 3px rgba(0,0,0,.2);"></div></div>
-      <span style="font-size:12.5px;font-weight:600;color:var(--ink3);">Yearly <span style="font-size:10.5px;color:var(--green);font-weight:700;background:var(--gbg);padding:2px 6px;border-radius:20px;margin-left:3px;">Save 17%</span></span>
-    </div>
-    <div class="plan-cards">
-      <div class="pcard"><div class="pcard-name">Starter</div><div class="pcard-tag">Try the platform</div><div class="pcard-price">$29<span class="pcard-per">/mo</span></div><div class="pcard-dn">1–3 domains · <strong>$9.67/domain avg</strong></div><div class="pcard-feat"><span class="pi">✅</span>3 active domains</div><div class="pcard-feat"><span class="pi">✅</span>2 free blogs per domain</div><div class="pcard-feat"><span class="pi">✅</span>1 blog/month ongoing</div><div class="pcard-feat"><span class="pi">✅</span>Default audience + voice</div><div class="pcard-feat"><span class="pi">➕</span>Premium bundles available</div><button class="btn btn-s pcard-cta">Get Started</button></div>
-      <div class="pcard feat"><div class="pcard-badge">⭐ BEST FOR 7 DOMAINS</div><div class="pcard-name">Growth</div><div class="pcard-tag">The sweet spot</div><div class="pcard-price">$59<span class="pcard-per">/mo</span></div><div class="pcard-dn">4–10 domains · <strong>from $5.90/domain</strong></div><div class="pcard-feat"><span class="pi">✅</span>10 active domains</div><div class="pcard-feat"><span class="pi">✅</span>2 free blogs per domain</div><div class="pcard-feat"><span class="pi">✅</span>1 blog/month ongoing</div><div class="pcard-feat"><span class="pi">✅</span>1 saved custom audience DNA</div><div class="pcard-feat"><span class="pi">✅</span>Email support + onboarding</div><div class="pcard-feat"><span class="pi">➕</span>All premium bundles available</div><button class="btn btn-p pcard-cta">Get Growth Plan</button></div>
-      <div class="pcard"><div class="pcard-name">Portfolio</div><div class="pcard-tag">Scale your holdings</div><div class="pcard-price">$99<span class="pcard-per">/mo</span></div><div class="pcard-dn">11–25 domains · <strong>from $3.96/domain</strong></div><div class="pcard-feat"><span class="pi">✅</span>25 active domains</div><div class="pcard-feat"><span class="pi">✅</span>3 saved audience DNA profiles</div><div class="pcard-feat"><span class="pi">✅</span>Priority support + 3 team seats</div><div class="pcard-feat"><span class="pi">✅</span>10% discount on boost packs</div><button class="btn btn-s pcard-cta">Get Portfolio</button></div>
-    </div>
-
-    <div class="psec-title">Premium Bundle Pricing</div>
-    <div class="psec-sub">Bundles replace individual add-ons. Better value, clearer pricing — no mixing and matching individual features.</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
-      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rxl);padding:17px;box-shadow:var(--sh);"><div style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);margin-bottom:9px;display:inline-block;">Bundle</div><div style="font-size:13.5px;font-weight:800;margin-bottom:2px;">🌿 Warm Bundle</div><div style="font-size:23px;font-weight:900;color:var(--brand);">$12<span style="font-size:11px;font-weight:600;color:var(--ink4);">/domain/mo</span></div><div style="font-size:11px;color:var(--green);font-weight:600;margin:3px 0 10px;">vs. $11 if itemised → save &amp; bundle</div><div style="font-size:12px;color:var(--ink2);line-height:1.7;">8 posts/month (2×/week) · Preset audience profile · 2 voice profiles rotating · Market signals</div></div>
-      <div style="background:var(--brand-lt);border:1.5px solid var(--brand);border-radius:var(--rxl);padding:17px;box-shadow:var(--shmd);"><div style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--brand);color:#fff;margin-bottom:9px;display:inline-block;">⭐ Recommended</div><div style="font-size:13.5px;font-weight:800;margin-bottom:2px;">🔥 Heat Bundle</div><div style="font-size:23px;font-weight:900;color:var(--brand);">$22<span style="font-size:11px;font-weight:600;color:var(--ink4);">/domain/mo</span></div><div style="font-size:11px;color:var(--green);font-weight:600;margin:3px 0 10px;">Includes $29 Boost Pack value</div><div style="font-size:12px;color:var(--ink2);line-height:1.7;">12 posts/month (3×/week) · Custom DNA builder · 3 voice profiles rotating · Priority queue · Full market signals</div></div>
-      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rxl);padding:17px;box-shadow:var(--sh);"><div style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);margin-bottom:9px;display:inline-block;">Bundle</div><div style="font-size:13.5px;font-weight:800;margin-bottom:2px;">⚡ Blaze Bundle</div><div style="font-size:23px;font-weight:900;color:var(--brand);">$35<span style="font-size:11px;font-weight:600;color:var(--ink4);">/domain/mo</span></div><div style="font-size:11px;color:var(--green);font-weight:600;margin:3px 0 10px;">Includes Authority Blitz (50 posts) monthly</div><div style="font-size:12px;color:var(--ink2);line-height:1.7;">20 posts/month (5×/week) · Full custom DNA + analytics · Unlimited voices · 1 Authority Blitz/mo free</div></div>
-    </div>
-
-    <div class="rec-box">
-      <div class="rec-box-t">🏗️ Pricing Architecture — Key Decisions</div>
-      <div class="rec-item"><div class="rec-num">1</div><div class="rec-txt"><h5>Bundle pricing, not add-on itemisation</h5><p>$1/mo for Audience DNA alone isn't compelling. Research from SaaS pricing studies shows bundle pricing converts 3–4× better than itemised feature lists. Users think "value" not "cost" when they see one clear price. Heat at $22/mo is a clear, justified upgrade story.</p></div></div>
-      <div class="rec-item"><div class="rec-num">2</div><div class="rec-txt"><h5>First 2 blogs free → $15/10 block gateway</h5><p>Brett confirmed: "Two feels better — the second email a month later and they've gotten two." At $0.08/post cost, free trial is $0.16 total. The $15/10 block at 94.7% margin is the first paid conversion anchor.</p></div></div>
-      <div class="rec-item"><div class="rec-num">3</div><div class="rec-txt"><h5>Cadence tiers locked behind bundles, not standalone</h5><p>Bi-weekly requires Warm+ bundle. Weekly requires Heat+. This prevents cherry-picking the cadence upgrade alone at $9 while making bundles feel like natural progressions. Users see the full value picture before upgrading.</p></div></div>
-      <div class="rec-item"><div class="rec-num">4</div><div class="rec-txt"><h5>Brett's UX rule: single row, expands on demand</h5><p>"Have an add configuration button and have it expand or pop up — we don't want a big commercial in front of somebody every time they go." The right panel shows one compact row. Users who aren't interested see nothing more, forever.</p></div></div>
-      <div class="rec-item"><div class="rec-num">5</div><div class="rec-txt"><h5>Growth plan is the 7-domain sweet spot</h5><p>$59/mo ÷ 7 domains = $8.43/domain. Compare to Semrush Pro at $27.99/domain. SiteWarming is 3.3× cheaper and includes content generation Semrush doesn't offer. Lead all growth marketing with "from $5.90/domain."</p></div></div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /main -->
 </div><!-- /app -->
 
-<!-- CENTER MODAL for domain activation -->
+<!-- ── ACTIVATION MODAL ── -->
 <div class="moverlay" id="moverlay" onclick="checkModalClose(event)">
   <div class="modal" id="modal">
     <div class="modal-hd">
-      <div style="display:flex;align-items:center;gap:8px;"><span class="modal-title">Activate Domain</span><span class="modal-pill" id="m-pill">Step 1 of 5</span></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="modal-title">Activate Domain</span>
+        <span class="modal-pill" id="m-pill">Step 1 of 5</span>
+      </div>
       <div class="modal-close" onclick="closeModal()">×</div>
     </div>
-    <!-- Progress -->
+
+    <!-- Progress bar -->
     <div class="modal-prog">
       <div class="mprog-row">
         <div class="mpc"><div class="mpd active" id="md1">1</div></div><div class="mpl-w"><div class="mpl" id="ml1"></div></div>
-        <div class="mpc"><div class="mpd idle" id="md2">2</div></div><div class="mpl-w"><div class="mpl" id="ml2"></div></div>
-        <div class="mpc"><div class="mpd idle" id="md3">3</div></div><div class="mpl-w"><div class="mpl" id="ml3"></div></div>
-        <div class="mpc"><div class="mpd idle" id="md4">4</div></div><div class="mpl-w"><div class="mpl" id="ml4"></div></div>
+        <div class="mpc"><div class="mpd idle"   id="md2">2</div></div><div class="mpl-w"><div class="mpl" id="ml2"></div></div>
+        <div class="mpc"><div class="mpd idle"   id="md3">3</div></div><div class="mpl-w"><div class="mpl" id="ml3"></div></div>
+        <div class="mpc"><div class="mpd idle"   id="md4">4</div></div><div class="mpl-w"><div class="mpl" id="ml4"></div></div>
         <div class="mpc" style="flex:0;"><div class="mpd idle" id="md5">5</div></div>
       </div>
     </div>
-    <div class="mp-labels"><span class="mp-lbl active" id="ml-1">Domain</span><span class="mp-lbl" id="ml-2">Theme</span><span class="mp-lbl" id="ml-3">Site Type</span><span class="mp-lbl" id="ml-4">DNS</span><span class="mp-lbl mp-lbl-last" id="ml-5">Blog</span></div>
+    <div class="mp-labels">
+      <span class="mp-lbl active" id="ml-1">Domain</span>
+      <span class="mp-lbl"        id="ml-2">Theme</span>
+      <span class="mp-lbl"        id="ml-3">Site Type</span>
+      <span class="mp-lbl"        id="ml-4">DNS</span>
+      <span class="mp-lbl mp-lbl-last" id="ml-5">Blog</span>
+    </div>
 
     <div class="modal-body">
-      <!-- Step 1 -->
+      <!-- Step 1: Domain -->
       <div class="ms on" id="ms1">
-        <div class="ms-ey">Step 1 of 5</div><div class="ms-h">Enter Your Domain</div>
+        <div class="ms-ey">Step 1 of 5</div>
+        <div class="ms-h">Enter Your Domain</div>
         <div class="ms-sub">The domain you want to activate. Goes live within 3–6 hours of completing this setup.</div>
-        <div class="fl"><label>Domain Name</label><input class="fi" id="dom-in" placeholder="e.g. mybusiness.com"/><span class="fh">Without https:// or www — handled automatically.</span></div>
-        <div class="ins ins-brand"><h5>💡 What activation includes</h5><p>Live site · Auto-generated FAQs · <strong>First 2 blog posts free</strong> · 1 blog/month ongoing. Premium acceleration (bundles) configured separately from Site Acceleration tab — no waiting during setup.</p></div>
+        <div class="fl">
+          <label>Domain Name</label>
+          <input class="fi" id="dom-in" placeholder="e.g. mybusiness.com"/>
+          <span class="fh">Without https:// or www — handled automatically.</span>
+        </div>
+        <div class="ins ins-brand">
+          <h5>💡 What activation includes</h5>
+          <p>Live site · Auto-generated FAQs · <strong>First 2 blog posts free</strong> · 1 blog/month ongoing. Premium acceleration (bundles) configured separately from Site Acceleration tab — no waiting during setup.</p>
+        </div>
       </div>
-      <!-- Step 2 -->
+
+      <!-- Step 2: Theme -->
       <div class="ms" id="ms2">
-        <div class="ms-ey">Step 2 of 5</div><div class="ms-h">Choose a Theme</div>
+        <div class="ms-ey">Step 2 of 5</div>
+        <div class="ms-h">Choose a Theme</div>
         <div class="ms-sub">Visual design for <strong id="ms2-dom">your site</strong>.</div>
         <div class="theme-g">
           <div class="tc on" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#F8F9FA;">🌿</div><div class="tc-n">Minimal</div></div>
@@ -1288,11 +131,14 @@ input,textarea,select{font-family:inherit;outline:none;}
           <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#1E293B;">🌙</div><div class="tc-n">Dark</div></div>
         </div>
       </div>
-      <!-- Step 3 -->
+
+      <!-- Step 3: Site Type -->
       <div class="ms" id="ms3">
-        <div class="ms-ey">Step 3 of 5</div><div class="ms-h">Site Type &amp; Content Direction</div>
+        <div class="ms-ey">Step 3 of 5</div>
+        <div class="ms-h">Site Type &amp; Content Direction</div>
         <div class="ms-sub">Helps our AI generate relevant, targeted content for every post.</div>
-        <div class="fl"><label>Site Type</label>
+        <div class="fl">
+          <label>Site Type</label>
           <div class="type-g">
             <div class="typec on" onclick="pk(this,'.typec')"><div class="tyic">🏢</div><div class="tynm">Business</div><div class="tyds">Company, service</div></div>
             <div class="typec" onclick="pk(this,'.typec')"><div class="tyic">🛒</div><div class="tynm">E-Commerce</div><div class="tyds">Products, store</div></div>
@@ -1302,33 +148,67 @@ input,textarea,select{font-family:inherit;outline:none;}
             <div class="typec" onclick="pk(this,'.typec')"><div class="tyic">⚙️</div><div class="tynm">Other</div><div class="tyds">Describe below</div></div>
           </div>
         </div>
-        <div class="fl" style="margin-top:10px;"><label>Blog Content Direction <span style="font-weight:400;color:var(--ink4)">(recommended)</span></label><textarea class="fi fta" placeholder="What topics should your blog cover? e.g. 'Domain investment platform — focus on SEO, domain valuation, and portfolio management for investors.'"></textarea><span class="fh">Stored on the domain record. Used in every future AI generation. Editable anytime.</span></div>
+        <div class="fl" style="margin-top:10px;">
+          <label>Blog Content Direction <span style="font-weight:400;color:var(--ink4)">(recommended)</span></label>
+          <textarea class="fi fta" placeholder="What topics should your blog cover? e.g. 'Domain investment platform — focus on SEO, domain valuation, and portfolio management for investors.'"></textarea>
+          <span class="fh">Stored on the domain record. Used in every future AI generation. Editable anytime.</span>
+        </div>
       </div>
-      <!-- Step 4 -->
+
+      <!-- Step 4: DNS -->
       <div class="ms" id="ms4">
-        <div class="ms-ey">Step 4 of 5</div><div class="ms-h">DNS Configuration</div>
+        <div class="ms-ey">Step 4 of 5</div>
+        <div class="ms-h">DNS Configuration</div>
         <div class="ms-sub">Add these records at your registrar to connect <strong id="ms4-dom">your domain</strong>.</div>
         <div class="dns-bx">
-          <div class="dns-rw"><div class="dns-fi" style="max-width:58px;"><div class="dns-lbl">Type</div><div class="dns-v">CNAME</div></div><div class="dns-fi" style="max-width:72px;"><div class="dns-lbl">Host</div><div class="dns-v">www</div></div><div class="dns-fi"><div class="dns-lbl">Points To</div><div class="dns-v">hosted.sitewarming.com</div></div><button class="btn btn-s btn-xs" onclick="this.textContent='✓'">Copy</button></div>
-          <div class="dns-rw"><div class="dns-fi" style="max-width:58px;"><div class="dns-lbl">Type</div><div class="dns-v">A</div></div><div class="dns-fi" style="max-width:72px;"><div class="dns-lbl">Host</div><div class="dns-v">@</div></div><div class="dns-fi"><div class="dns-lbl">Points To</div><div class="dns-v">104.21.88.42</div></div><button class="btn btn-s btn-xs" onclick="this.textContent='✓'">Copy</button></div>
+          <div class="dns-rw">
+            <div class="dns-fi" style="max-width:58px;"><div class="dns-lbl">Type</div><div class="dns-v">CNAME</div></div>
+            <div class="dns-fi" style="max-width:72px;"><div class="dns-lbl">Host</div><div class="dns-v">www</div></div>
+            <div class="dns-fi"><div class="dns-lbl">Points To</div><div class="dns-v">hosted.sitewarming.com</div></div>
+            <button class="btn btn-s btn-xs" onclick="this.textContent='✓'">Copy</button>
+          </div>
+          <div class="dns-rw">
+            <div class="dns-fi" style="max-width:58px;"><div class="dns-lbl">Type</div><div class="dns-v">A</div></div>
+            <div class="dns-fi" style="max-width:72px;"><div class="dns-lbl">Host</div><div class="dns-v">@</div></div>
+            <div class="dns-fi"><div class="dns-lbl">Points To</div><div class="dns-v">104.21.88.42</div></div>
+            <button class="btn btn-s btn-xs" onclick="this.textContent='✓'">Copy</button>
+          </div>
         </div>
         <div class="dns-st dns-p" id="dns-s"><span>⏳</span><span>Waiting — click Check Status</span></div>
         <button class="btn btn-s btn-xs" style="margin-top:6px;" onclick="checkDNS()">🔄 Check DNS</button>
-        <div class="fl" style="margin-top:11px;"><label>Need help? Select your DNS provider</label><select class="fi" style="padding:7px 10px;font-size:12px;"><option>Select DNS provider for guide</option><option>GoDaddy</option><option>Namecheap</option><option>Cloudflare</option><option>Google Domains</option></select></div>
+        <div class="fl" style="margin-top:11px;">
+          <label>Need help? Select your DNS provider</label>
+          <select class="fi" style="padding:7px 10px;font-size:12px;">
+            <option>Select DNS provider for guide</option>
+            <option>GoDaddy</option><option>Namecheap</option><option>Cloudflare</option><option>Google Domains</option>
+          </select>
+        </div>
       </div>
-      <!-- Step 5 -->
+
+      <!-- Step 5: Blog -->
       <div class="ms" id="ms5">
-        <div class="ms-ey">Step 5 of 5 — Blog Publishing</div><div class="ms-h">Schedule Your Blog</div>
+        <div class="ms-ey">Step 5 of 5 — Blog Publishing</div>
+        <div class="ms-h">Schedule Your Blog</div>
         <div class="ms-sub">Your first 2 blogs are <strong>free</strong>. Set when they publish. Premium bundles for higher cadence are available from Site Acceleration after activation.</div>
-        <div class="fl"><label>When should your first blog publish?</label>
+        <div class="fl">
+          <label>When should your first blog publish?</label>
           <div class="pub-opts">
             <div class="pub-opt on" onclick="pp(this)"><div class="pub-ic">⚡</div><div class="pub-t">Today</div><div class="pub-s">3–6 hours</div></div>
             <div class="pub-opt" onclick="pp(this)"><div class="pub-ic">🌅</div><div class="pub-t">Tomorrow</div><div class="pub-s">Overnight</div></div>
             <div class="pub-opt" onclick="pp(this)"><div class="pub-ic">📆</div><div class="pub-t">Pick day</div><div class="pub-s">Next 7 days</div></div>
           </div>
         </div>
-        <div class="fl"><label>Monthly recurring publish day</label>
-          <div class="day-row"><div class="daybtn" onclick="pd(this)">Mon</div><div class="daybtn on" onclick="pd(this)">Tue</div><div class="daybtn" onclick="pd(this)">Wed</div><div class="daybtn" onclick="pd(this)">Thu</div><div class="daybtn" onclick="pd(this)">Fri</div><div class="daybtn" onclick="pd(this)">Sat</div><div class="daybtn" onclick="pd(this)">Sun</div></div>
+        <div class="fl">
+          <label>Monthly recurring publish day</label>
+          <div class="day-row">
+            <div class="daybtn" onclick="pd(this)">Mon</div>
+            <div class="daybtn on" onclick="pd(this)">Tue</div>
+            <div class="daybtn" onclick="pd(this)">Wed</div>
+            <div class="daybtn" onclick="pd(this)">Thu</div>
+            <div class="daybtn" onclick="pd(this)">Fri</div>
+            <div class="daybtn" onclick="pd(this)">Sat</div>
+            <div class="daybtn" onclick="pd(this)">Sun</div>
+          </div>
           <span class="fh">First Tuesday of each month. Changeable anytime from domain settings.</span>
         </div>
         <div class="cfg-sum">
@@ -1338,8 +218,12 @@ input,textarea,select{font-family:inherit;outline:none;}
           <div class="cfg-row"><div class="cfgk">📝 Ongoing cadence</div><div class="cfgv">1/month <span class="cbf">Free</span></div></div>
           <div class="cfg-row"><div class="cfgk">❓ FAQs</div><div class="cfgv">Auto-generated <span class="cbf">Free</span></div></div>
         </div>
-        <div class="ins ins-green"><h5>⚡ After activation</h5><p>Premium acceleration bundles (Warm $12/mo · Heat $22/mo · Blaze $35/mo) are configured from the domain's Site Acceleration tab. No purchase required during this setup.</p></div>
+        <div class="ins ins-green">
+          <h5>⚡ After activation</h5>
+          <p>Premium acceleration bundles (Warm $12/mo · Heat $22/mo · Blaze $35/mo) are configured from the domain's Site Acceleration tab. No purchase required during this setup.</p>
+        </div>
       </div>
+
       <!-- Step 6: Processing -->
       <div class="ms" id="ms6">
         <div class="proc-sc">
@@ -1354,6 +238,7 @@ input,textarea,select{font-family:inherit;outline:none;}
           </div>
         </div>
       </div>
+
       <!-- Step 7: Confirm -->
       <div class="ms" id="ms7">
         <div class="conf-sc">
@@ -1366,7 +251,10 @@ input,textarea,select{font-family:inherit;outline:none;}
             <div class="cdr"><div class="cdk">📅 Monthly</div><div class="cdv">First Tuesday of each month</div></div>
             <div class="cdr"><div class="cdk">🎯 Audience</div><div class="cdv">Default (auto-applied)</div></div>
           </div>
-          <div class="conf-hint"><div class="cht">⚡ Next step: Site Acceleration</div><div class="chd">Add a premium bundle (Warm $12 · Heat $22 · Blaze $35) from the domain's Site Acceleration tab. Each bundle combines posts, targeting, and voice in one clear price.</div></div>
+          <div class="conf-hint">
+            <div class="cht">⚡ Next step: Site Acceleration</div>
+            <div class="chd">Add a premium bundle (Warm $12 · Heat $22 · Blaze $35) from the domain's Site Acceleration tab. Each bundle combines posts, targeting, and voice in one clear price.</div>
+          </div>
           <button class="btn btn-p" style="width:100%;justify-content:center;padding:10px;" onclick="finishAct()">Go to My Domains →</button>
         </div>
       </div>
@@ -1380,209 +268,25 @@ input,textarea,select{font-family:inherit;outline:none;}
       </div>
     </div>
   </div>
-</div>
+</div><!-- /moverlay -->
 
+<script src="js/app.js"></script>
 <script>
-/* VIEW */
-function V(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
-  ['dash','domains','pricing'].forEach(k=>{const e=document.getElementById('sb-'+k);if(e)e.classList.remove('on');});
-  document.getElementById('view-'+id).classList.add('on');
-  const m={dashboard:'dash',mydomains:'domains',domainmanage:'domains',pricing:'pricing'};
-  const sb=document.getElementById('sb-'+m[id]);if(sb)sb.classList.add('on');
-}
+/* Load all views from separate files on startup */
+const viewMap = {
+  dashboard:    'views/dashboard.html',
+  mydomains:    'views/mydomains.html',
+  domainmanage: 'views/domainmanage.html',
+  pricing:      'views/pricing.html'
+};
 
-/* DOMAIN ROW SELECT */
-function selDom(row,name,status){
-  document.querySelectorAll('.dtbl tbody tr').forEach(r=>r.classList.remove('sel'));
-  row.classList.add('sel');
-  document.getElementById('md-right').classList.add('on');
-  document.getElementById('dr-n').textContent=name;
-  const st=document.getElementById('dr-st');
-  if(status==='accelerating'){st.className='sp sp-ac';st.textContent='⚡ Accelerating';}
-  else if(status==='active'){st.className='sp sp-a';st.textContent='Active';}
-  else{st.className='sp sp-d';st.textContent='Draft';}
-  // Acceleration row visibility
-  const ar=document.getElementById('dr-acc-row');
-  const aa=document.getElementById('dr-acc-active');
-  if(status==='accelerating'){ar.style.display='none';aa.classList.add('on');}
-  else if(status==='active'){ar.style.display='block';ar.classList.remove('open');aa.classList.remove('on');}
-  else{ar.style.display='none';aa.classList.remove('on');}
-  // Configure button target
-  document.querySelector('.dr-cfg').onclick=()=>openDM(name,'general');
-}
-
-/* EXPAND/COLLAPSE — Brett's pattern */
-function toggleAcc(){document.getElementById('dr-acc-row').classList.toggle('open');}
-function collapseAcc(){document.getElementById('dr-acc-row').classList.remove('open');}
-function selBundle(el,type){document.querySelectorAll('.bundle-cards .bcard').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
-
-/* DOMAIN MANAGEMENT */
-function openDM(name,tab){V('domainmanage');document.getElementById('dm-ttl').textContent='Manage '+name;switchTab(tab||'general');}
-function switchTab(t){
-  const all=['general','social','tech','intel','sa','co','sell','val','visit'];
-  all.forEach(id=>{
-    const btn=document.getElementById('dmt-'+id);
-    const body=document.getElementById('dtb-'+id);
-    if(btn)btn.classList.toggle('on',id===t);
-    if(body){
-      if(id==='sa'||id==='co'){body.style.display=id===t?'flex':'none';}
-      else{body.style.display=id===t?'block':'none';}
-    }
-  });
-}
-
-/* SA LOGIC */
-let saBundleActive='heat',saBundlePrice=22,saBoostAmt=29,saBoostLabel='Content Sprint';
-function selSABundle(el,type,price){
-  document.querySelectorAll('#sa-bundle-grid .bplan').forEach(b=>{b.classList.remove('on');});
-  el.classList.add('on');
-  saBundleActive=type;saBundlePrice=price;
-  // Update CTA buttons
-  ['warm','heat','blaze'].forEach(b=>{
-    const cta=document.getElementById('bpl-'+b+'-cta');
-    if(!cta)return;
-    if(b===type){cta.className='bplan-cta bplan-cta-p';cta.textContent=`✓ ${type.charAt(0).toUpperCase()+type.slice(1)} — $${price}/mo`;}
-    else{cta.className='bplan-cta bplan-cta-s';cta.textContent=`Select ${b.charAt(0).toUpperCase()+b.slice(1)}`;}
-  });
-  updateSAOrder();
-  // Update impact sidebar
-  const posts={'warm':8,'heat':12,'blaze':20};
-  const targeting={'warm':'Preset audience','heat':'Custom DNA','blaze':'Full DNA + analytics'};
-  const voices={'warm':'2 rotating','heat':'3 rotating','blaze':'Unlimited'};
-  const ctxMap={'warm':'Warm Bundle: 8 posts/month with preset audience and 2 rotating voices. Steady content momentum builds domain authority over 3–6 months.','heat':'Heat Bundle: 12 posts/month with custom DNA and 3 rotating voices. Authority building phase — expect ~20% traffic growth in 60–90 days.','blaze':'Blaze Bundle: 20 posts/month, crosses HubSpot 16+/month threshold for 3.5× traffic multiplier. Aggressive authority growth in 45–60 days.'};
-  document.getElementById('imp-posts').textContent=posts[type]+'/mo';
-  document.getElementById('imp-aud').textContent=targeting[type];
-  document.getElementById('imp-voice').textContent=voices[type];
-  document.getElementById('ctx-txt').textContent=ctxMap[type];
-}
-function selBoost(el,amt,label,posts){
-  document.querySelectorAll('.boost-grid-sa .bst').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');saBoostAmt=amt;saBoostLabel=label;
-  updateSAOrder();
-}
-function updateSAOrder(){
-  const ol=document.getElementById('sa-ol-bundle');
-  if(ol) ol.innerHTML=`<span class="sa-ok">Bundle: ${saBundleActive.charAt(0).toUpperCase()+saBundleActive.slice(1)}</span><span class="sa-ov sa-ov-paid">$${saBundlePrice}/mo</span>`;
-  const ob=document.getElementById('sa-ol-boost');
-  if(ob) ob.innerHTML=`<span class="sa-ok">Boost: ${saBoostLabel}</span><span class="sa-ov sa-ov-paid">$${saBoostAmt} one-time</span>`;
-  const tot=document.getElementById('sa-total');
-  if(tot) tot.textContent='$'+saBundlePrice+'/mo';
-  const btn=document.getElementById('sa-save-btn');
-  if(btn) btn.textContent=`💳 Activate ${saBundleActive.charAt(0).toUpperCase()+saBundleActive.slice(1)} Bundle — $${saBundlePrice}/mo`;
-}
-function toggleSA(){
-  const tog=document.getElementById('sa-tog');
-  const lbl=document.getElementById('sa-tog-lbl');
-  const desc=document.getElementById('sa-status-p');
-  const badge=document.getElementById('dm-accel-badge');
-  const isOff=tog.classList.contains('on')===false||tog.style.background!=='';
-  tog.classList.toggle('on');
-  if(tog.classList.contains('on')){
-    lbl.textContent='Premium Active';lbl.style.color='var(--green)';
-    desc.textContent='Acceleration is actively running premium content generation for this domain.';
-    badge.style.display='inline-flex';
-    // Update right panel to show active state
-    document.getElementById('dr-acc-row').style.display='none';
-    document.getElementById('dr-acc-active').classList.add('on');
-  } else {
-    lbl.textContent='Premium Off';lbl.style.color='var(--ink3)';
-    desc.textContent='1 blog/month active (free). Enable premium bundles below.';
-    badge.style.display='none';
-    document.getElementById('dr-acc-row').style.display='block';
-    document.getElementById('dr-acc-active').classList.remove('on');
-  }
-}
-function saveSA(){
-  toggleSA();
-  document.getElementById('sa-save-btn').textContent='✓ Bundle Active — Saved';
-  document.getElementById('sa-save-btn').style.background='var(--green)';
-}
-
-/* CONTENT OPS */
-function pickCadence(el,type,label,addlCost){
-  document.querySelectorAll('.co-cad-tog .copt:not(.locked)').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById('co-cadence-label').textContent=label+' cadence'+(addlCost?` (+$${addlCost}/mo)`:'');
-  document.getElementById('co-sched-desc').textContent=label+' on the 15th between 12 PM – 3 PM (Asia/Calcutta)';
-}
-function showUpgradeNudge(el){
-  // Navigate to SA tab to upgrade
-  const hint=el.querySelector('.copt-lock');
-  if(hint){const bundle=hint.textContent.replace('🔒 ','').replace(' bundle','');alert('Upgrade to '+bundle+' bundle in Site Acceleration to unlock this cadence.');}
-}
-
-/* MODAL ACTIVATION */
-let mCur=1;
-function openModal(){document.getElementById('moverlay').classList.add('on');mCur=1;renderM(1);}
-function closeModal(){document.getElementById('moverlay').classList.remove('on');}
-function checkModalClose(e){if(e.target===document.getElementById('moverlay'))closeModal();}
-function renderM(n){
-  document.querySelectorAll('.ms').forEach((s,i)=>s.classList.toggle('on',i+1===n));
-  document.getElementById('m-pill').textContent=n<=5?`Step ${n} of 5`:'';
-  for(let i=1;i<=5;i++){
-    const d=document.getElementById('md'+i),l=document.getElementById('ml'+i),lb=document.getElementById('ml-'+i);
-    if(!d)continue;
-    d.className='mpd '+(i<n?'done':i===n?'active':'idle');d.textContent=i<n?'✓':i;
-    if(l)l.className='mpl'+(i<n?' done':'');
-    if(lb)lb.className='mp-lbl'+(i<n?' done':i===n?' active':'');
-  }
-  const ft=document.getElementById('m-ft');
-  if(n>=6){ft.style.display='none';return;}else{ft.style.display='flex';}
-  const back=document.getElementById('m-back'),next=document.getElementById('m-next'),note=document.getElementById('m-note');
-  back.style.display=n>1?'inline-flex':'none';
-  if(n===5){next.textContent='🚀 Activate Domain';next.className='btn btn-g btn-sm';}
-  else{next.textContent='Continue →';next.className='btn btn-p btn-sm';}
-  note.textContent=n===5?'Jobs run in background — returns instantly':'No credit card required';
-  const dom=document.getElementById('dom-in')?.value||'your domain';
-  ['ms2-dom','ms4-dom'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=dom;});
-}
-function mNext(){
-  if(mCur===5){mCur=6;renderM(6);runProc();}
-  else{mCur++;renderM(mCur);}
-}
-function mBack(){if(mCur>1){mCur--;renderM(mCur);}}
-function runProc(){
-  [['ps1',700],['ps2',1400],['ps3',2000],['ps4',2600]].forEach(([id,t],i)=>{
-    setTimeout(()=>{
-      const el=document.getElementById(id);
-      el.className='proc-step ps-done';el.querySelector('.proc-ico').textContent='✅';
-      if(i===3)setTimeout(()=>{mCur=7;renderM(7);const dom=document.getElementById('dom-in').value||'mybusiness.com';document.getElementById('cf-dom').textContent=dom;},500);
-    },t);
-  });
-}
-function finishAct(){
-  const dom=document.getElementById('dom-in').value||'mybusiness.com';
-  closeModal();V('mydomains');
-  // Add row to table
-  const tr=document.createElement('tr');
-  tr.onclick=()=>selDom(tr,dom,'active');
-  tr.innerHTML=`<td><input type="checkbox" checked style="accent-color:var(--brand);"/></td><td><div class="dc"><div class="dfl">🔥</div><span class="dn">${dom}</span></div></td><td><span class="sp sp-a">● Active</span></td><td><div class="soci"><div class="si">🌐</div><div class="si">📄</div><div class="si">🔒</div></div></td><td><span style="font-size:10.5px;color:var(--ink4);">None</span></td><td><span class="lp">Building My Vision</span></td><td><span class="sob so-a">🚀 Active</span></td><td><span style="font-size:11.5px;color:var(--ink3);">—</span></td><td><span style="font-size:11.5px;color:var(--ink4);">Today</span></td>`;
-  const tbody=document.getElementById('dom-tbody');
-  tbody.insertBefore(tr,tbody.firstChild);
-  // Stats
-  ['d-active','mds-a'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=parseInt(e.textContent)+1;});
-  const sba=document.getElementById('sb-active');if(sba){const p=sba.textContent.split('/');sba.textContent=(parseInt(p[0])+1)+'/'+p[1].trim();}
-  // Show dashboard hint
-  document.getElementById('dash-hint').classList.add('on');
-  mCur=1;renderM(1);
-}
-
-/* HELPERS */
-function pk(el,cls){document.querySelectorAll(cls).forEach(c=>c.classList.remove('on'));el.classList.add('on');}
-function pp(el){document.querySelectorAll('.pub-opt').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
-function pd(el){document.querySelectorAll('.daybtn').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
-function checkDNS(){
-  const s=document.getElementById('dns-s');
-  s.className='dns-st dns-p';s.innerHTML='<span>🔄</span><span>Checking…</span>';
-  setTimeout(()=>{s.className='dns-st dns-ok';s.innerHTML='<span>✅</span><span>DNS verified — domain connected!</span>';},1500);
-}
-
-// INIT
-V('mydomains');
-switchTab('general');
-// Select first row
-selDom(document.querySelector('.dtbl tbody tr.sel'),'stackcopilot.ai','active');
+Promise.all(
+  Object.entries(viewMap).map(([id, path]) =>
+    fetch(path)
+      .then(r => r.text())
+      .then(html => { document.getElementById('view-' + id).innerHTML = html; })
+  )
+).catch(err => console.error('View load error:', err));
 </script>
 </body>
 </html>

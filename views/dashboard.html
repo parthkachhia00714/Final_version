@@ -1,0 +1,68 @@
+<div class="dash">
+  <div class="dash-h1">Activate instantly. Accelerate for growth.</div>
+  <div class="dash-sub">Welcome back, Parth!</div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-nums">
+        <div><div class="stat-v" id="d-ready">4</div><div class="stat-l">Ready to Activate</div></div>
+        <div><div class="stat-v">0</div><div class="stat-l">Tracked</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+        <span style="font-size:18px;color:var(--ink5);">📄</span>
+        <span style="font-size:18px;color:var(--ink5);">🛡️</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-nums">
+        <div><div class="stat-v" id="d-active">2</div><div class="stat-l">Active</div></div>
+      </div>
+      <span style="font-size:22px;color:var(--ink5);">🌐</span>
+    </div>
+    <div class="stat">
+      <div><div class="stat-v">$0</div><div class="stat-l">Portfolio Value</div></div>
+      <span style="font-size:24px;color:var(--ink5);">$</span>
+    </div>
+  </div>
+
+  <!-- Subtle one-time hint -->
+  <div class="act-hint" id="dash-hint">
+    <div class="ah-l">
+      <div class="ah-ic">⚡</div>
+      <div>
+        <div class="ah-title">Domain activated — premium acceleration available</div>
+        <div class="ah-sub">Configure audience, voice &amp; cadence from domain's Site Acceleration tab.</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="btn btn-p btn-sm" onclick="V('mydomains');openDM('namecrates.com','sa')">Configure →</button>
+      <button class="ah-dismiss" onclick="document.getElementById('dash-hint').style.display='none'">Dismiss</button>
+    </div>
+  </div>
+
+  <div class="action-g">
+    <div class="ac">
+      <div class="ac-top">
+        <div class="ac-hd"><span class="ac-ic">🚀</span><span class="ac-title">Activate Your Domain</span></div>
+        <div class="ac-play" onclick="openModal()">▶</div>
+      </div>
+      <p class="ac-desc">Turn your domain into a live site in minutes. Every activation includes 1 blog post/month — free, automatic, published within 3–6 hours.</p>
+      <button class="ac-btn ac-p" onclick="openModal()">+ Activate New Site</button>
+    </div>
+    <div class="ac">
+      <div class="ac-top">
+        <div class="ac-hd"><span class="ac-ic">📥</span><span class="ac-title">Bulk Import Domains</span></div>
+        <div class="ac-play">▶</div>
+      </div>
+      <p class="ac-desc">Import your existing domains and start managing them all in one place.</p>
+      <button class="ac-btn ac-o">↑ Import Domains</button>
+    </div>
+    <div class="ac">
+      <div class="ac-top">
+        <div class="ac-hd"><span class="ac-ic">👁️</span><span class="ac-title">Track a Domain</span></div>
+      </div>
+      <p class="ac-desc">Monitor a domain you host elsewhere. Track value and performance without activation.</p>
+      <button class="ac-btn ac-o">👁 Track a Domain</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,215 @@
+<div class="mdwrap">
+
+  <!-- LEFT: Domain table -->
+  <div class="mdmain">
+    <div class="mdh">
+      <div>
+        <div class="mdh-t">My Domains</div>
+        <div class="mdh-s">Manage and monitor your active domains</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn btn-s btn-sm">↑ Add Bulk</button>
+        <button class="btn btn-p btn-sm" onclick="openModal()">+ Add New</button>
+      </div>
+    </div>
+
+    <div class="md-stats">
+      <div class="mds">
+        <div class="mds-nums">
+          <div><div class="mds-v" id="mds-r">4</div><div class="mds-l">Ready to Activate</div></div>
+          <div><div class="mds-v">0</div><div class="mds-l">Tracked</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;">
+          <span style="font-size:16px;color:var(--ink5);">📄</span>
+          <span style="font-size:16px;color:var(--ink5);">🛡️</span>
+        </div>
+      </div>
+      <div class="mds">
+        <div class="mds-nums">
+          <div><div class="mds-v" id="mds-a">2</div><div class="mds-l">Active</div></div>
+          <div><div class="mds-v" id="mds-ac">1</div><div class="mds-l">Accelerating</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;">
+          <span style="font-size:16px;color:var(--ink5);">🌐</span>
+          <span style="font-size:16px;color:var(--ink5);">🔥</span>
+        </div>
+      </div>
+      <div class="mds">
+        <div><div class="mds-v">$0</div><div class="mds-l">Portfolio Value</div></div>
+        <span style="font-size:20px;color:var(--ink5);">$</span>
+      </div>
+    </div>
+
+    <div class="dtabs">
+      <div class="dtab on">⊟ All</div>
+      <div class="dtab">🚀 Active</div>
+      <div class="dtab">🔥 Accelerating</div>
+      <div class="dtab">👁 Tracked</div>
+      <div class="dtab">🌿 Seasoned</div>
+      <div class="dtab">↔ Transferred</div>
+    </div>
+
+    <div class="mdtool">
+      <div class="mdsrch">
+        <span style="font-size:11px;color:var(--ink4);">🔍</span>
+        <input placeholder="Search domains…"/>
+      </div>
+      <select class="fsel">
+        <option>▼ All Statuses</option>
+        <option>Active</option>
+        <option>Draft</option>
+        <option>Accelerating</option>
+      </select>
+    </div>
+
+    <table class="dtbl">
+      <thead>
+        <tr>
+          <th><input type="checkbox" style="accent-color:var(--brand);"/></th>
+          <th>Domain ↕</th>
+          <th>Status ↕</th>
+          <th>Verified</th>
+          <th>Social</th>
+          <th>Layout</th>
+          <th>Activation Status</th>
+          <th>Expiration ↕</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody id="dom-tbody">
+        <tr onclick="selDom(this,'namecrates.com','accelerating')">
+          <td><input type="checkbox" style="accent-color:var(--brand);"/></td>
+          <td><div class="dc"><div class="dfl">🔥</div><span class="dn">namecrates.com</span></div></td>
+          <td><span class="sp sp-ac">⚡ Accelerating</span></td>
+          <td><div class="soci"><div class="si">🌐</div><div class="si">📄</div><div class="si">🔒</div><div class="si">🔒</div><div class="si">🔒</div></div></td>
+          <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
+          <td><span class="lp">Actively Selling</span></td>
+          <td><span class="sob so-a">⚡ Accelerating</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink3);">02/10/2027</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink4);">15/04/2026</span></td>
+        </tr>
+        <tr class="sel" onclick="selDom(this,'stackcopilot.ai','active')">
+          <td><input type="checkbox" checked style="accent-color:var(--brand);"/></td>
+          <td><div class="dc"><div class="dfl">🔥</div><span class="dn">stackcopilot.ai</span></div></td>
+          <td><span class="sp sp-a">● Active</span></td>
+          <td><div class="soci"><div class="si">🌐</div><div class="si">📄</div><div class="si">🔒</div><div class="si">🔒</div><div class="si">🔒</div></div></td>
+          <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
+          <td><span class="lp">Actively Selling</span></td>
+          <td><span class="sob so-a">🚀 Active</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink3);">02/10/2027</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td>
+        </tr>
+        <tr onclick="selDom(this,'helperdroids.co','draft')">
+          <td><input type="checkbox" style="accent-color:var(--brand);"/></td>
+          <td><div class="dc"><div class="dfl">🔥</div><span class="dn">helperdroids.co…</span></div></td>
+          <td><span class="sp sp-d">📄 Draft</span></td>
+          <td><div class="soci"><div class="si">📄</div><div class="si">📄</div><div class="si">🔒</div></div></td>
+          <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
+          <td><span class="lp" style="background:var(--gbg);color:var(--green);border-color:var(--gbd);">Open to Offers</span></td>
+          <td><span class="sob so-act" onclick="event.stopPropagation();openModal()">🚀 Activate Site</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink3);">23/12/2026</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td>
+        </tr>
+        <tr onclick="selDom(this,'forget.org','draft')">
+          <td><input type="checkbox" style="accent-color:var(--brand);"/></td>
+          <td><div class="dc"><div class="dfl">🔥</div><span class="dn">forget.org</span></div></td>
+          <td><span class="sp sp-d">📄 Draft</span></td>
+          <td><div class="soci"><div class="si">📄</div><div class="si">📄</div><div class="si">🔒</div></div></td>
+          <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
+          <td><span class="lp" style="background:#F0FDF4;color:#047857;border-color:#A7F3D0;">Building My Vision</span></td>
+          <td><span class="sob so-act" onclick="event.stopPropagation();openModal()">🚀 Activate Site</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink3);">12/02/2027</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td>
+        </tr>
+        <tr onclick="selDom(this,'example7.com','draft')">
+          <td><input type="checkbox" style="accent-color:var(--brand);"/></td>
+          <td><div class="dc"><div class="dfl">🔥</div><span class="dn">example7.com</span></div></td>
+          <td><span class="sp sp-d">📄 Draft</span></td>
+          <td><div class="soci"><div class="si">📄</div><div class="si">📄</div><div class="si">🔒</div></div></td>
+          <td><span style="font-size:10.5px;color:var(--ink4);">None</span></td>
+          <td><span class="lp" style="background:#F0FDF4;color:#047857;border-color:#A7F3D0;">Building My Vision</span></td>
+          <td><span class="sob so-act" onclick="event.stopPropagation();openModal()">🚀 Activate Site</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink3);">04/01/2027</span></td>
+          <td><span style="font-size:11.5px;color:var(--ink4);">10/04/2026</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RIGHT: Domain detail panel -->
+  <div class="mdr on" id="md-right">
+    <div class="dr-hd">
+      <div class="dr-nr">
+        <span style="font-size:14px;">🔥</span>
+        <span class="dr-nm" id="dr-n">stackcopilot.ai</span>
+        <span class="sp sp-a" style="font-size:9.5px;" id="dr-st">Active</span>
+      </div>
+      <div class="dr-acts">
+        <button class="btn btn-sm dr-visit">↗ Visit Site</button>
+        <button class="btn btn-sm dr-draft">← Draft</button>
+      </div>
+    </div>
+    <button class="dr-cfg" onclick="openDM(document.getElementById('dr-n').textContent,'general')">⚙ Configure</button>
+
+    <!-- Premium Acceleration expand row -->
+    <div class="dr-acc-row" id="dr-acc-row">
+      <div class="dr-acc-trig" onclick="toggleAcc()">
+        <div class="dr-acc-tl">
+          <div class="dr-acc-tic">⚡</div>
+          <div>
+            <div class="dr-acc-tn">Premium Acceleration</div>
+            <div class="dr-acc-ts">Warm · Heat · Blaze bundles</div>
+          </div>
+        </div>
+        <span class="dr-acc-chv">▾</span>
+      </div>
+      <div class="dr-acc-body">
+        <div class="dr-acc-in">
+          <div class="dr-acc-lede">Upgrade beyond 1 post/month. Bundles combine audience targeting, voice customisation, and increased cadence — all in one price.</div>
+          <div class="bundle-cards">
+            <div class="bcard" onclick="selBundle(this,'warm')">
+              <div class="bcard-top"><div class="bcard-name">🌿 Warm Bundle</div><div class="bcard-price">$12<span style="font-size:10px;font-weight:600;color:var(--ink3);">/mo</span></div></div>
+              <div class="bcard-sub">8 posts/month · Audience DNA · Multi-Voice</div>
+              <div class="bcard-feats"><span class="bfeat">8 posts/mo</span><span class="bfeat">Audience</span><span class="bfeat">Voice</span></div>
+            </div>
+            <div class="bcard on" onclick="selBundle(this,'heat')">
+              <div class="bcard-rec">RECOMMENDED</div>
+              <div class="bcard-top"><div class="bcard-name">🔥 Heat Bundle</div><div class="bcard-price">$22<span style="font-size:10px;font-weight:600;color:var(--ink3);">/mo</span></div></div>
+              <div class="bcard-sub">12 posts/month · Custom DNA · Multi-Voice</div>
+              <div class="bcard-feats"><span class="bfeat">12 posts/mo</span><span class="bfeat">Custom DNA</span><span class="bfeat">3 Voices</span></div>
+            </div>
+            <div class="bcard" onclick="selBundle(this,'blaze')">
+              <div class="bcard-top"><div class="bcard-name">⚡ Blaze Bundle</div><div class="bcard-price">$35<span style="font-size:10px;font-weight:600;color:var(--ink3);">/mo</span></div></div>
+              <div class="bcard-sub">20 posts/month + 1 Boost Pack/mo</div>
+              <div class="bcard-feats"><span class="bfeat">20 posts/mo</span><span class="bfeat">Full DNA</span><span class="bfeat">Boost</span></div>
+            </div>
+          </div>
+          <div class="dr-acc-footer">
+            <button class="dr-acc-go" onclick="openDM(document.getElementById('dr-n').textContent,'sa')">⚡ Open Site Acceleration →</button>
+            <button class="dr-acc-skip" onclick="collapseAcc()">Not now</button>
+          </div>
+          <div class="dr-acc-note">Configure full details from the Site Acceleration tab.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Already accelerating state -->
+    <div class="dr-acc-active" id="dr-acc-active">
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--brand);">⚡ Accelerating — Heat Bundle</div>
+      <button class="btn btn-xs" style="background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);" onclick="openDM(document.getElementById('dr-n').textContent,'sa')">Manage</button>
+    </div>
+
+    <div class="dr-info">
+      <div class="dr-st-lbl" style="font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4);margin-bottom:7px;">Domain Information</div>
+      <div class="dr-ig">
+        <div class="dr-ib"><div class="dr-ibl">Registrar</div><div class="dr-ibv" id="dr-reg">NameCheap, Inc.</div></div>
+        <div class="dr-ib"><div class="dr-ibl">Purchase Date</div><div class="dr-ibv" id="dr-pdate">Oct 2, 2023</div></div>
+        <div class="dr-ib"><div class="dr-ibl">Expiration</div><div class="dr-ibv" id="dr-exp">02/10/2027</div></div>
+        <div class="dr-ib"><div class="dr-ibl">Layout</div><div class="dr-ibv" id="dr-layout">Actively Selling</div></div>
+        <div class="dr-ib"><div class="dr-ibl">Status</div><div class="dr-ibv" id="dr-stat-v" style="color:var(--green);">● Active</div></div>
+        <div class="dr-ib"><div class="dr-ibl">Last Updated</div><div class="dr-ibv">10/04/2026</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>

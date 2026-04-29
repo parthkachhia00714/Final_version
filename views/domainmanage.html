@@ -1,0 +1,428 @@
+<div class="dmwrap">
+
+  <!-- Top bar -->
+  <div class="dmtop">
+    <div class="dmback" onclick="V('mydomains')">←</div>
+    <div class="dmbic">🔥</div>
+    <div class="dmtitle" id="dm-ttl">Manage namecrates.com</div>
+    <span class="badge-a bga">● Active</span>
+    <span class="badge-a bgac" id="dm-acbadge" style="display:none;">⚡ Accelerating</span>
+    <div class="dmsp"></div>
+    <div style="display:flex;gap:5px;">
+      <button class="btn btn-s btn-sm">↗ Visit</button>
+      <button class="btn btn-s btn-sm">← Back to Draft</button>
+      <button class="btn btn-s btn-sm">◎ Tracked</button>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="dmtabs">
+    <div class="dmtab on"  id="dmt-general" onclick="switchTab('general')">⊟ General</div>
+    <div class="dmtab"     id="dmt-social"  onclick="switchTab('social')">📱 Social Media</div>
+    <div class="dmtab"     id="dmt-tech"    onclick="switchTab('tech')">⚙ Technical</div>
+    <div class="dmtab"     id="dmt-intel"   onclick="switchTab('intel')">📊 Domain Intelligence</div>
+    <div class="dmtab"     id="dmt-sa"      onclick="switchTab('sa')">⚡ Site Acceleration</div>
+    <div class="dmtab"     id="dmt-co"      onclick="switchTab('co')">📝 Content Ops</div>
+    <div class="dmtab"     id="dmt-sell"    onclick="switchTab('sell')">💰 Selling Details</div>
+    <div class="dmtab"     id="dmt-val"     onclick="switchTab('val')">📈 Valuation</div>
+    <div class="dmtab"     id="dmt-visit"   onclick="switchTab('visit')">🌐 Visit Site</div>
+  </div>
+
+  <div class="dmbody">
+
+    <!-- ── GENERAL TAB ── -->
+    <div id="dtb-general" class="dmcontent">
+      <div class="dmsec">
+        <div class="dmsec-t">Domain Details</div>
+        <div class="dmsec-s">Basic domain information and registration details</div>
+        <div class="dmfr">
+          <div>
+            <label class="dmlbl">Domain Name</label>
+            <div class="dminpw"><input class="dminp" value="stackcopilot.ai" readonly/><span class="dmic">🔒</span></div>
+          </div>
+          <div>
+            <label class="dmlbl">Registrar</label>
+            <div class="dminpw"><input class="dminp" value="NameCheap, Inc." readonly/><span class="dmic">🔒</span></div>
+          </div>
+        </div>
+        <div class="dmfr">
+          <div>
+            <label class="dmlbl">Purchase Date</label>
+            <div class="dminpw"><input class="dminp" value="02-10-2023"/><span class="dmic">✏️</span></div>
+          </div>
+          <div>
+            <label class="dmlbl">Expiration Date</label>
+            <div class="dminpw"><input class="dminp" value="02-10-2027"/><span class="dmic">✏️</span></div>
+          </div>
+        </div>
+        <div class="dmfr">
+          <div>
+            <label class="dmlbl">Renewal Amount</label>
+            <div class="dminpw"><input class="dminp" value="0.00"/><span class="dmic">✏️</span></div>
+          </div>
+          <div>
+            <label class="dmlbl">Renewal Period</label>
+            <select class="dminp" style="padding:8px 10px;">
+              <option>Select renewal period</option>
+              <option>1 Year</option>
+              <option>2 Years</option>
+            </select>
+          </div>
+        </div>
+        <div class="dmfr full">
+          <label class="dmlbl">Notes</label>
+          <textarea class="dmta" placeholder="Add any notes about this domain…"></textarea>
+        </div>
+      </div>
+
+      <div class="dmsec">
+        <div class="dmsec-t">Domain Logos</div>
+        <div class="dmsec-s">Upload logos for different use cases</div>
+        <div class="logo-g">
+          <div class="logo-box">
+            <div class="logo-tit">Square Logo</div>
+            <div class="logo-sub">For profile pictures, favicons, and thumbnails</div>
+            <div class="logo-upl">
+              <div class="logo-ph">No logo</div>
+              <button class="upl-btn">↑ Upload Square Logo</button>
+            </div>
+            <div style="font-size:10px;color:var(--ink4);margin-top:5px;">Square ratio (1:1), 200×200px recommended</div>
+          </div>
+          <div class="logo-box">
+            <div class="logo-tit">Ultrawide Logo</div>
+            <div class="logo-sub">For headers, banners, and wide displays</div>
+            <div class="logo-upl">
+              <div class="logo-ph">No logo</div>
+              <button class="upl-btn">↑ Upload Ultrawide Logo</button>
+            </div>
+            <div style="font-size:10px;color:var(--ink4);margin-top:5px;">Ultrawide ratio (±2:1), 400×200px recommended</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SITE ACCELERATION TAB ── -->
+    <div id="dtb-sa" style="display:none;overflow:hidden;" class="dmbody">
+      <div class="dmcontent" style="overflow-y:auto;" id="sa-col">
+
+        <!-- Status banner -->
+        <div class="sa-banner">
+          <div>
+            <h3>Acceleration Status</h3>
+            <p id="sa-status-p">1 blog/month active (free). Enable premium bundles below to increase cadence and personalise content.</p>
+          </div>
+          <div class="sa-tog">
+            <span class="sa-tog-lbl" id="sa-tog-lbl" style="color:var(--ink3);">Premium Off</span>
+            <div class="tog" id="sa-tog" onclick="toggleSA()"><div class="tok"></div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div style="font-size:11.5px;color:var(--ink3);">Configure premium settings below. Changes save when you click Save.</div>
+          <button class="btn btn-s btn-sm">FAQ Complete (5) →</button>
+        </div>
+
+        <!-- Included free -->
+        <div class="sa-free-card">
+          <div class="sa-free-hd">
+            <div class="sa-free-title">✅ Already Active — Included Free with Your Plan</div>
+            <span style="font-size:10.5px;font-weight:700;color:var(--green);">No extra charge</span>
+          </div>
+          <div class="sa-free-grid">
+            <div class="sa-free-item"><div class="sa-fi-lbl">📝 Blog Cadence</div><div class="sa-fi-val">1× / month</div><div class="sa-fi-sub">First Tuesday recurring</div></div>
+            <div class="sa-free-item"><div class="sa-fi-lbl">🎯 Audience</div><div class="sa-fi-val">Default</div><div class="sa-fi-sub">Auto-matched to domain</div></div>
+            <div class="sa-free-item"><div class="sa-fi-lbl">🗣️ Voice</div><div class="sa-fi-val">Default</div><div class="sa-fi-sub">Authoritative tone</div></div>
+          </div>
+        </div>
+
+        <!-- Premium divider -->
+        <div class="sa-prem-divider">
+          <div class="sa-prem-line"></div>
+          <div class="sa-prem-label">⚡ Premium Bundles — Upgrade Below</div>
+          <div class="sa-prem-line"></div>
+        </div>
+
+        <div style="font-size:12px;color:var(--ink3);margin-bottom:13px;">Choose a bundle that fits your growth goals. Bundles combine posts, targeting, and voice into one clear price — no need to add individual add-ons.</div>
+
+        <!-- Bundle plans -->
+        <div class="bundle-grid" id="sa-bundle-grid">
+          <div class="bplan" onclick="selSABundle(this,'warm',12)" id="bpl-warm">
+            <div class="bplan-name">🌿 Warm</div>
+            <div class="bplan-tagline">Steady content momentum</div>
+            <div class="bplan-price">$12<span class="bplan-per">/mo</span></div>
+            <div class="bplan-compare">vs. $9 cadence + $1 audience + $1 voice separately</div>
+            <div class="bplan-divider"></div>
+            <div class="bplan-feat"><span class="ic">✅</span>8 posts/month (2×/week)</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Preset audience profile</div>
+            <div class="bplan-feat"><span class="ic">✅</span>2 voice profiles (rotating)</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Market signal selection</div>
+            <div class="bplan-feat"><span class="ic">📊</span>Research: 3.6× faster growth</div>
+            <button class="bplan-cta bplan-cta-s" id="bpl-warm-cta">Select Warm</button>
+          </div>
+          <div class="bplan on" onclick="selSABundle(this,'heat',22)" id="bpl-heat">
+            <div class="bplan-rec">⭐ RECOMMENDED</div>
+            <div class="bplan-name">🔥 Heat</div>
+            <div class="bplan-tagline">Authority building phase</div>
+            <div class="bplan-price">$22<span class="bplan-per">/mo</span></div>
+            <div class="bplan-compare">Includes $29 Boost Pack value</div>
+            <div class="bplan-divider"></div>
+            <div class="bplan-feat"><span class="ic">✅</span>12 posts/month (3×/week)</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Custom Audience DNA builder</div>
+            <div class="bplan-feat"><span class="ic">✅</span>3 voice profiles (rotating)</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Market signals + extra context</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Priority post generation queue</div>
+            <button class="bplan-cta bplan-cta-p" id="bpl-heat-cta">Select Heat — $22/mo</button>
+          </div>
+          <div class="bplan" onclick="selSABundle(this,'blaze',35)" id="bpl-blaze">
+            <div class="bplan-name">⚡ Blaze</div>
+            <div class="bplan-tagline">Aggressive authority growth</div>
+            <div class="bplan-price">$35<span class="bplan-per">/mo</span></div>
+            <div class="bplan-compare">Includes $49 Boost Pack free monthly</div>
+            <div class="bplan-divider"></div>
+            <div class="bplan-feat"><span class="ic">✅</span>20 posts/month (5×/week)</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Full custom DNA + analytics</div>
+            <div class="bplan-feat"><span class="ic">✅</span>Unlimited voice profiles</div>
+            <div class="bplan-feat"><span class="ic">✅</span>1 Authority Blitz (50 posts) free</div>
+            <div class="bplan-feat"><span class="ic">✅</span>3.5× HubSpot traffic threshold</div>
+            <button class="bplan-cta bplan-cta-s" id="bpl-blaze-cta">Select Blaze</button>
+          </div>
+        </div>
+
+        <!-- Boost packs -->
+        <div class="sa-sec" id="sa-sec-boost">
+          <div class="sa-sec-hd">
+            <div class="sa-sec-title">⚡ Boost Packs <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--s2);color:var(--ink3);border:1px solid var(--border);margin-left:5px;">One-time · No subscription</span></div>
+          </div>
+          <div class="sa-sec-b">
+            <div style="font-size:11.5px;color:var(--ink3);margin-bottom:11px;">A one-time burst of posts for domain launches, seasonal pushes, or topical clusters. Uses your current audience &amp; voice settings.</div>
+            <div class="boost-grid-sa">
+              <div class="bst" onclick="selBoost(this,15,'Quick Burst',10)"><div class="bst-top"><div class="bst-nm">⚡ Quick Burst</div><div class="bst-pr">$15</div></div><div class="bst-meta">10 posts · over 2 weeks</div><div class="bst-hint">Good for: domain refresh, topic testing</div></div>
+              <div class="bst on" onclick="selBoost(this,29,'Content Sprint',25)"><div class="bst-top"><div class="bst-nm">🚀 Content Sprint</div><div class="bst-pr">$29</div></div><div class="bst-meta">25 posts · over 3–4 weeks · $1.16/post</div><div class="bst-hint">Good for: new activation, topical authority</div></div>
+              <div class="bst" onclick="selBoost(this,49,'Authority Blitz',50)"><div class="bst-top"><div class="bst-nm">🔥 Authority Blitz</div><div class="bst-pr">$49</div></div><div class="bst-meta">50 posts · topical cluster · $0.98/post</div><div class="bst-hint">Good for: competitive niches, ranking</div></div>
+              <div class="bst" onclick="selBoost(this,79,'Launch Kit',100)"><div class="bst-top"><div class="bst-nm">🏆 Domain Launch Kit</div><div class="bst-pr">$79</div></div><div class="bst-meta">100 posts · full authority · $0.79/post</div><div class="bst-hint">Good for: new domains, sandbox exit</div></div>
+            </div>
+            <div style="font-size:10.5px;color:var(--ink4);margin-top:9px;display:flex;align-items:center;gap:4px;"><span>💡</span><span>Surfer SEO charges $29/article. Our Authority Blitz delivers 50 posts for the same price — 98% cheaper per post.</span></div>
+          </div>
+        </div>
+
+        <!-- Market signals -->
+        <div class="sa-sec">
+          <div class="sa-sec-hd"><div class="sa-sec-title">📊 Domain &amp; Market Signals</div><div style="font-size:11px;color:var(--ink3);">Select at least 3 · informs AI content direction</div></div>
+          <div class="sa-sec-b">
+            <div class="sig-g">
+              <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Trend-rising</div>
+              <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Evergreen topic</div>
+              <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Highly brandable</div>
+              <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Geo/local opportunity</div>
+              <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Affiliate potential</div>
+              <div class="sig-c on" onclick="this.classList.toggle('on')"><div class="sig-ck">✓</div>Lead gen potential</div>
+              <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Community angle</div>
+              <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>How-to/tutorial heavy</div>
+              <div class="sig-c" onclick="this.classList.toggle('on')"><div class="sig-ck"></div>Comparison/roundups</div>
+            </div>
+            <textarea style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;color:var(--ink);min-height:65px;resize:vertical;margin-top:10px;" placeholder="Additional context — any extra insights about this domain's opportunity, target market, or content focus…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- SA aside -->
+      <div class="dmaside">
+        <div class="sa-aside">
+          <div class="sa-at">Your Selection</div>
+          <div class="sa-order">
+            <div class="sa-ol"><span class="sa-ok">Monthly blog (included)</span><span class="sa-ov sa-ov-free">$0</span></div>
+            <div class="sa-ol" id="sa-ol-bundle"><span class="sa-ok">Bundle: Heat</span><span class="sa-ov sa-ov-paid">$22/mo</span></div>
+            <div class="sa-ol" id="sa-ol-boost"><span class="sa-ok">Boost: Content Sprint</span><span class="sa-ov sa-ov-paid">$29 one-time</span></div>
+            <div class="sa-ototal"><span>Monthly total</span><span class="sa-otv" id="sa-total">$22/mo</span></div>
+            <div style="font-size:10.5px;color:var(--ink4);margin-top:4px;text-align:right;">+ $29 one-time today</div>
+          </div>
+          <button class="sa-save" id="sa-save-btn" onclick="saveSA()">💳 Activate Heat Bundle — $22/mo</button>
+          <div class="sa-rnote">Per-domain. Cancel anytime from this tab. Next billing cycle after save.</div>
+
+          <div class="sa-at" style="margin-top:14px;">Context Preview</div>
+          <div class="ctx-box">
+            <div class="ctx-title">How this shapes content</div>
+            <div class="ctx-txt" id="ctx-txt">Heat Bundle: 12 posts/month with custom audience DNA and 3 rotating voice profiles. Content will be highly targeted and varied in style — no uniform AI tone. Expected: 20% traffic growth in 60–90 days based on research data.</div>
+          </div>
+          <div class="imp-box">
+            <div class="imp-title">📊 Impact at a Glance</div>
+            <div class="imp-row"><span class="imp-k">Posts / Month</span><span class="imp-v" id="imp-posts">12 (Heat)</span></div>
+            <div class="imp-row"><span class="imp-k">Targeting</span><span class="imp-v" id="imp-aud">Custom DNA</span></div>
+            <div class="imp-row"><span class="imp-k">Voice Variety</span><span class="imp-v" id="imp-voice">3 rotating</span></div>
+            <div class="imp-row"><span class="imp-k">Expected Growth</span><span class="imp-v" style="color:var(--green);">~20% in 90 days</span></div>
+          </div>
+
+          <div class="sa-at" style="margin-top:14px;">Layout &amp; Theme</div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:5px;">Sale Mode</div>
+          <div style="display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);margin-bottom:9px;font-size:12px;">💰 Actively Selling</div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:6px;">Theme</div>
+          <div class="lt-row"><span style="font-size:14px;">🌙</span><div><div style="font-size:12px;font-weight:700;">Midnight</div><div style="font-size:10px;color:var(--ink4);">Dark &amp; mysterious</div></div><div class="lt-dots"><div class="lt-dot" style="background:#6366F1;"></div><div class="lt-dot" style="background:#A5B4FC;"></div></div></div>
+          <div class="lt-row on"><span style="font-size:14px;">☀️</span><div><div style="font-size:12px;font-weight:700;">Aurora</div><div style="font-size:10px;color:var(--ink4);">Vibrant &amp; energetic</div></div><div class="lt-dots"><div class="lt-dot" style="background:#F59E0B;"></div><div class="lt-dot" style="background:#FDE68A;"></div></div></div>
+          <div class="lt-row"><span style="font-size:14px;">🌊</span><div><div style="font-size:12px;font-weight:700;">Ocean</div><div style="font-size:10px;color:var(--ink4);">Calm &amp; professional</div></div><div class="lt-dots"><div class="lt-dot" style="background:#3B82F6;"></div><div class="lt-dot" style="background:#93C5FD;"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTENT OPS TAB ── -->
+    <div id="dtb-co" style="display:none;" class="dmcontent">
+      <div class="co-metrics">
+        <div class="com"><div class="com-title">Total Performance <span class="coming-tag">Coming Soon</span></div><div class="com-val">0</div><div class="com-sub">Total views</div><div style="display:flex;gap:14px;margin-top:4px;font-size:10.5px;color:var(--ink4);"><span>0 Clicks</span><span>0.0% CTR</span></div></div>
+        <div class="com"><div class="com-title">Publishing Metrics</div><div class="com-val" id="co-pub-count">0</div><div class="com-sub">Total published</div><div style="font-size:10.5px;color:var(--ink4);margin-top:4px;"><span style="font-weight:700;color:var(--ink3);" id="co-this-mo">1</span> This month · <span style="font-weight:700;color:var(--ink3);">Apr 15</span> Next post</div><div style="font-size:10px;color:var(--ink4);margin-top:1px;" id="co-cadence-label">Monthly cadence</div></div>
+        <div class="com"><div class="com-title">Growth &amp; Impact <span class="coming-tag">Coming Soon</span></div><div class="com-val">0</div><div class="com-sub">Avg. views per post</div><div style="font-size:10.5px;color:var(--ink4);margin-top:4px;">0 Active (30d)</div></div>
+      </div>
+
+      <div class="co-card">
+        <div class="co-chd"><div><div class="co-ct">Publishing Schedule</div><div class="co-cs" id="co-sched-desc">Monthly on the 15th between 12 PM – 3 PM (Asia/Calcutta)</div></div></div>
+        <div class="co-cb">
+          <div class="co-free-notice">
+            <div class="co-fn-l"><span>🆓</span>1 blog/month included with your plan</div>
+            <div class="co-upgrade-hint" onclick="switchTab('sa')">Upgrade for more ⚡ →</div>
+          </div>
+          <div class="co-sl">
+            <div>
+              <div style="font-size:12px;font-weight:700;margin-bottom:9px;">Posts per month</div>
+              <div class="co-cad-tog">
+                <div class="copt on" onclick="pickCadence(this,'monthly','Monthly',0)">
+                  <div class="copt-name">Monthly</div>
+                  <div class="copt-price" style="color:var(--green);">Included free</div>
+                </div>
+                <div class="copt locked" onclick="showUpgradeNudge(this)">
+                  <div class="copt-name">Bi-weekly</div>
+                  <div class="copt-lock">🔒 Warm+ bundle</div>
+                </div>
+                <div class="copt locked" onclick="showUpgradeNudge(this)">
+                  <div class="copt-name">Weekly</div>
+                  <div class="copt-lock">🔒 Heat+ bundle</div>
+                </div>
+              </div>
+              <div class="form-f"><label>Preferred publish day</label><select class="form-sel" id="co-pub-day"><option>Wednesday</option><option>Monday</option><option>Tuesday</option><option>Thursday</option><option>Friday</option></select></div>
+              <div class="form-f"><label>Preferred time window</label><select class="form-sel"><option>12 PM – 3 PM</option><option>9 AM – 12 PM</option><option>3 PM – 6 PM</option></select></div>
+              <div class="form-f"><label>Time zone <span style="font-size:10px;color:var(--green);font-weight:600;">Auto-detected</span></label><select class="form-sel"><option>Asia/Calcutta (Your timezone)</option><option>UTC</option><option>America/New_York</option></select></div>
+              <div style="font-size:10px;color:var(--ink4);">All publish times shown in Asia/Calcutta</div>
+
+              <div class="pu-sec">
+                <div class="pu-hd">🔥 Power-Ups <span style="font-size:11px;font-weight:400;color:var(--ink3);">Give your domain extra fuel</span></div>
+                <div class="pu-item"><div class="pu-ico pu-brand">⚡</div><div class="pu-info"><div class="pu-nm">Boost Your Start <span style="font-size:11.5px;font-weight:700;color:var(--brand);margin-left:4px;">One-time $10</span></div><div class="pu-desc">Add 10 boost posts distributed every 3 days between your regular posts to accelerate domain authority.</div></div><button class="btn btn-p btn-xs" style="flex-shrink:0;">Add</button></div>
+                <div class="pu-item" style="opacity:.55;"><div class="pu-ico pu-gray">🔗</div><div class="pu-info"><div class="pu-nm">LinkedIn Auto-Share <span class="cs-badge">Coming Soon</span></div><div class="pu-desc">Automatically share new posts to your company LinkedIn page.</div></div></div>
+                <div class="pu-item" style="opacity:.55;"><div class="pu-ico pu-gray">🐦</div><div class="pu-info"><div class="pu-nm">Twitter/X Auto-Share <span class="cs-badge">Coming Soon</span></div><div class="pu-desc">Auto-post content snippets and links to your Twitter/X account.</div></div></div>
+                <div style="font-size:11px;color:var(--ink4);text-align:center;margin-top:5px;">Enhancements unlock new ways to accelerate and share your domain.</div>
+              </div>
+            </div>
+
+            <!-- Mini calendar -->
+            <div>
+              <div class="pub-notice"><span>⚠️</span><span><strong>48-Hour Notice:</strong> First publish must be at least 48 hours from today for research and positioning.</span></div>
+              <div class="mini-cal-month">April 2026</div>
+              <div class="mini-cal-grid">
+                <div class="mch">Mon</div><div class="mch">Tue</div><div class="mch">Wed</div><div class="mch">Thu</div><div class="mch">Fri</div><div class="mch">Sat</div><div class="mch">Sun</div>
+                <div class="mcd mcd-e"></div><div class="mcd mcd-e"></div><div class="mcd">1</div><div class="mcd">2</div><div class="mcd">3</div><div class="mcd">4</div><div class="mcd">5</div>
+                <div class="mcd">6</div><div class="mcd">7</div><div class="mcd">8</div><div class="mcd">9</div><div class="mcd">10</div><div class="mcd">11</div><div class="mcd">12</div>
+                <div class="mcd">13</div><div class="mcd mcd-today">14</div><div class="mcd mcd-sched">15</div><div class="mcd">16</div><div class="mcd">17</div><div class="mcd">18</div><div class="mcd">19</div>
+                <div class="mcd">20</div><div class="mcd">21</div><div class="mcd mcd-sched">22</div><div class="mcd">23</div><div class="mcd">24</div><div class="mcd">25</div><div class="mcd">26</div>
+                <div class="mcd">27</div><div class="mcd">28</div><div class="mcd">29</div><div class="mcd">30</div>
+              </div>
+              <div class="mini-cal-month" style="margin-top:10px;">May 2026</div>
+              <div class="mini-cal-grid">
+                <div class="mch">Mon</div><div class="mch">Tue</div><div class="mch">Wed</div><div class="mch">Thu</div><div class="mch">Fri</div><div class="mch">Sat</div><div class="mch">Sun</div>
+                <div class="mcd mcd-e"></div><div class="mcd mcd-e"></div><div class="mcd mcd-e"></div><div class="mcd">1</div><div class="mcd">2</div><div class="mcd">3</div><div class="mcd">4</div>
+                <div class="mcd mcd-sched">5</div><div class="mcd">6</div><div class="mcd">7</div><div class="mcd">8</div><div class="mcd">9</div><div class="mcd">10</div><div class="mcd">11</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Content -->
+      <div class="uc-section">
+        <div class="uc-hd">
+          <div><div class="uc-title">Upcoming Content</div><div style="font-size:11.5px;color:var(--ink3);">Topics for your publishing calendar</div></div>
+          <span class="uc-count" id="uc-count">4 Scheduled</span>
+        </div>
+        <div class="uc-grid" id="uc-grid">
+          <div class="uc-card">
+            <div class="uc-card-corner"></div>
+            <div class="uc-meta"><div><div class="uc-date">Fri, May 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-howto">Comparison</span><span class="uc-tag utg-inter">Intermediate</span><span class="uc-tag utg-words">+1,600 words</span></div></div></div>
+            <div class="uc-body">
+              <div class="uc-body-title">Sustainable Light Aerocraft Comparison: 5 Electric Models Redefining Suburban Transit for the Modern Homeowner</div>
+              <div class="uc-excerpt">A comparative look at the emerging electric aerocraft market, highlighting models that fit the suburban lifestyle and meet the sustainability standards of the 28-45 demographic.</div>
+              <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">A sustainability-focused comparison of new-to-market electric vertical take-off and landing (eVTOL) craft.</div></div></div>
+              <div class="uc-kws"><span class="uc-kw">light aerocraft comparison</span><span class="uc-kw">electric aviation market</span><span class="uc-kw">eVTOL for homeowners</span><span class="uc-kw">sustainable private flight</span></div>
+              <div class="uc-footer"><span class="uc-pri">● Priority 9/10</span><span class="uc-cal">✓ On Calendar</span></div>
+            </div>
+          </div>
+          <div class="uc-card">
+            <div class="uc-card-corner"></div>
+            <div class="uc-meta"><div><div class="uc-date">Mon, Jun 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-howto">Tutorial</span><span class="uc-tag utg-advanced">Advanced</span><span class="uc-tag utg-words">+2,200 words</span></div></div></div>
+            <div class="uc-body">
+              <div class="uc-body-title">How to Evaluate Aerocraft Resale Value: A Data-Driven Framework for First-Time Suburban Buyers</div>
+              <div class="uc-excerpt">A technical tutorial on evaluating asset depreciation and value retention within the light aerocraft market.</div>
+              <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">Financial framework for asset evaluation in the specialised aviation retail space.</div></div></div>
+              <div class="uc-kws"><span class="uc-kw">aerocraft resale value</span><span class="uc-kw">aircraft depreciation rates</span><span class="uc-kw">aviation asset management</span><span class="uc-kw">pre-owned light aircraft</span></div>
+              <div class="uc-footer"><span class="uc-pri">● Priority 9/10</span><span class="uc-cal">✓ On Calendar</span></div>
+            </div>
+          </div>
+          <div class="uc-card">
+            <div class="uc-card-corner"></div>
+            <div class="uc-meta"><div><div class="uc-date">Wed, Jul 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-opinion">Opinion</span><span class="uc-tag utg-inter">Intermediate</span><span class="uc-tag utg-words">+1,200 words</span></div></div></div>
+            <div class="uc-body">
+              <div class="uc-body-title">The 2026 Aerocraft Industry Analysis: Why Personalised Storage is the New Standard for Luxury Flight Cabins</div>
+              <div class="uc-excerpt">An exploration of how the aerocraft market is shifting toward 'Identity-First' interiors, focusing on how manufacturers are integrating personalised organisational systems into small-cabin designs.</div>
+              <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">Industry analysis focusing on the intersection of aircraft interior design and personalised organisational utility.</div></div></div>
+              <div class="uc-kws"><span class="uc-kw">aerocraft industry analysis</span><span class="uc-kw">luxury aircraft interiors</span><span class="uc-kw">bespoke aviation storage</span><span class="uc-kw">custom flight cabin décor</span></div>
+              <div class="uc-footer"><span class="uc-pri">● Priority 8/10</span><span class="uc-cal">✓ On Calendar</span></div>
+            </div>
+          </div>
+          <div class="uc-card">
+            <div class="uc-card-corner"></div>
+            <div class="uc-meta"><div><div class="uc-date">Sat, Aug 15, 2026</div><div class="uc-time">12:00 PM – 3:00 PM</div><div class="uc-tags"><span class="uc-tag utg-howto">Listicle</span><span class="uc-tag utg-beginner">Beginner</span><span class="uc-tag utg-words">+1,000 words</span></div></div></div>
+            <div class="uc-body">
+              <div class="uc-body-title">The Corporate Gift-Giver's Guide to Aerocraft Experience Packages: A Market Growth Strategy</div>
+              <div class="uc-excerpt">This post explores the secondary aerocraft market for corporate gifting, specifically how businesses are using private flight vouchers and personalised aviation accessories to build high-level client relationships.</div>
+              <div class="uc-angle"><span class="uc-angle-ico">📍</span><div><div class="uc-angle-t">STRATEGIC ANGLE</div><div class="uc-angle-v">Marketing and gifting strategy centred on the growth of the experiential aviation sector.</div></div></div>
+              <div class="uc-kws"><span class="uc-kw">aerocraft experience packages</span><span class="uc-kw">corporate aviation gifts</span><span class="uc-kw">private jet charter trends</span><span class="uc-kw">luxury gifting market</span></div>
+              <div class="uc-footer"><span class="uc-pri">● Priority 7/10</span><span class="uc-cal">✓ On Calendar</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Published Content -->
+      <div class="pub-hd">
+        <div><div class="pub-title">Published Content</div><div style="font-size:11.5px;color:var(--ink3);">Manage your acceleration blog posts and track performance</div></div>
+        <div class="pub-tabs"><div class="pub-tab on">All</div><div class="pub-tab">Published</div><div class="pub-tab">Scheduled</div></div>
+      </div>
+      <div class="pub-cards-grid" id="pub-grid">
+        <div class="pub-card">
+          <div class="pub-card-img">
+            <div class="pub-card-img-inner"><div class="pub-card-img-txt">Navigating the Private Aerocraft Market: A Framework for Suburban Homeowners Investing in Personal Aviation</div></div>
+            <div class="pub-card-tags"><span class="uc-tag utg-howto" style="font-size:9px;">Content</span><span class="uc-tag" style="font-size:9px;background:var(--abg);color:var(--amber);border-color:var(--abd);">Scheduled</span></div>
+          </div>
+          <div class="pub-card-body">
+            <div class="pub-card-title">Navigating the Private Aerocraft Market: A Framework for Suburban Homeowners…</div>
+            <div class="pub-card-excerpt">Personal aircraft ownership is the ultimate investment in domestic sophistication. Discover the strategic framework for navigating insurance, selection, and suburban logistics.</div>
+            <div class="pub-card-footer"><span class="pub-card-date">Apr 15, 2026</span><span class="pub-card-status pcs-scheduled">Scheduled · Publishing soon</span></div>
+          </div>
+        </div>
+        <div class="pub-card" id="pub-card-2" style="display:none;">
+          <div class="pub-card-img">
+            <div class="pub-card-img-inner"><div class="pub-card-img-txt">How AI Copilots Are Transforming Stack Development for Modern Engineering Teams</div></div>
+            <div class="pub-card-tags"><span class="uc-tag utg-howto" style="font-size:9px;">Content</span><span class="uc-tag" style="font-size:9px;background:var(--gbg);color:var(--green);border-color:var(--gbd);">Published</span></div>
+          </div>
+          <div class="pub-card-body">
+            <div class="pub-card-title">How AI Copilots Are Transforming Stack Development</div>
+            <div class="pub-card-excerpt">A deep dive into how AI-powered copilots are changing the way engineering teams approach stack architecture, debugging, and code review workflows.</div>
+            <div class="pub-card-footer"><span class="pub-card-date">Apr 13, 2026</span><span class="pub-card-status pcs-published">Published</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PLACEHOLDER TABS ── -->
+    <div id="dtb-social"  style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Social Media configuration — coming soon</div></div>
+    <div id="dtb-tech"    style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Technical settings — DNS, SSL, redirects</div></div>
+    <div id="dtb-intel"   style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Domain Intelligence — analytics &amp; signals</div></div>
+    <div id="dtb-sell"    style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Selling Details</div></div>
+    <div id="dtb-val"     style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Valuation</div></div>
+    <div id="dtb-visit"   style="display:none;" class="dmcontent"><div style="padding:40px;text-align:center;color:var(--ink4);">Opening site in new tab…</div></div>
+
+  </div><!-- /dmbody -->
+</div><!-- /dmwrap -->
