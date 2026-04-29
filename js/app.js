@@ -233,9 +233,9 @@ function toggleMktSig(el) {
 
 function renderM(n) {
   document.querySelectorAll('.ms').forEach((s, i) => s.classList.toggle('on', i + 1 === n));
-  document.getElementById('m-pill').textContent = n <= 5 ? `Step ${n} of 5` : '';
+  document.getElementById('m-pill').textContent = n <= 6 ? `Step ${n} of 6` : '';
 
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     const d = document.getElementById('md' + i), l = document.getElementById('ml' + i), lb = document.getElementById('ml-' + i);
     if (!d) continue;
     d.className = 'mpd ' + (i < n ? 'done' : i === n ? 'active' : 'idle');
@@ -245,24 +245,33 @@ function renderM(n) {
   }
 
   const ft = document.getElementById('m-ft');
-  if (n >= 6) { ft.style.display = 'none'; return; } else { ft.style.display = 'flex'; }
+  if (n >= 7) { ft.style.display = 'none'; return; } else { ft.style.display = 'flex'; }
 
   const back = document.getElementById('m-back'), next = document.getElementById('m-next'), note = document.getElementById('m-note');
   back.style.display = n > 1 ? 'inline-flex' : 'none';
-  if (n === 5) { next.textContent = '🚀 Activate Domain'; next.className = 'btn btn-g btn-sm'; }
+  if (n === 6) { next.textContent = '🚀 Activate Domain'; next.className = 'btn btn-g btn-sm'; }
   else { next.textContent = 'Continue →'; next.className = 'btn btn-p btn-sm'; }
-  note.textContent = n === 5 ? 'Jobs run in background — returns instantly' : 'No credit card required';
+  note.textContent = n === 6 ? 'Jobs run in background — returns instantly' : 'No credit card required';
 
   const dom = document.getElementById('dom-in')?.value || 'your domain';
   ['ms2-dom', 'ms3-dom', 'ms5-dom'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = dom; });
 }
 
 function mNext() {
-  if (mCur === 5) { mCur = 6; renderM(6); runProc(); }
+  if (mCur === 6) { mCur = 7; renderM(7); runProc(); }
   else { mCur++; renderM(mCur); }
 }
 
 function mBack() { if (mCur > 1) { mCur--; renderM(mCur); } }
+
+function macSelAud(el) {
+  document.querySelectorAll('#mac-aud-presets .mac-pre').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+}
+function macSelVoice(el) {
+  document.querySelectorAll('#mac-voice-presets .mac-pre').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+}
 
 function runProc() {
   [['ps1', 700], ['ps2', 1400], ['ps3', 2000], ['ps4', 2600]].forEach(([id, t], i) => {
@@ -271,7 +280,7 @@ function runProc() {
       el.className = 'proc-step ps-done';
       el.querySelector('.proc-ico').textContent = '✅';
       if (i === 3) setTimeout(() => {
-        mCur = 7; renderM(7);
+        mCur = 8; renderM(8);
         const dom = document.getElementById('dom-in').value || 'mybusiness.com';
         document.getElementById('cf-dom').textContent = dom;
         const dnaEl = document.getElementById('cf-dna');

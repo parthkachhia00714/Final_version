@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>SiteWarming — Platform v5</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/styles.css?v=5"/>
+<link rel="stylesheet" href="css/styles.css?v=6"/>
 </head>
 <body>
 <div class="app">
@@ -77,7 +77,7 @@
     <div class="modal-hd">
       <div style="display:flex;align-items:center;gap:8px;">
         <span class="modal-title">Activate Domain</span>
-        <span class="modal-pill" id="m-pill">Step 1 of 5</span>
+        <span class="modal-pill" id="m-pill">Step 1 of 6</span>
       </div>
       <div class="modal-close" onclick="closeModal()">×</div>
     </div>
@@ -89,7 +89,8 @@
         <div class="mpc"><div class="mpd idle"   id="md2">2</div></div><div class="mpl-w"><div class="mpl" id="ml2"></div></div>
         <div class="mpc"><div class="mpd idle"   id="md3">3</div></div><div class="mpl-w"><div class="mpl" id="ml3"></div></div>
         <div class="mpc"><div class="mpd idle"   id="md4">4</div></div><div class="mpl-w"><div class="mpl" id="ml4"></div></div>
-        <div class="mpc" style="flex:0;"><div class="mpd idle" id="md5">5</div></div>
+        <div class="mpc"><div class="mpd idle"   id="md5">5</div></div><div class="mpl-w"><div class="mpl" id="ml5"></div></div>
+        <div class="mpc" style="flex:0;"><div class="mpd idle" id="md6">6</div></div>
       </div>
     </div>
     <div class="mp-labels">
@@ -97,14 +98,15 @@
       <span class="mp-lbl"        id="ml-2">Content DNA</span>
       <span class="mp-lbl"        id="ml-3">Brand</span>
       <span class="mp-lbl"        id="ml-4">Site Type</span>
-      <span class="mp-lbl mp-lbl-last" id="ml-5">DNS</span>
+      <span class="mp-lbl"        id="ml-5">DNS</span>
+      <span class="mp-lbl mp-lbl-last" id="ml-6">Acceleration</span>
     </div>
 
     <div class="modal-body">
 
       <!-- Step 1: Domain -->
       <div class="ms on" id="ms1">
-        <div class="ms-ey">Step 1 of 5</div>
+        <div class="ms-ey">Step 1 of 6</div>
         <div class="ms-h">Enter Your Domain</div>
         <div class="ms-sub">The domain you want to activate. Goes live within 3–6 hours of completing this setup.</div>
         <div class="fl">
@@ -120,7 +122,7 @@
 
       <!-- Step 2: Content DNA -->
       <div class="ms" id="ms2">
-        <div class="ms-ey">Step 2 of 5</div>
+        <div class="ms-ey">Step 2 of 6</div>
         <div class="ms-h">Content DNA</div>
         <div class="ms-sub">How should we approach content for <strong id="ms2-dom">your domain</strong>? This shapes every blog post we write.</div>
 
@@ -220,7 +222,7 @@ Output: Markdown with front matter (title, description, tags)</textarea>
 
       <!-- Step 3: Brand & Schedule -->
       <div class="ms" id="ms3">
-        <div class="ms-ey">Step 3 of 5</div>
+        <div class="ms-ey">Step 3 of 6</div>
         <div class="ms-h">Brand &amp; Schedule</div>
         <div class="ms-sub">Set the visual style, content signals, and publish timing for <strong id="ms3-dom">your domain</strong>.</div>
 
@@ -278,7 +280,7 @@ Output: Markdown with front matter (title, description, tags)</textarea>
 
       <!-- Step 4: Site Type -->
       <div class="ms" id="ms4">
-        <div class="ms-ey">Step 4 of 5</div>
+        <div class="ms-ey">Step 4 of 6</div>
         <div class="ms-h">Site Type</div>
         <div class="ms-sub">Helps our AI generate relevant, targeted content for every post.</div>
         <div class="fl">
@@ -301,7 +303,7 @@ Output: Markdown with front matter (title, description, tags)</textarea>
 
       <!-- Step 5: DNS -->
       <div class="ms" id="ms5">
-        <div class="ms-ey">Step 5 of 5</div>
+        <div class="ms-ey">Step 5 of 6</div>
         <div class="ms-h">DNS Configuration</div>
         <div class="ms-sub">Add these records at your registrar to connect <strong id="ms5-dom">your domain</strong>.</div>
         <div class="dns-bx">
@@ -329,7 +331,59 @@ Output: Markdown with front matter (title, description, tags)</textarea>
         </div>
       </div>
 
-      <!-- Step 6: Processing -->
+      <!-- Step 6: Acceleration -->
+      <div class="ms" id="ms-accel">
+        <div class="ms-ey">Step 6 of 6</div>
+        <div class="ms-h">⚡ Site Acceleration</div>
+        <div class="ms-sub">Choose your default audience &amp; voice. Presets are free and applied from your first post. Custom builds are unlocked after activation.</div>
+        <div class="mac-row">
+
+          <!-- Audience DNA -->
+          <div class="mac-card">
+            <div class="mac-hd">
+              <span class="mac-ic">🎯</span>
+              <div class="mac-hd-text">
+                <div class="mac-title">Audience DNA</div>
+                <div class="mac-sub">Who your content speaks to</div>
+              </div>
+              <span class="accel-badge-free">Free</span>
+            </div>
+            <div class="mac-presets" id="mac-aud-presets">
+              <div class="mac-pre on" onclick="macSelAud(this)">💼 Domain Investors</div>
+              <div class="mac-pre" onclick="macSelAud(this)">🏢 Business Owners</div>
+              <div class="mac-pre" onclick="macSelAud(this)">💻 Tech Professionals</div>
+              <div class="mac-pre" onclick="macSelAud(this)">📍 Local Consumers</div>
+              <div class="mac-pre" onclick="macSelAud(this)">🛒 Online Shoppers</div>
+              <div class="mac-pre" onclick="macSelAud(this)">🌐 General Audience</div>
+            </div>
+            <div class="mac-upgrade">💳 Custom Audience DNA — $15/mo · Available from Acceleration tab after activation</div>
+          </div>
+
+          <!-- Brand Voice -->
+          <div class="mac-card">
+            <div class="mac-hd">
+              <span class="mac-ic">🗣️</span>
+              <div class="mac-hd-text">
+                <div class="mac-title">Brand Voice</div>
+                <div class="mac-sub">How your content sounds</div>
+              </div>
+              <span class="accel-badge-free">Free</span>
+            </div>
+            <div class="mac-presets" id="mac-voice-presets">
+              <div class="mac-pre on" onclick="macSelVoice(this)">📚 Authoritative</div>
+              <div class="mac-pre" onclick="macSelVoice(this)">😊 Friendly</div>
+              <div class="mac-pre" onclick="macSelVoice(this)">💥 Bold &amp; Direct</div>
+              <div class="mac-pre" onclick="macSelVoice(this)">⚙️ Technical</div>
+              <div class="mac-pre" onclick="macSelVoice(this)">🎓 Educational</div>
+            </div>
+            <div class="mac-upgrade">💳 Custom Brand Voice — $10/mo · Available from Acceleration tab after activation</div>
+          </div>
+
+        </div>
+        <div class="mac-skip" onclick="mNext()">Skip — apply smart defaults automatically →</div>
+      </div>
+
+      <!-- Step 7: Processing -->
       <div class="ms" id="ms6">
         <div class="proc-sc">
           <div class="proc-spin"></div>
@@ -378,7 +432,7 @@ Output: Markdown with front matter (title, description, tags)</textarea>
   </div>
 </div><!-- /moverlay -->
 
-<script src="js/app.js?v=5"></script>
+<script src="js/app.js?v=6"></script>
 <script>
 /* Load all views from separate files on startup */
 const viewMap = {
