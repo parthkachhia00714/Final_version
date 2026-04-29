@@ -3,59 +3,78 @@
   <!-- Page header -->
   <div class="accel-hd">
     <div class="accel-hd-t">⚡ Acceleration</div>
-    <div class="accel-hd-s">Personalize audience, voice, and cadence per domain. Base plan (1 blog/month, default settings) is always free.</div>
+    <div class="accel-hd-s">Two premium add-ons per domain — personalize who reads your content and how it sounds. Presets are always free.</div>
   </div>
 
-  <!-- Domain selector tabs -->
+  <!-- Domain selector -->
   <div class="accel-domains" id="accel-dom-tabs">
     <div class="adom on" onclick="selAccelDom(this,'stackcopilot.ai','active')">
-      <span>🔥</span>stackcopilot.ai
+      🔥 stackcopilot.ai
       <span class="sp sp-a" style="font-size:9px;padding:1px 6px;">Active</span>
     </div>
     <div class="adom" onclick="selAccelDom(this,'namecrates.com','accelerating')">
-      <span>🔥</span>namecrates.com
-      <span class="sp sp-ac" style="font-size:9px;padding:1px 6px;">⚡ Accelerating</span>
+      🔥 namecrates.com
+      <span class="sp sp-ac" style="font-size:9px;padding:1px 6px;">⚡ Accel.</span>
     </div>
     <div class="adom adom-draft" title="Activate this domain first">
-      <span>📄</span>helperdroids.co
-      <span style="font-size:9px;font-weight:600;color:var(--ink4);">Draft</span>
+      📄 helperdroids.co
+      <span style="font-size:9px;color:var(--ink4);">Activate first</span>
     </div>
     <div class="adom adom-draft" title="Activate this domain first">
-      <span>📄</span>forget.org
-      <span style="font-size:9px;font-weight:600;color:var(--ink4);">Draft</span>
+      📄 forget.org
+      <span style="font-size:9px;color:var(--ink4);">Activate first</span>
     </div>
   </div>
 
-  <!-- Current domain state banner -->
-  <div class="accel-state" id="accel-state">
+  <!-- Domain state banner -->
+  <div class="accel-state">
     <div>
       <div class="accel-state-dom" id="accel-dom-name">stackcopilot.ai</div>
-      <div class="accel-state-cur" id="accel-state-cur">Currently: Default audience · Default voice · 1 post/month</div>
+      <div class="accel-state-cur" id="accel-state-cur">Base plan · 1 blog/month · default audience & voice</div>
     </div>
     <span class="accel-badge-free" id="accel-state-badge">Base Plan — Free</span>
   </div>
 
   <div class="accel-body">
-
-    <!-- LEFT: Configuration panels -->
     <div class="accel-main">
 
-      <!-- ── Audience DNA ── -->
+      <!-- ── SERVICE 1: Audience DNA ── -->
       <div class="accel-card" id="acc-card-aud">
         <div class="accel-card-hd">
           <div>
             <div class="accel-card-title">🎯 Audience DNA</div>
-            <div class="accel-card-sub">Define who your content speaks to. Preset profiles are free; custom DNA costs $1/mo.</div>
+            <div class="accel-card-sub">Who your content speaks to. Shapes every post's angle, depth, and call-to-action.</div>
           </div>
-          <div class="accel-card-tag" id="acc-aud-tag">Preset — Free</div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div class="accel-card-tag" id="acc-aud-tag">Default — Free</div>
+            <div style="font-size:10px;color:var(--ink4);margin-top:3px;">Custom build: $1/mo</div>
+          </div>
         </div>
 
+        <!-- Auto-generated profile from activation -->
         <div class="accel-section">
           <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
-            Audience presets <span class="accel-free-badge">Free</span>
+            Auto-generated profile <span class="accel-from-badge">From your activation</span>
+          </div>
+          <div class="agp-box" id="aud-gen-profile">
+            <div class="agp-label">🤖 Generated from your site content</div>
+            <div class="agp-text" id="agp-aud-text">Domain investors and tech-aware buyers aged 25–55. Focused on ROI, portfolio strategy, and identifying undervalued domains with SEO potential. They compare registrar options, monitor market trends, and respond strongly to data-backed insights and expert opinions.</div>
+            <div class="agp-tags">
+              <span class="agp-tag">Investor mindset</span>
+              <span class="agp-tag">Data-driven</span>
+              <span class="agp-tag">Portfolio focus</span>
+              <span class="agp-tag">Tech-aware</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preset profiles -->
+        <div class="accel-section">
+          <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
+            Switch to a preset <span class="accel-free-badge">Free</span>
           </div>
           <div class="aud-presets" id="aud-presets">
-            <div class="apre on" onclick="selAudPreset(this,'investors')">
+            <div class="apre" onclick="selAudPreset(this,'investors')">
               <div class="apre-name">💼 Domain Investors</div>
               <div class="apre-sub">ROI-focused, portfolio mindset, technical</div>
             </div>
@@ -77,58 +96,74 @@
             </div>
             <div class="apre" onclick="selAudPreset(this,'general')">
               <div class="apre-name">🌐 General Audience</div>
-              <div class="apre-sub">Broad appeal, accessible tone</div>
+              <div class="apre-sub">Broad appeal, accessible language</div>
             </div>
           </div>
         </div>
 
+        <!-- Custom DNA builder -->
         <div class="accel-section">
-          <div class="accel-sec-lbl" style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="display:flex;align-items:center;gap:7px;">Build Custom DNA <span class="accel-paid-badge">$1/mo per domain</span></span>
-            <button class="accel-toggle-btn" id="aud-custom-toggle" onclick="toggleAudCustom()">+ Add Custom DNA</button>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;">
+              Build fully custom <span class="accel-paid-badge">$1/mo</span>
+            </div>
+            <button class="accel-toggle-btn" id="aud-custom-toggle" onclick="toggleAudCustom()">+ Customize</button>
           </div>
-          <div class="accel-custom-panel" id="aud-custom-panel" style="display:none;">
+          <div class="accel-custom-panel" id="aud-custom-panel" style="display:none;margin-top:10px;">
             <div class="accel-custom-in">
               <div class="fl">
-                <label>Who is your target audience?</label>
+                <label>Who is your exact target audience?</label>
                 <input class="fi" id="aud-who" placeholder="e.g. Domain investors aged 30–55 with portfolios of 10+ domains"/>
               </div>
               <div class="fl">
-                <label>Their biggest pain points</label>
-                <textarea class="fi fta" id="aud-pain" placeholder="e.g. Finding undervalued domains, estimating SEO worth, managing renewal costs across a large portfolio…"></textarea>
+                <label>Their biggest challenges</label>
+                <textarea class="fi fta" id="aud-pain" rows="2" placeholder="e.g. Finding undervalued domains, estimating SEO worth, managing renewal costs across a large portfolio…"></textarea>
               </div>
               <div class="fl">
-                <label>What motivates them to act?</label>
+                <label>What drives them to take action?</label>
                 <input class="fi" id="aud-motive" placeholder="e.g. ROI potential, scarcity signals, expert validation, trend alignment"/>
-              </div>
-              <div style="background:var(--brand-lt);border:1px solid var(--brand-bd);border-radius:var(--r);padding:8px 11px;font-size:11px;color:var(--brand-dk);">
-                💡 The more specific your DNA, the more your posts will resonate. Editable anytime from this tab.
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ── Brand Voice ── -->
+      <!-- ── SERVICE 2: Brand Voice ── -->
       <div class="accel-card" id="acc-card-voice">
         <div class="accel-card-hd">
           <div>
             <div class="accel-card-title">🗣️ Brand Voice</div>
-            <div class="accel-card-sub">Control how your content sounds. Preset voices are free; custom voice costs $1/mo.</div>
+            <div class="accel-card-sub">How your content sounds. Controls tone, sentence style, and how ideas are framed to readers.</div>
           </div>
-          <div class="accel-card-tag" id="acc-voice-tag">Preset — Free</div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div class="accel-card-tag" id="acc-voice-tag">Default — Free</div>
+            <div style="font-size:10px;color:var(--ink4);margin-top:3px;">Custom build: $1/mo</div>
+          </div>
         </div>
 
+        <!-- Current default voice preview -->
         <div class="accel-section">
           <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
-            Voice presets <span class="accel-free-badge">Free</span>
+            Current default voice <span class="accel-from-badge">Auto-applied</span>
+          </div>
+          <div class="agp-box" id="voice-gen-profile">
+            <div class="agp-label">📚 Authoritative & Professional (default)</div>
+            <div class="agp-text">Expert-led, factual, and data-backed. Content positions the site as a trusted authority. Sentences are clear and direct, every claim is supported, and readers are guided to a logical conclusion with a confident call-to-action.</div>
+            <div class="agp-tags">
+              <span class="agp-tag">Expert-led</span>
+              <span class="agp-tag">Data-backed</span>
+              <span class="agp-tag">Clear</span>
+              <span class="agp-tag">Trustworthy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Voice presets -->
+        <div class="accel-section">
+          <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
+            Switch to a different voice <span class="accel-free-badge">Free</span>
           </div>
           <div class="voice-presets" id="voice-presets">
-            <div class="vpre on" onclick="selVoicePreset(this,'authoritative')">
-              <div class="vpre-name">📚 Authoritative</div>
-              <div class="vpre-sub">Expert, factual, data-backed. Builds trust fast.</div>
-              <div class="vpre-eg">"Research shows that domains with active content receive…"</div>
-            </div>
             <div class="vpre" onclick="selVoicePreset(this,'friendly')">
               <div class="vpre-name">😊 Friendly & Conversational</div>
               <div class="vpre-sub">Warm, approachable, jargon-free.</div>
@@ -142,21 +177,29 @@
             <div class="vpre" onclick="selVoicePreset(this,'technical')">
               <div class="vpre-name">⚙️ Technical</div>
               <div class="vpre-sub">Precise, in-depth, detail-oriented.</div>
-              <div class="vpre-eg">"A CNAME record with a 300s TTL minimises propagation…"</div>
+              <div class="vpre-eg">"A CNAME with 300s TTL reduces propagation delays significantly."</div>
+            </div>
+            <div class="vpre" onclick="selVoicePreset(this,'educational')">
+              <div class="vpre-name">🎓 Educational</div>
+              <div class="vpre-sub">Step-by-step, clear explanations.</div>
+              <div class="vpre-eg">"Let's break down exactly how domain authority works."</div>
             </div>
           </div>
         </div>
 
+        <!-- Custom voice builder -->
         <div class="accel-section">
-          <div class="accel-sec-lbl" style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="display:flex;align-items:center;gap:7px;">Build Custom Voice <span class="accel-paid-badge">$1/mo per domain</span></span>
-            <button class="accel-toggle-btn" id="voice-custom-toggle" onclick="toggleVoiceCustom()">+ Build Custom</button>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;">
+              Build fully custom <span class="accel-paid-badge">$1/mo</span>
+            </div>
+            <button class="accel-toggle-btn" id="voice-custom-toggle" onclick="toggleVoiceCustom()">+ Customize</button>
           </div>
-          <div class="accel-custom-panel" id="voice-custom-panel" style="display:none;">
+          <div class="accel-custom-panel" id="voice-custom-panel" style="display:none;margin-top:10px;">
             <div class="accel-custom-in">
               <div class="fl">
                 <label>Describe your brand voice in 2–3 sentences</label>
-                <textarea class="fi fta" id="voice-desc" placeholder="e.g. We're the calm expert in the room. We explain complex domain topics simply, back every claim with data, and always leave readers with one clear next step."></textarea>
+                <textarea class="fi fta" id="voice-desc" rows="2" placeholder="e.g. We're the calm expert in the room. We explain complex topics simply, back claims with data, and always leave readers with one clear next step."></textarea>
               </div>
               <div class="fl">
                 <label>Words that define your voice</label>
@@ -171,99 +214,30 @@
         </div>
       </div>
 
-      <!-- ── Content Cadence ── -->
-      <div class="accel-card" id="acc-card-cad">
-        <div class="accel-card-hd">
-          <div>
-            <div class="accel-card-title">📅 Content Cadence</div>
-            <div class="accel-card-sub">How often we publish to your domain. Monthly is always free.</div>
-          </div>
-          <div class="accel-card-tag" id="acc-cad-tag">1×/month — Free</div>
-        </div>
-
-        <div class="cad-opts" id="cad-opts">
-          <div class="cad-opt on" onclick="selCadence(this,'monthly',0)">
-            <div class="cad-opt-hd">
-              <div>
-                <div class="cad-name">Monthly</div>
-                <div class="cad-detail">1 post per month · published on your chosen day</div>
-              </div>
-              <div class="cad-price-tag cad-free">Free</div>
-            </div>
-            <div class="cad-note">✓ Included with every active domain. No purchase required.</div>
-          </div>
-          <div class="cad-opt" onclick="selCadence(this,'biweekly',5)">
-            <div class="cad-opt-hd">
-              <div>
-                <div class="cad-name">Bi-weekly</div>
-                <div class="cad-detail">2 posts per month · every 2 weeks</div>
-              </div>
-              <div class="cad-price-tag cad-paid">$5<span style="font-size:10px;font-weight:600;">/mo</span></div>
-            </div>
-            <div class="cad-note">Good middle ground — doubles your content signals without a big commitment.</div>
-          </div>
-          <div class="cad-opt" onclick="selCadence(this,'weekly',9)">
-            <div class="cad-opt-hd">
-              <div>
-                <div class="cad-name">Weekly <span class="cad-rec-badge">⭐ Most Impact</span></div>
-                <div class="cad-detail">4 posts per month · same day each week</div>
-              </div>
-              <div class="cad-price-tag cad-paid">$9<span style="font-size:10px;font-weight:600;">/mo</span></div>
-            </div>
-            <div class="cad-note">Weekly cadence builds domain authority 3× faster than monthly (HubSpot, 2023).</div>
-          </div>
-        </div>
-
-        <!-- Boost packs -->
-        <div class="accel-section">
-          <div class="accel-sec-lbl">⚡ Boost Packs <span style="font-size:10px;font-weight:500;color:var(--ink4);">— one-time burst, no subscription</span></div>
-          <div class="boost-grid-ac" id="boost-grid-ac">
-            <div class="bst-ac" onclick="selBoostAc(this,15,'Quick Burst',10)">
-              <div class="bst-ac-top"><div class="bst-ac-nm">⚡ Quick Burst</div><div class="bst-ac-pr">$15</div></div>
-              <div class="bst-ac-meta">10 posts over 2 weeks</div>
-            </div>
-            <div class="bst-ac" onclick="selBoostAc(this,29,'Content Sprint',25)">
-              <div class="bst-ac-top"><div class="bst-ac-nm">🚀 Content Sprint</div><div class="bst-ac-pr">$29</div></div>
-              <div class="bst-ac-meta">25 posts over 3–4 weeks</div>
-            </div>
-            <div class="bst-ac" onclick="selBoostAc(this,49,'Authority Blitz',50)">
-              <div class="bst-ac-top"><div class="bst-ac-nm">🔥 Authority Blitz</div><div class="bst-ac-pr">$49</div></div>
-              <div class="bst-ac-meta">50 posts · topical cluster</div>
-            </div>
-            <div class="bst-ac" onclick="selBoostAc(this,79,'Launch Kit',100)">
-              <div class="bst-ac-top"><div class="bst-ac-nm">🏆 Launch Kit</div><div class="bst-ac-pr">$79</div></div>
-              <div class="bst-ac-meta">100 posts · full authority</div>
-            </div>
-          </div>
-          <div style="font-size:10.5px;color:var(--ink4);margin-top:7px;">💡 Surfer SEO charges $29/article. Authority Blitz = 50 posts for the same price — 98% cheaper per post. Click again to deselect.</div>
-        </div>
-      </div>
-
     </div>
 
     <!-- RIGHT: Order summary -->
     <div class="accel-aside">
-      <div class="accel-aside-hd">Your Order</div>
-      <div class="accel-aside-dom">For: <strong id="acc-aside-dom">stackcopilot.ai</strong></div>
+      <div class="accel-aside-hd">Your Selection</div>
+      <div class="accel-aside-dom">Domain: <strong id="acc-aside-dom">stackcopilot.ai</strong></div>
 
       <div class="accel-order">
-        <div class="accel-ol"><span class="accel-ok">Base: 1 blog/month</span><span class="accel-ov-free">Free</span></div>
-        <div class="accel-ol" id="accel-ol-aud" style="display:none;"><span class="accel-ok" id="accel-ok-aud">Custom Audience DNA</span><span class="accel-ov-paid">$1/mo</span></div>
-        <div class="accel-ol" id="accel-ol-voice" style="display:none;"><span class="accel-ok" id="accel-ok-voice">Custom Voice</span><span class="accel-ov-paid">$1/mo</span></div>
-        <div class="accel-ol" id="accel-ol-cad" style="display:none;"><span class="accel-ok" id="accel-ok-cad">Weekly cadence</span><span class="accel-ov-paid" id="accel-ov-cad">$9/mo</span></div>
-        <div class="accel-ol" id="accel-ol-boost" style="display:none;"><span class="accel-ok" id="accel-ok-boost">Content Sprint</span><span class="accel-ov-paid" id="accel-ov-boost">$29</span></div>
+        <div class="accel-ol"><span class="accel-ok">1 blog/month (base)</span><span class="accel-ov-free">Free</span></div>
+        <div class="accel-ol"><span class="accel-ok">Default audience</span><span class="accel-ov-free">Free</span></div>
+        <div class="accel-ol"><span class="accel-ok">Default voice</span><span class="accel-ov-free">Free</span></div>
+        <div class="accel-ol" id="accel-ol-aud" style="display:none;"><span class="accel-ok">Custom Audience DNA</span><span class="accel-ov-paid">+$1/mo</span></div>
+        <div class="accel-ol" id="accel-ol-voice" style="display:none;"><span class="accel-ok">Custom Brand Voice</span><span class="accel-ov-paid">+$1/mo</span></div>
         <div class="accel-sep"></div>
         <div class="accel-total-row">
-          <span>Monthly total</span>
-          <span class="accel-total is-free" id="accel-total">Free</span>
+          <span>Monthly add-ons</span>
+          <span class="accel-total is-free" id="accel-total">$0</span>
         </div>
-        <div style="font-size:10px;color:var(--ink4);text-align:right;margin-top:2px;" id="accel-boost-line" style="display:none;"></div>
       </div>
 
       <button class="accel-save-btn" id="accel-save-btn" onclick="saveAcceleration()">Save Configuration</button>
-      <div style="font-size:10px;color:var(--ink4);text-align:center;margin-top:5px;line-height:1.5;">Per-domain · Cancel anytime · Prorated billing</div>
+      <div style="font-size:10px;color:var(--ink4);text-align:center;margin-top:5px;line-height:1.5;">Per domain · Cancel anytime · Applied from next post</div>
 
-      <!-- What's free reminder -->
+      <!-- What's always free -->
       <div class="accel-free-remind">
         <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:6px;">✅ Always Free</div>
         <div class="accel-free-item">📝 1 blog/month</div>
@@ -273,6 +247,5 @@
         <div class="accel-free-item">🌐 Live site + DNS</div>
       </div>
     </div>
-
   </div>
 </div>

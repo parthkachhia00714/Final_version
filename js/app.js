@@ -338,27 +338,25 @@ function checkDNS() {
 
 /* ── 9. ACCELERATION PAGE ── */
 let accAudCustom = false, accVoiceCustom = false;
-let accCadencePrice = 0, accBoostPrice = 0, accBoostLabel = '';
 
 function selAccelDom(el, domain, status) {
   document.querySelectorAll('#accel-dom-tabs .adom:not(.adom-draft)').forEach(d => d.classList.remove('on'));
   el.classList.add('on');
-  const nameEl = document.getElementById('accel-dom-name');
-  const asideEl = document.getElementById('acc-aside-dom');
-  if (nameEl) nameEl.textContent = domain;
-  if (asideEl) asideEl.textContent = domain;
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('accel-dom-name', domain);
+  set('acc-aside-dom', domain);
   const badge = document.getElementById('accel-state-badge');
   const cur = document.getElementById('accel-state-cur');
   if (status === 'accelerating') {
-    if (badge) { badge.textContent = '⚡ Accelerating'; badge.style.background='var(--brand-lt)'; badge.style.color='var(--brand)'; badge.style.borderColor='var(--brand-bd)'; }
-    if (cur) cur.textContent = 'Currently: Custom audience · Custom voice · Weekly cadence';
+    if (badge) { badge.textContent = '⚡ Accelerating'; badge.style.cssText = 'background:var(--brand-lt);color:var(--brand);border-color:var(--brand-bd);'; }
+    if (cur) cur.textContent = 'Custom audience & voice active · 1 blog/month';
   } else {
-    if (badge) { badge.textContent = 'Base Plan — Free'; badge.style.background=''; badge.style.color=''; badge.style.borderColor=''; }
-    if (cur) cur.textContent = 'Currently: Default audience · Default voice · 1 post/month';
+    if (badge) { badge.textContent = 'Base Plan — Free'; badge.style.cssText = ''; }
+    if (cur) cur.textContent = 'Base plan · 1 blog/month · default audience & voice';
   }
 }
 
-function selAudPreset(el, type) {
+function selAudPreset(el) {
   document.querySelectorAll('#aud-presets .apre').forEach(a => a.classList.remove('on'));
   el.classList.add('on');
 }
@@ -369,12 +367,12 @@ function toggleAudCustom() {
   const btn = document.getElementById('aud-custom-toggle');
   const tag = document.getElementById('acc-aud-tag');
   if (panel) panel.style.display = accAudCustom ? 'block' : 'none';
-  if (btn) btn.textContent = accAudCustom ? '− Remove Custom' : '+ Add Custom DNA';
-  if (tag) { tag.textContent = accAudCustom ? 'Custom DNA — $1/mo' : 'Preset — Free'; tag.className = 'accel-card-tag' + (accAudCustom ? ' paid' : ''); }
-  updateAccelOrder();
+  if (btn) btn.textContent = accAudCustom ? '− Remove Custom' : '+ Customize';
+  if (tag) { tag.textContent = accAudCustom ? 'Custom DNA — $1/mo' : 'Default — Free'; tag.className = 'accel-card-tag' + (accAudCustom ? ' paid' : ''); }
+  _updateAccelOrder();
 }
 
-function selVoicePreset(el, type) {
+function selVoicePreset(el) {
   document.querySelectorAll('#voice-presets .vpre').forEach(v => v.classList.remove('on'));
   el.classList.add('on');
 }
@@ -385,90 +383,27 @@ function toggleVoiceCustom() {
   const btn = document.getElementById('voice-custom-toggle');
   const tag = document.getElementById('acc-voice-tag');
   if (panel) panel.style.display = accVoiceCustom ? 'block' : 'none';
-  if (btn) btn.textContent = accVoiceCustom ? '− Remove Custom' : '+ Build Custom';
-  if (tag) { tag.textContent = accVoiceCustom ? 'Custom Voice — $1/mo' : 'Preset — Free'; tag.className = 'accel-card-tag' + (accVoiceCustom ? ' paid' : ''); }
-  updateAccelOrder();
+  if (btn) btn.textContent = accVoiceCustom ? '− Remove Custom' : '+ Customize';
+  if (tag) { tag.textContent = accVoiceCustom ? 'Custom Voice — $1/mo' : 'Default — Free'; tag.className = 'accel-card-tag' + (accVoiceCustom ? ' paid' : ''); }
+  _updateAccelOrder();
 }
 
-function selCadence(el, type, price) {
-  document.querySelectorAll('#cad-opts .cad-opt').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  accCadencePrice = price;
-  const tag = document.getElementById('acc-cad-tag');
-  if (tag) {
-    const labels = { monthly: '1×/month — Free', biweekly: 'Bi-weekly — $5/mo', weekly: 'Weekly — $9/mo' };
-    tag.textContent = labels[type] || '1×/month — Free';
-    tag.className = 'accel-card-tag' + (price > 0 ? ' paid' : '');
-  }
-  updateAccelOrder();
-}
-
-function selBoostAc(el, price, label, posts) {
-  if (el.classList.contains('on')) {
-    el.classList.remove('on'); accBoostPrice = 0; accBoostLabel = '';
-  } else {
-    document.querySelectorAll('#boost-grid-ac .bst-ac').forEach(b => b.classList.remove('on'));
-    el.classList.add('on');
-    accBoostPrice = price; accBoostLabel = label;
-  }
-  updateAccelOrder();
-}
-
-function updateAccelOrder() {
-  const show = (id, visible) => { const e = document.getElementById(id); if (e) e.style.display = visible ? 'flex' : 'none'; };
+function _updateAccelOrder() {
+  const show = (id, v) => { const e = document.getElementById(id); if (e) e.style.display = v ? 'flex' : 'none'; };
   show('accel-ol-aud', accAudCustom);
   show('accel-ol-voice', accVoiceCustom);
 
-  const cadRow = document.getElementById('accel-ol-cad');
-  if (cadRow) {
-    cadRow.style.display = accCadencePrice > 0 ? 'flex' : 'none';
-    const lbl = document.getElementById('accel-ok-cad');
-    const val = document.getElementById('accel-ov-cad');
-    if (lbl) lbl.textContent = accCadencePrice === 9 ? 'Weekly cadence' : 'Bi-weekly cadence';
-    if (val) val.textContent = '$' + accCadencePrice + '/mo';
-  }
-
-  const boostRow = document.getElementById('accel-ol-boost');
-  if (boostRow) {
-    boostRow.style.display = accBoostPrice > 0 ? 'flex' : 'none';
-    const lbl = document.getElementById('accel-ok-boost');
-    const val = document.getElementById('accel-ov-boost');
-    if (lbl) lbl.textContent = accBoostLabel + ' boost';
-    if (val) val.textContent = '$' + accBoostPrice;
-  }
-
-  const monthly = (accAudCustom ? 1 : 0) + (accVoiceCustom ? 1 : 0) + accCadencePrice;
-  const totalEl = document.getElementById('accel-total');
-  if (totalEl) {
-    totalEl.textContent = monthly > 0 ? '$' + monthly + '/mo' : 'Free';
-    totalEl.className = 'accel-total' + (monthly === 0 ? ' is-free' : '');
-  }
-
-  const boostLine = document.getElementById('accel-boost-line');
-  if (boostLine) {
-    boostLine.style.display = accBoostPrice > 0 ? 'block' : 'none';
-    boostLine.textContent = '+ $' + accBoostPrice + ' one-time today';
-  }
+  const total = (accAudCustom ? 1 : 0) + (accVoiceCustom ? 1 : 0);
+  const el = document.getElementById('accel-total');
+  if (el) { el.textContent = total > 0 ? '$' + total + '/mo' : '$0'; el.className = 'accel-total' + (total === 0 ? ' is-free' : ''); }
 
   const btn = document.getElementById('accel-save-btn');
-  if (btn) {
-    if (monthly === 0 && accBoostPrice === 0) {
-      btn.textContent = 'Save Preset Selection'; btn.style.background = 'var(--brand)';
-    } else if (monthly > 0 && accBoostPrice > 0) {
-      btn.textContent = '💳 Activate — $' + monthly + '/mo + $' + accBoostPrice + ' today';
-    } else if (monthly > 0) {
-      btn.textContent = '💳 Activate — $' + monthly + '/mo';
-    } else {
-      btn.textContent = '💳 Add Boost — $' + accBoostPrice + ' today';
-    }
-  }
+  if (btn) btn.textContent = total > 0 ? '💳 Activate — $' + total + '/mo' : 'Save Preset Selection';
 }
 
 function saveAcceleration() {
   const btn = document.getElementById('accel-save-btn');
-  const origText = btn.textContent;
-  const origBg = btn.style.background;
-  btn.textContent = '✓ Saved!';
-  btn.style.background = 'var(--green)';
-  setTimeout(() => { btn.textContent = origText; btn.style.background = origBg || 'var(--brand)'; }, 2000);
+  const orig = btn.textContent;
+  btn.textContent = '✓ Saved!'; btn.style.background = 'var(--green)';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
 }
