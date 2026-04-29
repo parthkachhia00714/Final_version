@@ -292,18 +292,41 @@ function finishActAndAccel() {
 
 function openAccelForDomain(dom) {
   V('acceleration');
-  const tabs = document.querySelectorAll('#accel-dom-tabs .adom:not(.adom-draft)');
-  // try to find matching tab, otherwise select first
-  let matched = false;
-  tabs.forEach(t => {
-    if (t.textContent.includes(dom)) { t.classList.add('on'); matched = true; }
-    else t.classList.remove('on');
-  });
-  if (!matched && tabs.length) tabs[0].classList.add('on');
-  const nameEl = document.getElementById('accel-dom-name');
-  const asideEl = document.getElementById('acc-aside-dom');
-  if (nameEl) nameEl.textContent = dom;
-  if (asideEl) asideEl.textContent = dom;
+  setTimeout(() => {
+    // reset custom states
+    accAudCustom = false; accVoiceCustom = false;
+    const audPanel = document.getElementById('aud-custom-panel');
+    const audBtn = document.getElementById('aud-custom-toggle');
+    const audTag = document.getElementById('acc-aud-tag');
+    const voicePanel = document.getElementById('voice-custom-panel');
+    const voiceBtn = document.getElementById('voice-custom-toggle');
+    const voiceTag = document.getElementById('acc-voice-tag');
+    if (audPanel) audPanel.style.display = 'none';
+    if (audBtn) audBtn.textContent = '+ Build Custom Audience — $15/mo';
+    if (audTag) { audTag.textContent = 'Default — Free'; audTag.className = 'accel-card-tag'; }
+    if (voicePanel) voicePanel.style.display = 'none';
+    if (voiceBtn) voiceBtn.textContent = '+ Build Custom Voice — $10/mo';
+    if (voiceTag) { voiceTag.textContent = 'Default — Free'; voiceTag.className = 'accel-card-tag'; }
+    document.querySelectorAll('#aud-presets .apre, #voice-presets .vpre').forEach(p => p.classList.remove('on'));
+    _updateAccelOrder();
+
+    // find or create matching tab
+    const tabsContainer = document.getElementById('accel-dom-tabs');
+    if (!tabsContainer) return;
+    let matchedTab = null;
+    tabsContainer.querySelectorAll('.adom:not(.adom-draft)').forEach(t => {
+      if (t.textContent.includes(dom)) matchedTab = t;
+    });
+    if (!matchedTab && tabsContainer) {
+      const newTab = document.createElement('div');
+      newTab.className = 'adom';
+      newTab.innerHTML = `🔥 ${dom} <span class="sp sp-a" style="font-size:9px;padding:1px 6px;">Active</span>`;
+      newTab.onclick = () => selAccelDom(newTab, dom, 'active');
+      tabsContainer.insertBefore(newTab, tabsContainer.firstChild);
+      matchedTab = newTab;
+    }
+    if (matchedTab) selAccelDom(matchedTab, dom, 'active');
+  }, 180);
 }
 
 function _addDomToTable(dom) {
@@ -367,8 +390,8 @@ function toggleAudCustom() {
   const btn = document.getElementById('aud-custom-toggle');
   const tag = document.getElementById('acc-aud-tag');
   if (panel) panel.style.display = accAudCustom ? 'block' : 'none';
-  if (btn) btn.textContent = accAudCustom ? '− Remove Custom' : '+ Customize';
-  if (tag) { tag.textContent = accAudCustom ? 'Custom DNA — $1/mo' : 'Default — Free'; tag.className = 'accel-card-tag' + (accAudCustom ? ' paid' : ''); }
+  if (btn) btn.textContent = accAudCustom ? '− Remove Custom Audience' : '+ Build Custom Audience — $15/mo';
+  if (tag) { tag.textContent = accAudCustom ? 'Custom DNA — $15/mo' : 'Default — Free'; tag.className = 'accel-card-tag' + (accAudCustom ? ' paid' : ''); }
   _updateAccelOrder();
 }
 
@@ -383,8 +406,8 @@ function toggleVoiceCustom() {
   const btn = document.getElementById('voice-custom-toggle');
   const tag = document.getElementById('acc-voice-tag');
   if (panel) panel.style.display = accVoiceCustom ? 'block' : 'none';
-  if (btn) btn.textContent = accVoiceCustom ? '− Remove Custom' : '+ Customize';
-  if (tag) { tag.textContent = accVoiceCustom ? 'Custom Voice — $1/mo' : 'Default — Free'; tag.className = 'accel-card-tag' + (accVoiceCustom ? ' paid' : ''); }
+  if (btn) btn.textContent = accVoiceCustom ? '− Remove Custom Voice' : '+ Build Custom Voice — $10/mo';
+  if (tag) { tag.textContent = accVoiceCustom ? 'Custom Voice — $10/mo' : 'Default — Free'; tag.className = 'accel-card-tag' + (accVoiceCustom ? ' paid' : ''); }
   _updateAccelOrder();
 }
 
@@ -393,7 +416,7 @@ function _updateAccelOrder() {
   show('accel-ol-aud', accAudCustom);
   show('accel-ol-voice', accVoiceCustom);
 
-  const total = (accAudCustom ? 1 : 0) + (accVoiceCustom ? 1 : 0);
+  const total = (accAudCustom ? 15 : 0) + (accVoiceCustom ? 10 : 0);
   const el = document.getElementById('accel-total');
   if (el) { el.textContent = total > 0 ? '$' + total + '/mo' : '$0'; el.className = 'accel-total' + (total === 0 ? ' is-free' : ''); }
 

@@ -2,11 +2,13 @@
 
   <!-- Page header -->
   <div class="accel-hd">
-    <div class="accel-hd-t">⚡ Acceleration</div>
-    <div class="accel-hd-s">Two premium add-ons per domain — personalize who reads your content and how it sounds. Presets are always free.</div>
+    <div>
+      <div class="accel-hd-t">⚡ Acceleration</div>
+      <div class="accel-hd-s">Premium personalization per domain — two add-ons, three tiers each. Presets are always free. Custom builds are $15/mo.</div>
+    </div>
   </div>
 
-  <!-- Domain selector -->
+  <!-- Domain tabs -->
   <div class="accel-domains" id="accel-dom-tabs">
     <div class="adom on" onclick="selAccelDom(this,'stackcopilot.ai','active')">
       🔥 stackcopilot.ai
@@ -16,11 +18,11 @@
       🔥 namecrates.com
       <span class="sp sp-ac" style="font-size:9px;padding:1px 6px;">⚡ Accel.</span>
     </div>
-    <div class="adom adom-draft" title="Activate this domain first">
+    <div class="adom adom-draft">
       📄 helperdroids.co
       <span style="font-size:9px;color:var(--ink4);">Activate first</span>
     </div>
-    <div class="adom adom-draft" title="Activate this domain first">
+    <div class="adom adom-draft">
       📄 forget.org
       <span style="font-size:9px;color:var(--ink4);">Activate first</span>
     </div>
@@ -30,7 +32,7 @@
   <div class="accel-state">
     <div>
       <div class="accel-state-dom" id="accel-dom-name">stackcopilot.ai</div>
-      <div class="accel-state-cur" id="accel-state-cur">Base plan · 1 blog/month · default audience & voice</div>
+      <div class="accel-state-cur" id="accel-state-cur">Base plan · 1 blog/month · default audience &amp; voice applied</div>
     </div>
     <span class="accel-badge-free" id="accel-state-badge">Base Plan — Free</span>
   </div>
@@ -38,176 +40,201 @@
   <div class="accel-body">
     <div class="accel-main">
 
-      <!-- ── SERVICE 1: Audience DNA ── -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- SERVICE 1 — AUDIENCE DNA                       -->
+      <!-- ═══════════════════════════════════════════════ -->
       <div class="accel-card" id="acc-card-aud">
         <div class="accel-card-hd">
           <div>
             <div class="accel-card-title">🎯 Audience DNA</div>
-            <div class="accel-card-sub">Who your content speaks to. Shapes every post's angle, depth, and call-to-action.</div>
+            <div class="accel-card-sub">Who your content speaks to — shapes every post's angle, depth, and call-to-action.</div>
           </div>
-          <div style="text-align:right;flex-shrink:0;">
-            <div class="accel-card-tag" id="acc-aud-tag">Default — Free</div>
-            <div style="font-size:10px;color:var(--ink4);margin-top:3px;">Custom build: $1/mo</div>
-          </div>
+          <div class="accel-card-tag" id="acc-aud-tag">Default — Free</div>
         </div>
 
-        <!-- Auto-generated profile from activation -->
-        <div class="accel-section">
-          <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
-            Auto-generated profile <span class="accel-from-badge">From your activation</span>
+        <!-- TIER 1: Current Setup (auto-generated, free) -->
+        <div class="accel-tier">
+          <div class="accel-tier-sep">
+            <span class="accel-tier-lbl">Current Setup</span>
+            <div class="accel-tier-line"></div>
+            <span class="accel-tier-badge atb-free">✓ Applied · Free</span>
           </div>
-          <div class="agp-box" id="aud-gen-profile">
-            <div class="agp-label">🤖 Generated from your site content</div>
-            <div class="agp-text" id="agp-aud-text">Domain investors and tech-aware buyers aged 25–55. Focused on ROI, portfolio strategy, and identifying undervalued domains with SEO potential. They compare registrar options, monitor market trends, and respond strongly to data-backed insights and expert opinions.</div>
-            <div class="agp-tags">
-              <span class="agp-tag">Investor mindset</span>
-              <span class="agp-tag">Data-driven</span>
-              <span class="agp-tag">Portfolio focus</span>
-              <span class="agp-tag">Tech-aware</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Preset profiles -->
-        <div class="accel-section">
-          <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
-            Switch to a preset <span class="accel-free-badge">Free</span>
-          </div>
-          <div class="aud-presets" id="aud-presets">
-            <div class="apre" onclick="selAudPreset(this,'investors')">
-              <div class="apre-name">💼 Domain Investors</div>
-              <div class="apre-sub">ROI-focused, portfolio mindset, technical</div>
-            </div>
-            <div class="apre" onclick="selAudPreset(this,'business')">
-              <div class="apre-name">🏢 Business Owners</div>
-              <div class="apre-sub">Decision makers, growth-oriented</div>
-            </div>
-            <div class="apre" onclick="selAudPreset(this,'tech')">
-              <div class="apre-name">💻 Tech Professionals</div>
-              <div class="apre-sub">Builders, developers, product people</div>
-            </div>
-            <div class="apre" onclick="selAudPreset(this,'local')">
-              <div class="apre-name">📍 Local Consumers</div>
-              <div class="apre-sub">Location-aware, community-driven</div>
-            </div>
-            <div class="apre" onclick="selAudPreset(this,'ecomm')">
-              <div class="apre-name">🛒 Online Shoppers</div>
-              <div class="apre-sub">Purchase intent, comparison-driven</div>
-            </div>
-            <div class="apre" onclick="selAudPreset(this,'general')">
-              <div class="apre-name">🌐 General Audience</div>
-              <div class="apre-sub">Broad appeal, accessible language</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Custom DNA builder -->
-        <div class="accel-section">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;">
-              Build fully custom <span class="accel-paid-badge">$1/mo</span>
-            </div>
-            <button class="accel-toggle-btn" id="aud-custom-toggle" onclick="toggleAudCustom()">+ Customize</button>
-          </div>
-          <div class="accel-custom-panel" id="aud-custom-panel" style="display:none;margin-top:10px;">
-            <div class="accel-custom-in">
-              <div class="fl">
-                <label>Who is your exact target audience?</label>
-                <input class="fi" id="aud-who" placeholder="e.g. Domain investors aged 30–55 with portfolios of 10+ domains"/>
+          <div class="accel-tier-body">
+            <div class="agp-box agp-active">
+              <div class="agp-label">🤖 Auto-generated from your activation content</div>
+              <div class="agp-text">Domain investors and tech-aware buyers aged 25–55. Focused on ROI, portfolio strategy, and identifying undervalued domains with SEO potential. They compare registrar options, monitor market trends, and respond strongly to data-backed insights and expert analysis.</div>
+              <div class="agp-tags">
+                <span class="agp-tag">Investor mindset</span>
+                <span class="agp-tag">Data-driven</span>
+                <span class="agp-tag">Portfolio focus</span>
+                <span class="agp-tag">Tech-aware</span>
+                <span class="agp-tag">ROI-oriented</span>
               </div>
-              <div class="fl">
-                <label>Their biggest challenges</label>
-                <textarea class="fi fta" id="aud-pain" rows="2" placeholder="e.g. Finding undervalued domains, estimating SEO worth, managing renewal costs across a large portfolio…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIER 2: Preset Library (free) -->
+        <div class="accel-tier">
+          <div class="accel-tier-sep">
+            <span class="accel-tier-lbl">Preset Library</span>
+            <div class="accel-tier-line"></div>
+            <span class="accel-tier-badge atb-free">Free · Switch anytime</span>
+          </div>
+          <div class="accel-tier-body">
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:9px;">Select a preset to replace your current audience profile. No charge.</div>
+            <div class="aud-presets" id="aud-presets">
+              <div class="apre" onclick="selAudPreset(this,'investors')">
+                <div class="apre-name">💼 Domain Investors</div>
+                <div class="apre-sub">ROI-focused, portfolio mindset, technical</div>
               </div>
-              <div class="fl">
-                <label>What drives them to take action?</label>
-                <input class="fi" id="aud-motive" placeholder="e.g. ROI potential, scarcity signals, expert validation, trend alignment"/>
+              <div class="apre" onclick="selAudPreset(this,'business')">
+                <div class="apre-name">🏢 Business Owners</div>
+                <div class="apre-sub">Decision makers, growth-oriented</div>
+              </div>
+              <div class="apre" onclick="selAudPreset(this,'tech')">
+                <div class="apre-name">💻 Tech Professionals</div>
+                <div class="apre-sub">Builders, developers, product people</div>
+              </div>
+              <div class="apre" onclick="selAudPreset(this,'local')">
+                <div class="apre-name">📍 Local Consumers</div>
+                <div class="apre-sub">Location-aware, community-driven</div>
+              </div>
+              <div class="apre" onclick="selAudPreset(this,'ecomm')">
+                <div class="apre-name">🛒 Online Shoppers</div>
+                <div class="apre-sub">Purchase intent, comparison-driven</div>
+              </div>
+              <div class="apre" onclick="selAudPreset(this,'general')">
+                <div class="apre-name">🌐 General Audience</div>
+                <div class="apre-sub">Broad appeal, accessible language</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIER 3: Custom Build (paid) -->
+        <div class="accel-tier">
+          <div class="accel-tier-sep">
+            <span class="accel-tier-lbl">Custom Build</span>
+            <div class="accel-tier-line"></div>
+            <span class="accel-tier-badge atb-paid">$15/mo per domain</span>
+          </div>
+          <div class="accel-tier-body">
+            <div style="font-size:11.5px;color:var(--ink2);margin-bottom:11px;line-height:1.6;">Build a fully custom audience profile unique to this domain. We use your answers to shape every post — tone, depth, examples, and CTAs are all tailored to who you define.</div>
+            <button class="accel-toggle-btn" id="aud-custom-toggle" onclick="toggleAudCustom()">+ Build Custom Audience — $15/mo</button>
+            <div class="accel-custom-panel" id="aud-custom-panel" style="display:none;margin-top:12px;">
+              <div class="accel-custom-in">
+                <div class="fl">
+                  <label>Who is your exact target audience?</label>
+                  <input class="fi" id="aud-who" placeholder="e.g. Domain investors aged 30–55 with portfolios of 10+ domains, focused on portfolio diversification"/>
+                </div>
+                <div class="fl">
+                  <label>Their biggest challenges</label>
+                  <textarea class="fi fta" id="aud-pain" rows="2" placeholder="e.g. Finding undervalued domains, estimating SEO worth, managing renewal costs, identifying which domains to develop vs. sell…"></textarea>
+                </div>
+                <div class="fl">
+                  <label>What drives them to take action?</label>
+                  <input class="fi" id="aud-motive" placeholder="e.g. ROI potential, scarcity signals, expert validation, market trend data, competitive pressure"/>
+                </div>
+                <div class="accel-custom-note">💳 $15/mo charged per domain. Applied from your next blog post. Cancel anytime from this tab.</div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ── SERVICE 2: Brand Voice ── -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- SERVICE 2 — BRAND VOICE                        -->
+      <!-- ═══════════════════════════════════════════════ -->
       <div class="accel-card" id="acc-card-voice">
         <div class="accel-card-hd">
           <div>
             <div class="accel-card-title">🗣️ Brand Voice</div>
-            <div class="accel-card-sub">How your content sounds. Controls tone, sentence style, and how ideas are framed to readers.</div>
+            <div class="accel-card-sub">How your content sounds — controls tone, sentence style, and how ideas are framed.</div>
           </div>
-          <div style="text-align:right;flex-shrink:0;">
-            <div class="accel-card-tag" id="acc-voice-tag">Default — Free</div>
-            <div style="font-size:10px;color:var(--ink4);margin-top:3px;">Custom build: $1/mo</div>
-          </div>
+          <div class="accel-card-tag" id="acc-voice-tag">Default — Free</div>
         </div>
 
-        <!-- Current default voice preview -->
-        <div class="accel-section">
-          <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
-            Current default voice <span class="accel-from-badge">Auto-applied</span>
+        <!-- TIER 1: Current default voice (free) -->
+        <div class="accel-tier">
+          <div class="accel-tier-sep">
+            <span class="accel-tier-lbl">Current Voice</span>
+            <div class="accel-tier-line"></div>
+            <span class="accel-tier-badge atb-free">✓ Applied · Free</span>
           </div>
-          <div class="agp-box" id="voice-gen-profile">
-            <div class="agp-label">📚 Authoritative & Professional (default)</div>
-            <div class="agp-text">Expert-led, factual, and data-backed. Content positions the site as a trusted authority. Sentences are clear and direct, every claim is supported, and readers are guided to a logical conclusion with a confident call-to-action.</div>
-            <div class="agp-tags">
-              <span class="agp-tag">Expert-led</span>
-              <span class="agp-tag">Data-backed</span>
-              <span class="agp-tag">Clear</span>
-              <span class="agp-tag">Trustworthy</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Voice presets -->
-        <div class="accel-section">
-          <div class="accel-sec-lbl" style="display:flex;align-items:center;gap:7px;">
-            Switch to a different voice <span class="accel-free-badge">Free</span>
-          </div>
-          <div class="voice-presets" id="voice-presets">
-            <div class="vpre" onclick="selVoicePreset(this,'friendly')">
-              <div class="vpre-name">😊 Friendly & Conversational</div>
-              <div class="vpre-sub">Warm, approachable, jargon-free.</div>
-              <div class="vpre-eg">"Ever wondered how your domain name affects your brand?"</div>
-            </div>
-            <div class="vpre" onclick="selVoicePreset(this,'bold')">
-              <div class="vpre-name">💥 Bold & Direct</div>
-              <div class="vpre-sub">Confident, punchy, zero fluff.</div>
-              <div class="vpre-eg">"Here's what most domain owners get completely wrong."</div>
-            </div>
-            <div class="vpre" onclick="selVoicePreset(this,'technical')">
-              <div class="vpre-name">⚙️ Technical</div>
-              <div class="vpre-sub">Precise, in-depth, detail-oriented.</div>
-              <div class="vpre-eg">"A CNAME with 300s TTL reduces propagation delays significantly."</div>
-            </div>
-            <div class="vpre" onclick="selVoicePreset(this,'educational')">
-              <div class="vpre-name">🎓 Educational</div>
-              <div class="vpre-sub">Step-by-step, clear explanations.</div>
-              <div class="vpre-eg">"Let's break down exactly how domain authority works."</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Custom voice builder -->
-        <div class="accel-section">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;">
-              Build fully custom <span class="accel-paid-badge">$1/mo</span>
-            </div>
-            <button class="accel-toggle-btn" id="voice-custom-toggle" onclick="toggleVoiceCustom()">+ Customize</button>
-          </div>
-          <div class="accel-custom-panel" id="voice-custom-panel" style="display:none;margin-top:10px;">
-            <div class="accel-custom-in">
-              <div class="fl">
-                <label>Describe your brand voice in 2–3 sentences</label>
-                <textarea class="fi fta" id="voice-desc" rows="2" placeholder="e.g. We're the calm expert in the room. We explain complex topics simply, back claims with data, and always leave readers with one clear next step."></textarea>
+          <div class="accel-tier-body">
+            <div class="agp-box agp-active">
+              <div class="agp-label">📚 Authoritative &amp; Professional (default)</div>
+              <div class="agp-text">Expert-led, factual, and data-backed. Content positions the site as a trusted authority. Sentences are clear and direct, every claim is supported with reasoning, and readers are guided to a logical conclusion with a confident call-to-action.</div>
+              <div class="agp-tags">
+                <span class="agp-tag">Expert-led</span>
+                <span class="agp-tag">Data-backed</span>
+                <span class="agp-tag">Clear &amp; direct</span>
+                <span class="agp-tag">Trustworthy</span>
               </div>
-              <div class="fl">
-                <label>Words that define your voice</label>
-                <input class="fi" id="voice-words" placeholder="e.g. Clear, Honest, Precise, Empowering, Grounded"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIER 2: Preset voices (free) -->
+        <div class="accel-tier">
+          <div class="accel-tier-sep">
+            <span class="accel-tier-lbl">Preset Voices</span>
+            <div class="accel-tier-line"></div>
+            <span class="accel-tier-badge atb-free">Free · Switch anytime</span>
+          </div>
+          <div class="accel-tier-body">
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:9px;">Switch to a different voice style. No charge — applied from your next post.</div>
+            <div class="voice-presets" id="voice-presets">
+              <div class="vpre" onclick="selVoicePreset(this,'friendly')">
+                <div class="vpre-name">😊 Friendly &amp; Conversational</div>
+                <div class="vpre-sub">Warm, approachable, jargon-free.</div>
+                <div class="vpre-eg">"Ever wondered how your domain name affects your brand?"</div>
               </div>
-              <div class="fl">
-                <label>Words and patterns to avoid</label>
-                <input class="fi" id="voice-avoid" placeholder="e.g. Jargon, hype words, passive voice, clickbait titles, excessive hedging"/>
+              <div class="vpre" onclick="selVoicePreset(this,'bold')">
+                <div class="vpre-name">💥 Bold &amp; Direct</div>
+                <div class="vpre-sub">Confident, punchy, zero fluff.</div>
+                <div class="vpre-eg">"Here's what most domain owners get completely wrong."</div>
+              </div>
+              <div class="vpre" onclick="selVoicePreset(this,'technical')">
+                <div class="vpre-name">⚙️ Technical</div>
+                <div class="vpre-sub">Precise, in-depth, detail-oriented.</div>
+                <div class="vpre-eg">"A CNAME with 300s TTL minimises propagation delays…"</div>
+              </div>
+              <div class="vpre" onclick="selVoicePreset(this,'educational')">
+                <div class="vpre-name">🎓 Educational</div>
+                <div class="vpre-sub">Step-by-step, clear explanations.</div>
+                <div class="vpre-eg">"Let's break down exactly how domain authority works."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIER 3: Custom voice (paid) -->
+        <div class="accel-tier">
+          <div class="accel-tier-sep">
+            <span class="accel-tier-lbl">Custom Voice</span>
+            <div class="accel-tier-line"></div>
+            <span class="accel-tier-badge atb-paid">$10/mo per domain</span>
+          </div>
+          <div class="accel-tier-body">
+            <div style="font-size:11.5px;color:var(--ink2);margin-bottom:11px;line-height:1.6;">Write your brand's voice in your own words. We'll apply it consistently across every post — sentence structure, vocabulary, examples, and pacing all match what you define.</div>
+            <button class="accel-toggle-btn" id="voice-custom-toggle" onclick="toggleVoiceCustom()">+ Build Custom Voice — $10/mo</button>
+            <div class="accel-custom-panel" id="voice-custom-panel" style="display:none;margin-top:12px;">
+              <div class="accel-custom-in">
+                <div class="fl">
+                  <label>Describe your brand voice in 2–3 sentences</label>
+                  <textarea class="fi fta" id="voice-desc" rows="2" placeholder="e.g. We're the calm expert in the room. We explain complex topics simply, back claims with data, and always leave readers with one clear next step."></textarea>
+                </div>
+                <div class="fl">
+                  <label>Words that define your voice</label>
+                  <input class="fi" id="voice-words" placeholder="e.g. Clear, Honest, Precise, Empowering, Grounded, Confident"/>
+                </div>
+                <div class="fl">
+                  <label>Patterns to always avoid</label>
+                  <input class="fi" id="voice-avoid" placeholder="e.g. Jargon, hype words, passive voice, excessive hedging, clickbait titles"/>
+                </div>
+                <div class="accel-custom-note">💳 $10/mo charged per domain. Applied from your next blog post. Cancel anytime from this tab.</div>
               </div>
             </div>
           </div>
@@ -218,15 +245,21 @@
 
     <!-- RIGHT: Order summary -->
     <div class="accel-aside">
-      <div class="accel-aside-hd">Your Selection</div>
+      <div class="accel-aside-hd">Order Summary</div>
       <div class="accel-aside-dom">Domain: <strong id="acc-aside-dom">stackcopilot.ai</strong></div>
 
       <div class="accel-order">
-        <div class="accel-ol"><span class="accel-ok">1 blog/month (base)</span><span class="accel-ov-free">Free</span></div>
-        <div class="accel-ol"><span class="accel-ok">Default audience</span><span class="accel-ov-free">Free</span></div>
-        <div class="accel-ol"><span class="accel-ok">Default voice</span><span class="accel-ov-free">Free</span></div>
-        <div class="accel-ol" id="accel-ol-aud" style="display:none;"><span class="accel-ok">Custom Audience DNA</span><span class="accel-ov-paid">+$1/mo</span></div>
-        <div class="accel-ol" id="accel-ol-voice" style="display:none;"><span class="accel-ok">Custom Brand Voice</span><span class="accel-ov-paid">+$1/mo</span></div>
+        <div class="accel-ol accel-ol-base"><span class="accel-ok">1 blog/month</span><span class="accel-ov-free">Free</span></div>
+        <div class="accel-ol accel-ol-base"><span class="accel-ok">Default audience</span><span class="accel-ov-free">Free</span></div>
+        <div class="accel-ol accel-ol-base"><span class="accel-ok">Default voice</span><span class="accel-ov-free">Free</span></div>
+        <div class="accel-ol" id="accel-ol-aud" style="display:none;">
+          <span class="accel-ok">Custom Audience DNA</span>
+          <span class="accel-ov-paid" id="accel-ov-aud">+$15/mo</span>
+        </div>
+        <div class="accel-ol" id="accel-ol-voice" style="display:none;">
+          <span class="accel-ok">Custom Brand Voice</span>
+          <span class="accel-ov-paid" id="accel-ov-voice">+$10/mo</span>
+        </div>
         <div class="accel-sep"></div>
         <div class="accel-total-row">
           <span>Monthly add-ons</span>
@@ -237,12 +270,22 @@
       <button class="accel-save-btn" id="accel-save-btn" onclick="saveAcceleration()">Save Configuration</button>
       <div style="font-size:10px;color:var(--ink4);text-align:center;margin-top:5px;line-height:1.5;">Per domain · Cancel anytime · Applied from next post</div>
 
-      <!-- What's always free -->
-      <div class="accel-free-remind">
+      <!-- Pricing reference -->
+      <div class="accel-price-ref">
+        <div style="font-size:10px;font-weight:700;color:var(--ink3);margin-bottom:7px;text-transform:uppercase;letter-spacing:.05em;">Pricing</div>
+        <div class="accel-price-row"><span>Auto-generated profile</span><span class="apr-free">Free</span></div>
+        <div class="accel-price-row"><span>Preset profiles</span><span class="apr-free">Free</span></div>
+        <div class="accel-price-row"><span>Custom Audience DNA</span><span class="apr-paid">$15/mo</span></div>
+        <div class="accel-price-row"><span>Custom Brand Voice</span><span class="apr-paid">$10/mo</span></div>
+        <div style="font-size:9.5px;color:var(--ink4);margin-top:7px;line-height:1.5;">Both custom — $25/mo per domain. Cancel anytime.</div>
+      </div>
+
+      <!-- Always free reminder -->
+      <div class="accel-free-remind" style="margin-top:10px;">
         <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:6px;">✅ Always Free</div>
         <div class="accel-free-item">📝 1 blog/month</div>
-        <div class="accel-free-item">🎯 Default audience</div>
-        <div class="accel-free-item">🗣️ Default voice</div>
+        <div class="accel-free-item">🎯 Auto-generated audience</div>
+        <div class="accel-free-item">🗣️ All preset voices</div>
         <div class="accel-free-item">❓ Auto-generated FAQs</div>
         <div class="accel-free-item">🌐 Live site + DNS</div>
       </div>

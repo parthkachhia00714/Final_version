@@ -742,3 +742,23 @@ input,textarea,select{font-family:inherit;outline:none;}
 .acc-svc-name{font-size:12px;font-weight:700;color:var(--ink);}
 .acc-svc-state{font-size:10px;color:var(--ink4);margin-top:1px;}
 .acc-svc-price{font-size:10px;font-weight:700;color:var(--ink3);white-space:nowrap;flex-shrink:0;}
+
+/* ── 18. ACCELERATION — THREE-TIER LAYOUT ── */
+.accel-tier{border-top:1px solid var(--border);}
+.accel-tier:first-of-type{border-top:none;}
+.accel-tier-sep{display:flex;align-items:center;gap:8px;padding:10px 16px 0;}
+.accel-tier-lbl{font-size:10px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;flex-shrink:0;}
+.accel-tier-line{flex:1;height:1px;background:var(--border);}
+.accel-tier-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.atb-free{background:var(--gbg);color:var(--green);border:1px solid var(--gbd);}
+.atb-paid{background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);}
+.accel-tier-body{padding:10px 16px 14px;}
+.agp-box.agp-active{border-color:var(--green);background:#F0FDF4;}
+.agp-box.agp-active .agp-label{color:var(--green);}
+.agp-box.agp-active .agp-tag{background:#fff;border-color:var(--gbd);color:#047857;}
+.accel-custom-note{font-size:10px;color:var(--ink4);margin-top:10px;padding:7px 10px;background:var(--s2);border-radius:var(--r);border:1px solid var(--border);line-height:1.5;}
+.accel-ol-base{opacity:.7;}
+.accel-price-ref{margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 11px;}
+.accel-price-row{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--ink2);padding:3px 0;}
+.apr-free{font-weight:700;color:var(--green);}
+.apr-paid{font-weight:700;color:var(--brand);}
