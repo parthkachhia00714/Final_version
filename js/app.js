@@ -184,10 +184,52 @@ function showUpgradeNudge(el) {
 
 /* ── 7. ACTIVATION MODAL ── */
 let mCur = 1;
+let mMethod = 'ai';
 
-function openModal() { document.getElementById('moverlay').classList.add('on'); mCur = 1; renderM(1); }
+function openModal() { document.getElementById('moverlay').classList.add('on'); mCur = 1; mMethod = 'ai'; renderM(1); }
 function closeModal() { document.getElementById('moverlay').classList.remove('on'); }
 function checkModalClose(e) { if (e.target === document.getElementById('moverlay')) closeModal(); }
+
+function selectMethod(type) {
+  mMethod = type;
+  document.getElementById('mc-ai').classList.toggle('on', type === 'ai');
+  document.getElementById('mc-man').classList.toggle('on', type === 'manual');
+  document.getElementById('ai-pnl').style.display = type === 'ai' ? 'block' : 'none';
+  document.getElementById('man-pnl').style.display = type === 'manual' ? 'block' : 'none';
+}
+
+function copyPrompt() {
+  const txt = document.getElementById('ai-prompt-txt');
+  navigator.clipboard.writeText(txt.value).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = orig; }, 1800);
+  });
+}
+
+function downloadPrompt() {
+  const txt = document.getElementById('ai-prompt-txt').value;
+  const dom = document.getElementById('dom-in').value || 'domain';
+  const blob = new Blob([txt], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = dom.replace(/\./g, '_') + '_content_prompt.txt';
+  a.click();
+}
+
+function toggleMktSig(el) {
+  const grid = document.getElementById('mkt-grid');
+  const selected = grid.querySelectorAll('.mkt-sig.on').length;
+  if (el.classList.contains('on')) {
+    el.classList.remove('on');
+    grid.querySelectorAll('.mkt-sig').forEach(s => s.classList.remove('maxed'));
+  } else {
+    if (selected >= 5) return;
+    el.classList.add('on');
+    if (selected + 1 >= 5) grid.querySelectorAll('.mkt-sig:not(.on)').forEach(s => s.classList.add('maxed'));
+  }
+}
 
 function renderM(n) {
   document.querySelectorAll('.ms').forEach((s, i) => s.classList.toggle('on', i + 1 === n));
@@ -212,7 +254,7 @@ function renderM(n) {
   note.textContent = n === 5 ? 'Jobs run in background — returns instantly' : 'No credit card required';
 
   const dom = document.getElementById('dom-in')?.value || 'your domain';
-  ['ms2-dom', 'ms4-dom'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = dom; });
+  ['ms2-dom', 'ms3-dom', 'ms5-dom'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = dom; });
 }
 
 function mNext() {
@@ -232,6 +274,8 @@ function runProc() {
         mCur = 7; renderM(7);
         const dom = document.getElementById('dom-in').value || 'mybusiness.com';
         document.getElementById('cf-dom').textContent = dom;
+        const dnaEl = document.getElementById('cf-dna');
+        if (dnaEl) dnaEl.textContent = mMethod === 'ai' ? 'AI-Assisted' : 'Q&A (Manual)';
       }, 500);
     }, t);
   });

@@ -501,7 +501,7 @@ input,textarea,select{font-family:inherit;outline:none;}
 .moverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;animation:mfade .22s ease;}
 .moverlay.on{display:flex;}
 @keyframes mfade{from{opacity:0;}to{opacity:1;}}
-.modal{background:var(--surface);border-radius:var(--rxl);width:100%;max-width:620px;max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shlg);animation:mrise .25s ease;}
+.modal{background:var(--surface);border-radius:var(--rxl);width:100%;max-width:720px;max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shlg);animation:mrise .25s ease;}
 @keyframes mrise{from{opacity:0;transform:scale(.96) translateY(12px);}to{opacity:1;transform:none;}}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--border);flex-shrink:0;}
 .modal-title{font-size:15px;font-weight:800;}
@@ -609,3 +609,38 @@ input,textarea,select{font-family:inherit;outline:none;}
 .chd{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;}
 .modal-ft{padding:12px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--surface);}
 .mft-note{font-size:11px;color:var(--ink4);}
+
+/* ── 14. CONTENT DNA STEP ── */
+.meth-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.meth-c{border:1.5px solid var(--border);border-radius:var(--rxl);padding:16px 14px 14px;cursor:pointer;transition:var(--T);position:relative;text-align:left;}
+.meth-c:hover{border-color:var(--brand-bd);background:var(--brand-lt);}
+.meth-c.on{border-color:var(--brand);background:var(--brand-lt);box-shadow:0 0 0 2px rgba(200,93,55,.10);}
+.meth-rec{position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);font-size:9px;font-weight:800;letter-spacing:.06em;background:var(--brand);color:#fff;padding:2px 9px;border-radius:20px;white-space:nowrap;}
+.meth-ic{font-size:22px;margin-bottom:6px;margin-top:6px;}
+.meth-name{font-size:13px;font-weight:800;margin-bottom:4px;color:var(--ink);}
+.meth-desc{font-size:11px;color:var(--ink3);line-height:1.55;}
+.ai-pnl{border:1.5px solid var(--brand-bd);border-radius:var(--rxl);overflow:hidden;margin-bottom:12px;background:var(--surface);}
+.ai-pnl-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;background:var(--brand-lt);border-bottom:1px solid var(--brand-bd);}
+.ai-pnl-title{font-size:11.5px;font-weight:700;color:var(--brand-dk);}
+.ai-pnl-txt{width:100%;border:none;padding:12px 14px;font-size:11px;line-height:1.7;color:var(--ink2);background:var(--surface);resize:none;min-height:150px;font-family:inherit;outline:none;box-sizing:border-box;}
+.ai-pnl-note{padding:7px 13px;background:var(--s2);font-size:10.5px;color:var(--ink4);border-top:1px solid var(--border);line-height:1.5;}
+.man-ai-tip{display:flex;align-items:center;justify-content:space-between;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:8px 12px;font-size:11.5px;color:var(--ink3);cursor:pointer;margin-bottom:12px;transition:var(--T);}
+.man-ai-tip:hover{background:var(--brand-lt);border-color:var(--brand-bd);}
+.man-ai-sw{font-size:11px;font-weight:700;color:var(--brand);}
+.qa-list{display:flex;flex-direction:column;gap:11px;}
+.qa-item{display:flex;gap:10px;align-items:flex-start;}
+.qa-num{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.qa-body{flex:1;}
+.qa-lbl{font-size:11.5px;font-weight:700;display:block;margin-bottom:5px;color:var(--ink);}
+.tone-opt{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);color:var(--ink3);cursor:pointer;transition:var(--T);display:inline-block;}
+.tone-opt:hover{border-color:var(--brand-bd);color:var(--brand);}
+.tone-opt.on{border-color:var(--brand);background:var(--brand-lt);color:var(--brand);}
+
+/* ── 15. BRAND & SCHEDULE STEP ── */
+.mkt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;margin-bottom:4px;}
+.mkt-sig{font-size:10.5px;font-weight:600;padding:6px 8px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface);color:var(--ink3);cursor:pointer;transition:var(--T);display:flex;align-items:center;gap:5px;line-height:1.3;}
+.mkt-sig:hover{border-color:var(--brand-bd);background:var(--brand-lt);}
+.mkt-sig.on{border-color:var(--brand);background:var(--brand-lt);color:var(--ink);}
+.mkt-sig.maxed:not(.on){opacity:.45;cursor:not-allowed;}
+.mkt-ck{font-size:9px;font-weight:900;color:var(--brand);opacity:0;transition:opacity .15s;}
+.mkt-sig.on .mkt-ck{opacity:1;}

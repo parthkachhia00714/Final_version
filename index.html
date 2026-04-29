@@ -92,13 +92,14 @@
     </div>
     <div class="mp-labels">
       <span class="mp-lbl active" id="ml-1">Domain</span>
-      <span class="mp-lbl"        id="ml-2">Theme</span>
-      <span class="mp-lbl"        id="ml-3">Site Type</span>
-      <span class="mp-lbl"        id="ml-4">DNS</span>
-      <span class="mp-lbl mp-lbl-last" id="ml-5">Blog</span>
+      <span class="mp-lbl"        id="ml-2">Content DNA</span>
+      <span class="mp-lbl"        id="ml-3">Brand</span>
+      <span class="mp-lbl"        id="ml-4">Site Type</span>
+      <span class="mp-lbl mp-lbl-last" id="ml-5">DNS</span>
     </div>
 
     <div class="modal-body">
+
       <!-- Step 1: Domain -->
       <div class="ms on" id="ms1">
         <div class="ms-ey">Step 1 of 5</div>
@@ -110,35 +111,176 @@
           <span class="fh">Without https:// or www — handled automatically.</span>
         </div>
         <div class="ins ins-brand">
-          <h5>💡 What activation includes</h5>
-          <p>Live site · Auto-generated FAQs · <strong>First 2 blog posts free</strong> · 1 blog/month ongoing. Premium acceleration (bundles) configured separately from Site Acceleration tab — no waiting during setup.</p>
+          <h5>💡 What's included</h5>
+          <p>Live site · Auto-generated FAQs · <strong>First 2 blog posts free</strong> · 1 blog/month ongoing. Premium bundles configured from Site Acceleration after activation — nothing to buy here.</p>
         </div>
       </div>
 
-      <!-- Step 2: Theme -->
+      <!-- Step 2: Content DNA -->
       <div class="ms" id="ms2">
         <div class="ms-ey">Step 2 of 5</div>
-        <div class="ms-h">Choose a Theme</div>
-        <div class="ms-sub">Visual design for <strong id="ms2-dom">your site</strong>.</div>
-        <div class="theme-g">
-          <div class="tc on" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#F8F9FA;">🌿</div><div class="tc-n">Minimal</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#EEF2FF;">💼</div><div class="tc-n">Professional</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#FFF7ED;">🔥</div><div class="tc-n">Bold</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#FDF4FF;">✨</div><div class="tc-n">Elegant</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#F0F9FF;">🚀</div><div class="tc-n">Tech</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#F0FDF4;">🌳</div><div class="tc-n">Nature</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#FEFCE8;">⭐</div><div class="tc-n">Luxury</div></div>
-          <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#1E293B;">🌙</div><div class="tc-n">Dark</div></div>
+        <div class="ms-h">Content DNA</div>
+        <div class="ms-sub">How should we approach content for <strong id="ms2-dom">your domain</strong>? This shapes every blog post we write.</div>
+
+        <div class="meth-cards">
+          <div class="meth-c on" id="mc-ai" onclick="selectMethod('ai')">
+            <div class="meth-rec">⭐ RECOMMENDED</div>
+            <div class="meth-ic">✨</div>
+            <div class="meth-name">AI-Assisted Setup</div>
+            <div class="meth-desc">We generate a ready-to-use content prompt. Copy it, paste into any AI writing tool, and return with the output — or let us handle it automatically with a premium bundle.</div>
+          </div>
+          <div class="meth-c" id="mc-man" onclick="selectMethod('manual')">
+            <div class="meth-ic">✍️</div>
+            <div class="meth-name">Answer Questions</div>
+            <div class="meth-desc">Answer 5 short questions about your site. We build your content DNA from your answers — no external tools needed.</div>
+          </div>
+        </div>
+
+        <!-- AI Prompt Panel (shown when AI selected) -->
+        <div class="ai-pnl" id="ai-pnl">
+          <div class="ai-pnl-hd">
+            <div class="ai-pnl-title">📋 Your Content Prompt</div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-s btn-xs" onclick="copyPrompt()">📋 Copy</button>
+              <button class="btn btn-s btn-xs" onclick="downloadPrompt()">⬇ Download</button>
+            </div>
+          </div>
+          <textarea class="ai-pnl-txt" id="ai-prompt-txt" readonly>You are a professional blog writer.
+
+Write an SEO-optimized blog post for a website at [domain].
+
+Context:
+- Site focus: [will be refined after step 4]
+- Primary audience: domain investors, buyers, and developers in this niche
+- Tone: authoritative, helpful, and clear
+
+Requirements:
+- Length: 800–1,200 words
+- Structure: compelling title, intro, 3–5 H2 sections, conclusion with CTA
+- Include one internal link placeholder and one clear call-to-action
+- Avoid keyword stuffing, passive voice, and generic filler
+
+Output: Markdown with front matter (title, description, tags)</textarea>
+          <div class="ai-pnl-note">Paste this into any AI writing tool and return with the output. We auto-apply this prompt if you enable a premium bundle later.</div>
+        </div>
+
+        <!-- Manual Q&A Panel (shown when Manual selected) -->
+        <div class="man-pnl" id="man-pnl" style="display:none;">
+          <div class="man-ai-tip" onclick="selectMethod('ai')">
+            <span>✨ Want a ready-made prompt instead?</span>
+            <span class="man-ai-sw">Switch to AI Setup →</span>
+          </div>
+          <div class="qa-list">
+            <div class="qa-item">
+              <div class="qa-num">1</div>
+              <div class="qa-body">
+                <label class="qa-lbl">What is this site about? <span style="font-weight:400;color:var(--ink4);">(1–2 sentences)</span></label>
+                <textarea class="fi fta" rows="2" placeholder="e.g. A domain investment platform helping buyers find and value premium domains."></textarea>
+              </div>
+            </div>
+            <div class="qa-item">
+              <div class="qa-num">2</div>
+              <div class="qa-body">
+                <label class="qa-lbl">Who is your target audience?</label>
+                <input class="fi" placeholder="e.g. Domain investors, startup founders, SMBs looking to buy their first domain"/>
+              </div>
+            </div>
+            <div class="qa-item">
+              <div class="qa-num">3</div>
+              <div class="qa-body">
+                <label class="qa-lbl">What problems does your site solve?</label>
+                <input class="fi" placeholder="e.g. Finding undervalued domains, understanding SEO value, simplifying the buying process"/>
+              </div>
+            </div>
+            <div class="qa-item">
+              <div class="qa-num">4</div>
+              <div class="qa-body">
+                <label class="qa-lbl">What tone fits your brand?</label>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;">
+                  <span class="tone-opt on" onclick="pk(this,'.tone-opt')">Professional</span>
+                  <span class="tone-opt" onclick="pk(this,'.tone-opt')">Casual</span>
+                  <span class="tone-opt" onclick="pk(this,'.tone-opt')">Technical</span>
+                  <span class="tone-opt" onclick="pk(this,'.tone-opt')">Friendly</span>
+                  <span class="tone-opt" onclick="pk(this,'.tone-opt')">Bold</span>
+                </div>
+              </div>
+            </div>
+            <div class="qa-item">
+              <div class="qa-num">5</div>
+              <div class="qa-body">
+                <label class="qa-lbl">Topics to always include or avoid? <span style="font-weight:400;color:var(--ink4);">(optional)</span></label>
+                <textarea class="fi fta" rows="2" placeholder="e.g. Always cover: domain valuation, SEO trends. Avoid: technical jargon, competitor mentions."></textarea>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Step 3: Site Type -->
+      <!-- Step 3: Brand & Schedule -->
       <div class="ms" id="ms3">
         <div class="ms-ey">Step 3 of 5</div>
-        <div class="ms-h">Site Type &amp; Content Direction</div>
+        <div class="ms-h">Brand &amp; Schedule</div>
+        <div class="ms-sub">Set the visual style, content signals, and publish timing for <strong id="ms3-dom">your domain</strong>.</div>
+
+        <div class="fl">
+          <label>Visual Theme</label>
+          <div class="theme-g">
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#0F172A;display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🌑</span></div><div class="tc-n">Midnight</div></div>
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🌌</span></div><div class="tc-n">Aurora</div></div>
+            <div class="tc on" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#EFF6FF;display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🌊</span></div><div class="tc-n">Ocean</div></div>
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#F0FDF4;display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🌿</span></div><div class="tc-n">Forest</div></div>
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:linear-gradient(135deg,#FDE68A,#FB923C);display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🌅</span></div><div class="tc-n">Sunset</div></div>
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#F1F5F9;display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🏢</span></div><div class="tc-n">Corporate</div></div>
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:#FAFAFA;display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">⬜</span></div><div class="tc-n">Minimal</div></div>
+            <div class="tc" onclick="pk(this,'.tc')"><div class="tc-p" style="background:linear-gradient(135deg,#FDF0EB,#F2D5C8);display:flex;align-items:center;justify-content:center;"><span style="font-size:13px;">🎨</span></div><div class="tc-n">Custom</div></div>
+          </div>
+        </div>
+
+        <div class="fl" style="margin-top:14px;">
+          <label>Market Signals <span style="font-weight:400;color:var(--ink4);">— select 3–5 to shape every post</span></label>
+          <div class="mkt-grid" id="mkt-grid">
+            <div class="mkt-sig on" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>SEO keyword trends</div>
+            <div class="mkt-sig on" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Competitor activity</div>
+            <div class="mkt-sig on" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Industry news</div>
+            <div class="mkt-sig" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Social sentiment</div>
+            <div class="mkt-sig" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Search volume data</div>
+            <div class="mkt-sig" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Seasonal trends</div>
+            <div class="mkt-sig" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Backlink opportunities</div>
+            <div class="mkt-sig" onclick="toggleMktSig(this)"><span class="mkt-ck">✓</span>Domain authority</div>
+          </div>
+          <span class="fh">Selected signals are factored into every AI-generated blog post.</span>
+        </div>
+
+        <div class="fl" style="margin-top:14px;">
+          <label>First blog publishes</label>
+          <div class="pub-opts">
+            <div class="pub-opt on" onclick="pp(this)"><div class="pub-ic">⚡</div><div class="pub-t">Today</div><div class="pub-s">3–6 hours</div></div>
+            <div class="pub-opt" onclick="pp(this)"><div class="pub-ic">🌅</div><div class="pub-t">Tomorrow</div><div class="pub-s">Overnight</div></div>
+            <div class="pub-opt" onclick="pp(this)"><div class="pub-ic">📆</div><div class="pub-t">Pick day</div><div class="pub-s">Next 7 days</div></div>
+          </div>
+        </div>
+        <div class="fl">
+          <label>Recurring monthly day</label>
+          <div class="day-row">
+            <div class="daybtn" onclick="pd(this)">Mon</div>
+            <div class="daybtn on" onclick="pd(this)">Tue</div>
+            <div class="daybtn" onclick="pd(this)">Wed</div>
+            <div class="daybtn" onclick="pd(this)">Thu</div>
+            <div class="daybtn" onclick="pd(this)">Fri</div>
+            <div class="daybtn" onclick="pd(this)">Sat</div>
+            <div class="daybtn" onclick="pd(this)">Sun</div>
+          </div>
+          <span class="fh">First Tuesday of each month. Changeable anytime from domain settings.</span>
+        </div>
+      </div>
+
+      <!-- Step 4: Site Type -->
+      <div class="ms" id="ms4">
+        <div class="ms-ey">Step 4 of 5</div>
+        <div class="ms-h">Site Type</div>
         <div class="ms-sub">Helps our AI generate relevant, targeted content for every post.</div>
         <div class="fl">
-          <label>Site Type</label>
+          <label>What kind of site is this?</label>
           <div class="type-g">
             <div class="typec on" onclick="pk(this,'.typec')"><div class="tyic">🏢</div><div class="tynm">Business</div><div class="tyds">Company, service</div></div>
             <div class="typec" onclick="pk(this,'.typec')"><div class="tyic">🛒</div><div class="tynm">E-Commerce</div><div class="tyds">Products, store</div></div>
@@ -148,18 +290,18 @@
             <div class="typec" onclick="pk(this,'.typec')"><div class="tyic">⚙️</div><div class="tynm">Other</div><div class="tyds">Describe below</div></div>
           </div>
         </div>
-        <div class="fl" style="margin-top:10px;">
-          <label>Blog Content Direction <span style="font-weight:400;color:var(--ink4)">(recommended)</span></label>
-          <textarea class="fi fta" placeholder="What topics should your blog cover? e.g. 'Domain investment platform — focus on SEO, domain valuation, and portfolio management for investors.'"></textarea>
-          <span class="fh">Stored on the domain record. Used in every future AI generation. Editable anytime.</span>
+        <div class="fl" style="margin-top:12px;">
+          <label>Content direction <span style="font-weight:400;color:var(--ink4);">(optional — adds context to every post)</span></label>
+          <textarea class="fi fta" placeholder="e.g. Domain investment platform — focus on SEO, domain valuation, and portfolio management for investors."></textarea>
+          <span class="fh">Stored on the domain record. Editable anytime from domain settings.</span>
         </div>
       </div>
 
-      <!-- Step 4: DNS -->
-      <div class="ms" id="ms4">
-        <div class="ms-ey">Step 4 of 5</div>
+      <!-- Step 5: DNS -->
+      <div class="ms" id="ms5">
+        <div class="ms-ey">Step 5 of 5</div>
         <div class="ms-h">DNS Configuration</div>
-        <div class="ms-sub">Add these records at your registrar to connect <strong id="ms4-dom">your domain</strong>.</div>
+        <div class="ms-sub">Add these records at your registrar to connect <strong id="ms5-dom">your domain</strong>.</div>
         <div class="dns-bx">
           <div class="dns-rw">
             <div class="dns-fi" style="max-width:58px;"><div class="dns-lbl">Type</div><div class="dns-v">CNAME</div></div>
@@ -182,45 +324,6 @@
             <option>Select DNS provider for guide</option>
             <option>GoDaddy</option><option>Namecheap</option><option>Cloudflare</option><option>Google Domains</option>
           </select>
-        </div>
-      </div>
-
-      <!-- Step 5: Blog -->
-      <div class="ms" id="ms5">
-        <div class="ms-ey">Step 5 of 5 — Blog Publishing</div>
-        <div class="ms-h">Schedule Your Blog</div>
-        <div class="ms-sub">Your first 2 blogs are <strong>free</strong>. Set when they publish. Premium bundles for higher cadence are available from Site Acceleration after activation.</div>
-        <div class="fl">
-          <label>When should your first blog publish?</label>
-          <div class="pub-opts">
-            <div class="pub-opt on" onclick="pp(this)"><div class="pub-ic">⚡</div><div class="pub-t">Today</div><div class="pub-s">3–6 hours</div></div>
-            <div class="pub-opt" onclick="pp(this)"><div class="pub-ic">🌅</div><div class="pub-t">Tomorrow</div><div class="pub-s">Overnight</div></div>
-            <div class="pub-opt" onclick="pp(this)"><div class="pub-ic">📆</div><div class="pub-t">Pick day</div><div class="pub-s">Next 7 days</div></div>
-          </div>
-        </div>
-        <div class="fl">
-          <label>Monthly recurring publish day</label>
-          <div class="day-row">
-            <div class="daybtn" onclick="pd(this)">Mon</div>
-            <div class="daybtn on" onclick="pd(this)">Tue</div>
-            <div class="daybtn" onclick="pd(this)">Wed</div>
-            <div class="daybtn" onclick="pd(this)">Thu</div>
-            <div class="daybtn" onclick="pd(this)">Fri</div>
-            <div class="daybtn" onclick="pd(this)">Sat</div>
-            <div class="daybtn" onclick="pd(this)">Sun</div>
-          </div>
-          <span class="fh">First Tuesday of each month. Changeable anytime from domain settings.</span>
-        </div>
-        <div class="cfg-sum">
-          <div class="cfg-row"><div class="cfgk">🎯 Audience</div><div class="cfgv">Default auto-applied <span class="cbd">Auto</span></div></div>
-          <div class="cfg-row"><div class="cfgk">🗣️ Voice</div><div class="cfgv">Default auto-applied <span class="cbd">Auto</span></div></div>
-          <div class="cfg-row"><div class="cfgk">📝 First 2 blogs</div><div class="cfgv">Included <span class="cbf">Free</span></div></div>
-          <div class="cfg-row"><div class="cfgk">📝 Ongoing cadence</div><div class="cfgv">1/month <span class="cbf">Free</span></div></div>
-          <div class="cfg-row"><div class="cfgk">❓ FAQs</div><div class="cfgv">Auto-generated <span class="cbf">Free</span></div></div>
-        </div>
-        <div class="ins ins-green">
-          <h5>⚡ After activation</h5>
-          <p>Premium acceleration bundles (Warm $12/mo · Heat $22/mo · Blaze $35/mo) are configured from the domain's Site Acceleration tab. No purchase required during this setup.</p>
         </div>
       </div>
 
@@ -248,12 +351,12 @@
           <div class="conf-dt">
             <div class="cdr"><div class="cdk">🌐 Domain</div><div class="cdv" id="cf-dom">—</div></div>
             <div class="cdr"><div class="cdk">⚡ First 2 blogs</div><div class="cdv">Free · First queued in 3–6 hours</div></div>
-            <div class="cdr"><div class="cdk">📅 Monthly</div><div class="cdv">First Tuesday of each month</div></div>
-            <div class="cdr"><div class="cdk">🎯 Audience</div><div class="cdv">Default (auto-applied)</div></div>
+            <div class="cdr"><div class="cdk">📅 Monthly cadence</div><div class="cdv">First Tuesday of each month</div></div>
+            <div class="cdr"><div class="cdk">🧬 Content DNA</div><div class="cdv" id="cf-dna">AI-Assisted</div></div>
           </div>
           <div class="conf-hint">
-            <div class="cht">⚡ Next step: Site Acceleration</div>
-            <div class="chd">Add a premium bundle (Warm $12 · Heat $22 · Blaze $35) from the domain's Site Acceleration tab. Each bundle combines posts, targeting, and voice in one clear price.</div>
+            <div class="cht">⚡ Next: Site Acceleration</div>
+            <div class="chd">Add a premium bundle (Warm $12 · Heat $22 · Blaze $35) from the domain's Site Acceleration tab to increase posting cadence and unlock audience targeting.</div>
           </div>
           <button class="btn btn-p" style="width:100%;justify-content:center;padding:10px;" onclick="finishAct()">Go to My Domains →</button>
         </div>
