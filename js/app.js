@@ -14,12 +14,12 @@
 /* ── 1. VIEW ROUTER ── */
 function V(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
-  ['dash', 'domains', 'pricing'].forEach(k => {
+  ['dash', 'domains', 'pricing', 'acceleration'].forEach(k => {
     const e = document.getElementById('sb-' + k);
     if (e) e.classList.remove('on');
   });
   document.getElementById('view-' + id).classList.add('on');
-  const m = { dashboard: 'dash', mydomains: 'domains', domainmanage: 'domains', pricing: 'pricing' };
+  const m = { dashboard: 'dash', mydomains: 'domains', domainmanage: 'domains', pricing: 'pricing', acceleration: 'acceleration' };
   const sb = document.getElementById('sb-' + m[id]);
   if (sb) sb.classList.add('on');
 }
@@ -281,20 +281,46 @@ function runProc() {
   });
 }
 
-function finishAct() {
+function finishActAndAccel() {
   const dom = document.getElementById('dom-in').value || 'mybusiness.com';
-  closeModal(); V('mydomains');
+  closeModal();
+  _addDomToTable(dom);
+  V('acceleration');
+  setTimeout(() => openAccelForDomain(dom), 150);
+  mCur = 1; renderM(1);
+}
 
+function openAccelForDomain(dom) {
+  V('acceleration');
+  const tabs = document.querySelectorAll('#accel-dom-tabs .adom:not(.adom-draft)');
+  // try to find matching tab, otherwise select first
+  let matched = false;
+  tabs.forEach(t => {
+    if (t.textContent.includes(dom)) { t.classList.add('on'); matched = true; }
+    else t.classList.remove('on');
+  });
+  if (!matched && tabs.length) tabs[0].classList.add('on');
+  const nameEl = document.getElementById('accel-dom-name');
+  const asideEl = document.getElementById('acc-aside-dom');
+  if (nameEl) nameEl.textContent = dom;
+  if (asideEl) asideEl.textContent = dom;
+}
+
+function _addDomToTable(dom) {
   const tr = document.createElement('tr');
   tr.onclick = () => selDom(tr, dom, 'active');
   tr.innerHTML = `<td><input type="checkbox" checked style="accent-color:var(--brand);"/></td><td><div class="dc"><div class="dfl">🔥</div><span class="dn">${dom}</span></div></td><td><span class="sp sp-a">● Active</span></td><td><div class="soci"><div class="si">🌐</div><div class="si">📄</div><div class="si">🔒</div></div></td><td><span style="font-size:10.5px;color:var(--ink4);">None</span></td><td><span class="lp">Building My Vision</span></td><td><span class="sob so-a">🚀 Active</span></td><td><span style="font-size:11.5px;color:var(--ink3);">—</span></td><td><span style="font-size:11.5px;color:var(--ink4);">Today</span></td>`;
   const tbody = document.getElementById('dom-tbody');
-  tbody.insertBefore(tr, tbody.firstChild);
-
+  if (tbody) tbody.insertBefore(tr, tbody.firstChild);
   ['d-active', 'mds-a'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = parseInt(e.textContent) + 1; });
   const sba = document.getElementById('sb-active');
   if (sba) { const p = sba.textContent.split('/'); sba.textContent = (parseInt(p[0]) + 1) + '/' + p[1].trim(); }
+}
 
+function finishAct() {
+  const dom = document.getElementById('dom-in').value || 'mybusiness.com';
+  closeModal(); V('mydomains');
+  _addDomToTable(dom);
   document.getElementById('dash-hint').classList.add('on');
   mCur = 1; renderM(1);
 }
@@ -308,4 +334,141 @@ function checkDNS() {
   const s = document.getElementById('dns-s');
   s.className = 'dns-st dns-p'; s.innerHTML = '<span>🔄</span><span>Checking…</span>';
   setTimeout(() => { s.className = 'dns-st dns-ok'; s.innerHTML = '<span>✅</span><span>DNS verified — domain connected!</span>'; }, 1500);
+}
+
+/* ── 9. ACCELERATION PAGE ── */
+let accAudCustom = false, accVoiceCustom = false;
+let accCadencePrice = 0, accBoostPrice = 0, accBoostLabel = '';
+
+function selAccelDom(el, domain, status) {
+  document.querySelectorAll('#accel-dom-tabs .adom:not(.adom-draft)').forEach(d => d.classList.remove('on'));
+  el.classList.add('on');
+  const nameEl = document.getElementById('accel-dom-name');
+  const asideEl = document.getElementById('acc-aside-dom');
+  if (nameEl) nameEl.textContent = domain;
+  if (asideEl) asideEl.textContent = domain;
+  const badge = document.getElementById('accel-state-badge');
+  const cur = document.getElementById('accel-state-cur');
+  if (status === 'accelerating') {
+    if (badge) { badge.textContent = '⚡ Accelerating'; badge.style.background='var(--brand-lt)'; badge.style.color='var(--brand)'; badge.style.borderColor='var(--brand-bd)'; }
+    if (cur) cur.textContent = 'Currently: Custom audience · Custom voice · Weekly cadence';
+  } else {
+    if (badge) { badge.textContent = 'Base Plan — Free'; badge.style.background=''; badge.style.color=''; badge.style.borderColor=''; }
+    if (cur) cur.textContent = 'Currently: Default audience · Default voice · 1 post/month';
+  }
+}
+
+function selAudPreset(el, type) {
+  document.querySelectorAll('#aud-presets .apre').forEach(a => a.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function toggleAudCustom() {
+  accAudCustom = !accAudCustom;
+  const panel = document.getElementById('aud-custom-panel');
+  const btn = document.getElementById('aud-custom-toggle');
+  const tag = document.getElementById('acc-aud-tag');
+  if (panel) panel.style.display = accAudCustom ? 'block' : 'none';
+  if (btn) btn.textContent = accAudCustom ? '− Remove Custom' : '+ Add Custom DNA';
+  if (tag) { tag.textContent = accAudCustom ? 'Custom DNA — $1/mo' : 'Preset — Free'; tag.className = 'accel-card-tag' + (accAudCustom ? ' paid' : ''); }
+  updateAccelOrder();
+}
+
+function selVoicePreset(el, type) {
+  document.querySelectorAll('#voice-presets .vpre').forEach(v => v.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function toggleVoiceCustom() {
+  accVoiceCustom = !accVoiceCustom;
+  const panel = document.getElementById('voice-custom-panel');
+  const btn = document.getElementById('voice-custom-toggle');
+  const tag = document.getElementById('acc-voice-tag');
+  if (panel) panel.style.display = accVoiceCustom ? 'block' : 'none';
+  if (btn) btn.textContent = accVoiceCustom ? '− Remove Custom' : '+ Build Custom';
+  if (tag) { tag.textContent = accVoiceCustom ? 'Custom Voice — $1/mo' : 'Preset — Free'; tag.className = 'accel-card-tag' + (accVoiceCustom ? ' paid' : ''); }
+  updateAccelOrder();
+}
+
+function selCadence(el, type, price) {
+  document.querySelectorAll('#cad-opts .cad-opt').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  accCadencePrice = price;
+  const tag = document.getElementById('acc-cad-tag');
+  if (tag) {
+    const labels = { monthly: '1×/month — Free', biweekly: 'Bi-weekly — $5/mo', weekly: 'Weekly — $9/mo' };
+    tag.textContent = labels[type] || '1×/month — Free';
+    tag.className = 'accel-card-tag' + (price > 0 ? ' paid' : '');
+  }
+  updateAccelOrder();
+}
+
+function selBoostAc(el, price, label, posts) {
+  if (el.classList.contains('on')) {
+    el.classList.remove('on'); accBoostPrice = 0; accBoostLabel = '';
+  } else {
+    document.querySelectorAll('#boost-grid-ac .bst-ac').forEach(b => b.classList.remove('on'));
+    el.classList.add('on');
+    accBoostPrice = price; accBoostLabel = label;
+  }
+  updateAccelOrder();
+}
+
+function updateAccelOrder() {
+  const show = (id, visible) => { const e = document.getElementById(id); if (e) e.style.display = visible ? 'flex' : 'none'; };
+  show('accel-ol-aud', accAudCustom);
+  show('accel-ol-voice', accVoiceCustom);
+
+  const cadRow = document.getElementById('accel-ol-cad');
+  if (cadRow) {
+    cadRow.style.display = accCadencePrice > 0 ? 'flex' : 'none';
+    const lbl = document.getElementById('accel-ok-cad');
+    const val = document.getElementById('accel-ov-cad');
+    if (lbl) lbl.textContent = accCadencePrice === 9 ? 'Weekly cadence' : 'Bi-weekly cadence';
+    if (val) val.textContent = '$' + accCadencePrice + '/mo';
+  }
+
+  const boostRow = document.getElementById('accel-ol-boost');
+  if (boostRow) {
+    boostRow.style.display = accBoostPrice > 0 ? 'flex' : 'none';
+    const lbl = document.getElementById('accel-ok-boost');
+    const val = document.getElementById('accel-ov-boost');
+    if (lbl) lbl.textContent = accBoostLabel + ' boost';
+    if (val) val.textContent = '$' + accBoostPrice;
+  }
+
+  const monthly = (accAudCustom ? 1 : 0) + (accVoiceCustom ? 1 : 0) + accCadencePrice;
+  const totalEl = document.getElementById('accel-total');
+  if (totalEl) {
+    totalEl.textContent = monthly > 0 ? '$' + monthly + '/mo' : 'Free';
+    totalEl.className = 'accel-total' + (monthly === 0 ? ' is-free' : '');
+  }
+
+  const boostLine = document.getElementById('accel-boost-line');
+  if (boostLine) {
+    boostLine.style.display = accBoostPrice > 0 ? 'block' : 'none';
+    boostLine.textContent = '+ $' + accBoostPrice + ' one-time today';
+  }
+
+  const btn = document.getElementById('accel-save-btn');
+  if (btn) {
+    if (monthly === 0 && accBoostPrice === 0) {
+      btn.textContent = 'Save Preset Selection'; btn.style.background = 'var(--brand)';
+    } else if (monthly > 0 && accBoostPrice > 0) {
+      btn.textContent = '💳 Activate — $' + monthly + '/mo + $' + accBoostPrice + ' today';
+    } else if (monthly > 0) {
+      btn.textContent = '💳 Activate — $' + monthly + '/mo';
+    } else {
+      btn.textContent = '💳 Add Boost — $' + accBoostPrice + ' today';
+    }
+  }
+}
+
+function saveAcceleration() {
+  const btn = document.getElementById('accel-save-btn');
+  const origText = btn.textContent;
+  const origBg = btn.style.background;
+  btn.textContent = '✓ Saved!';
+  btn.style.background = 'var(--green)';
+  setTimeout(() => { btn.textContent = origText; btn.style.background = origBg || 'var(--brand)'; }, 2000);
 }

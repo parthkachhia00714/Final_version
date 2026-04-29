@@ -31,6 +31,7 @@
     <nav class="sb-nav">
       <div class="sb-item" id="sb-dash"    onclick="V('dashboard')"><span class="sb-item-i">⊞</span>Dashboard</div>
       <div class="sb-item on" id="sb-domains" onclick="V('mydomains')"><span class="sb-item-i">🌐</span>My Domains</div>
+      <div class="sb-item" id="sb-acceleration" onclick="V('acceleration')"><span class="sb-item-i">⚡</span>Acceleration</div>
       <div class="sb-item"><span class="sb-item-i">🎨</span>Logo Maker</div>
       <div class="sb-item"><span class="sb-item-i">🔗</span>Connection</div>
       <div class="sb-item" id="sb-pricing" onclick="V('pricing')"><span class="sb-item-i">💰</span>Pricing &amp; Billing</div>
@@ -65,6 +66,7 @@
     <div class="view on" id="view-mydomains"></div>
     <div class="view"    id="view-domainmanage"></div>
     <div class="view"    id="view-pricing"></div>
+    <div class="view"    id="view-acceleration"></div>
   </div>
 
 </div><!-- /app -->
@@ -358,7 +360,10 @@ Output: Markdown with front matter (title, description, tags)</textarea>
             <div class="cht">⚡ Next: Site Acceleration</div>
             <div class="chd">Add a premium bundle (Warm $12 · Heat $22 · Blaze $35) from the domain's Site Acceleration tab to increase posting cadence and unlock audience targeting.</div>
           </div>
-          <button class="btn btn-p" style="width:100%;justify-content:center;padding:10px;" onclick="finishAct()">Go to My Domains →</button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-s" style="flex:1;justify-content:center;padding:10px;" onclick="finishAct()">Go to My Domains</button>
+            <button class="btn btn-p" style="flex:1;justify-content:center;padding:10px;" onclick="finishActAndAccel()">⚡ Set Up Acceleration →</button>
+          </div>
         </div>
       </div>
     </div>
@@ -380,7 +385,8 @@ const viewMap = {
   dashboard:    'views/dashboard.html',
   mydomains:    'views/mydomains.html',
   domainmanage: 'views/domainmanage.html',
-  pricing:      'views/pricing.html'
+  pricing:      'views/pricing.html',
+  acceleration: 'views/acceleration.html'
 };
 
 Promise.all(

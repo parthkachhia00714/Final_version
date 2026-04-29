@@ -185,7 +185,7 @@
             </div>
           </div>
           <div class="dr-acc-footer">
-            <button class="dr-acc-go" onclick="openDM(document.getElementById('dr-n').textContent,'sa')">⚡ Open Site Acceleration →</button>
+            <button class="dr-acc-go" onclick="openAccelForDomain(document.getElementById('dr-n').textContent)">⚡ Set Up Acceleration →</button>
             <button class="dr-acc-skip" onclick="collapseAcc()">Not now</button>
           </div>
           <div class="dr-acc-note">Configure full details from the Site Acceleration tab.</div>
@@ -195,8 +195,8 @@
 
     <!-- Already accelerating state -->
     <div class="dr-acc-active" id="dr-acc-active">
-      <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--brand);">⚡ Accelerating — Heat Bundle</div>
-      <button class="btn btn-xs" style="background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);" onclick="openDM(document.getElementById('dr-n').textContent,'sa')">Manage</button>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--brand);">⚡ Accelerating</div>
+      <button class="btn btn-xs" style="background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-bd);" onclick="openAccelForDomain(document.getElementById('dr-n').textContent)">Manage →</button>
     </div>
 
     <div class="dr-info">
